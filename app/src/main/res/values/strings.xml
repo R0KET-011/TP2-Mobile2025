@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">TP2-Mobile2025</string>
+    <string name="back">Retour</string>
+    <string name="info">Informations</string>
+    <string name="description">Description</string>
+
+    <string name="team_index">Liste des équipes</string>
+    <string name="team_create">Création d\'une équipe</string>
+    <string name="team_show">Détails de l\'équipe</string>
+    <string name="team_edit">Modifier l\'équipe</string>
+    <string name="team_join">Rejoindre l\'équipe</string>
+    <string-array name="states">
+        <item>Totalement conforme</item>
+        <item>Partiellement conforme</item>
+        <item>Non conforme</item>
+    </string-array>
+
+    <string name="students">Étudiants</string>
+
 </resources>

@@ -13,6 +13,18 @@
         android:theme="@style/Theme.TP2Mobile2025"
         tools:targetApi="31">
         <activity
+            android:name=".team.TeamEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".team.TeamCreateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".team.TeamShowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".team.TeamIndexActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
