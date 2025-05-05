@@ -21,12 +21,20 @@
 
 package com.example.tp2_mobile2025.project;
 
+import android.app.Application;
 import android.os.Bundle;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class ProjectController {
@@ -44,12 +52,23 @@ public class ProjectController {
         // API CALL TO LOCAL
         new Thread(() -> {
             try {
+                URL url = new URL("localhost:8000/api/group/1/projects");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null){
+                    response.append(line);
+                }
+                reader.close();
+                connection.disconnect();
 
             }
             catch(Exception e) {
-
+                e.printStackTrace();
             }
-        });
+        }).start();
 
         // Convertit le JSON en objet Projets et les rajoutent dans l'Arraylist.
         for (int i = 0 ; i < projectArray.length() ; i++) {

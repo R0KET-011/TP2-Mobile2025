@@ -8,7 +8,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.tp2_mobile2025.project.Project;
+import com.example.tp2_mobile2025.project.ProjectController;
+
+import org.json.JSONException;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
