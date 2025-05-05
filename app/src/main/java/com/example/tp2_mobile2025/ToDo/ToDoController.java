@@ -14,62 +14,53 @@
 
 package com.example.tp2_mobile2025.ToDo;
 
-import com.example.tp2_mobile2025.Comment;
-
 public class ToDoController {
     /**
      * Display a listing of the resource.
      */
-    public void index()
-    {
+    public void index() {
 
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public void create()
-    {
+    public void create() {
         //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public void store(Comment comment)
-    {
+    public void store(ToDo task) {
         //
     }
 
     /**
      * Display the specified resource.
      */
-    public void show(Comment comment)
-    {
+    public void show(ToDo task) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public void edit(Comment comment)
-    {
+    public void edit(ToDo task) {
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public void update(Comment comment)
-    {
+    public void update(ToDo task) {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public void destroy(int id)
-    {
+    public void destroy(int id) {
         //
     }
 }
