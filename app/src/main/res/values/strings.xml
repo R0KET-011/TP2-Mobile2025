@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TP2-Mobile2025</string>
+    <string name="project_participant">Participant(s): </string>
 </resources>

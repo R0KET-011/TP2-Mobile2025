@@ -13,6 +13,7 @@ import com.example.tp2_mobile2025.Auth.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
