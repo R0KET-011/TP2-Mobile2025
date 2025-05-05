@@ -1,7 +1,7 @@
 /****************************************
  Fichier : ResetPassword.java
  Auteur : Samy Larochelle
- Fonctionnalité : Fonctionalités 33.1, Récupération de mot de passe
+ Fonctionnalité : Fonctionalité 33.1, Récupération de mot de passe
  Date : 05/05/2025
  Vérification :
  Date           Nom                 Approuvé
