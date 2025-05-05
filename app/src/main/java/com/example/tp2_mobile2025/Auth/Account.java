@@ -24,6 +24,7 @@ public class Account {
 
     public Account(String email, String password, String token, Bitmap image) {
         this.email = email;
+        this.password = password;
         this.token = token;
         this.image = image;
     }
