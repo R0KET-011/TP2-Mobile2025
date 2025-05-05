@@ -1,6 +1,27 @@
+/****************************************
+ Fichier : ProjectController.java
+ Auteur : Kevin Larochelle
+ Fonctionnalité :
+ 31.1 Ajouter un projet
+ 31.2 Lister / consulter des projets
+ 31.4 Modifier un projet
+ 31.5 Supression d'un projet
+
+ Date : 05/05/2025
+
+ Vérification :
+ Date Nom Approuvé
+
+ =========================================================
+ Historique de modifications :
+ Date Nom Description
+
+ =========================================================
+ ****************************************/
+
 package com.example.tp2_mobile2025.project;
 
-import com.example.tp2_mobile2025.Comment;
+import android.os.Bundle;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,7 +31,8 @@ import java.util.ArrayList;
 
 public class ProjectController {
 
-    /** Retourne une liste d'objet Projet pour l'affichage de la liste des projets.
+    /** 31.2 Lister / consulter des projets
+     * Retourne une liste d'objet Projet pour l'affichage de la liste des projets.
      * @return ArrayList of Project objects */
     public ArrayList<Project> index() throws JSONException {
         // ArrayList pour retour de liste de projets
@@ -41,49 +63,43 @@ public class ProjectController {
         return projects;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    /** Ammène vers le formulaire pour la création d'un projet */
     public void create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public void store(Comment comment)
+    /** 31.1 Ajouter un projet
+     * Envoie les données à l'API pour ajouter un nouveau projets basé sur les champs remplis.
+     * @param formdata qui est un bundle d'ExtraData de l'intent */
+    public void store(Bundle formdata)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public void show(Comment comment)
+    /** Affiche les informations sur un projet.
+     * @param id est int*/
+    public void show(int id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public void edit(Comment comment)
+    /** Affiche le formulaire pour modifier un projet
+     * @param id est int*/
+    public void edit(int id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public void update(Comment comment)
+    /** Met à jour les informations sur un projet
+     * @param formdata qui estun bundle d'Extradata de l'intent. */
+    public void update(Bundle formdata)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    /** Supprime un projet
+     * @param id est int */
     public void destroy(int id)
     {
         //
