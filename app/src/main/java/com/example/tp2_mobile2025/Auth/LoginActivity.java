@@ -1,7 +1,7 @@
 /****************************************
  Fichier : LoginActivity.java
  Auteur : Samy Larochelle
- Fonctionnalité : Fonctionalités 33.2, Connexion
+ Fonctionnalité : Fonctionalité 33.2, Connexion
  Date : 05/05/2025
  Vérification :
  Date           Nom                 Approuvé

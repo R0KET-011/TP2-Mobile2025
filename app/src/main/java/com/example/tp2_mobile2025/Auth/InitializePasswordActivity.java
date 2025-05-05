@@ -1,7 +1,7 @@
 /****************************************
  Fichier : InitializePassword.java
  Auteur : Samy Larochelle
- Fonctionnalité : Fonctionalités 33.3, Inscription
+ Fonctionnalité : Fonctionalité 33.3, Inscription
  Date : 05/05/2025
  Vérification :
  Date           Nom                 Approuvé
