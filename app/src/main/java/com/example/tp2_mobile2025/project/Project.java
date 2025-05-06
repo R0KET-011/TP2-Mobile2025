@@ -18,6 +18,10 @@
 
 package com.example.tp2_mobile2025.project;
 
+import com.example.tp2_mobile2025.team.Team;
+
+import java.util.ArrayList;
+
 public class Project {
     int id = 0;
     String name = "";
@@ -27,6 +31,7 @@ public class Project {
     boolean joinable = false;
     boolean creatable = false;
     boolean common_classes = false;
+    ArrayList<Team> teams = new ArrayList<Team>();
 
     /** Constructeur pour objet Projet.
      * @param newId est int
