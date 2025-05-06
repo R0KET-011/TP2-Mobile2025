@@ -1,6 +1,19 @@
-package com.example.tp2_mobile2025;
+/****************************************
+ Fichier : LoginActivity.java
+ Auteur : Samy Larochelle
+ Fonctionnalité : Fonctionalité 33.2, Connexion
+ Date : 05/05/2025
+ Vérification :
+ Date           Nom                 Approuvé
+ =========================================================
+ Historique de modifications :
+ Date           Nom                 Description
+ 05/05/2025     Samy Larochelle     Création
+ =========================================================
+ ****************************************/
 
-import android.content.Intent;
+package com.example.tp2_mobile2025.Auth;
+
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -9,20 +22,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.tp2_mobile2025.Auth.LoginActivity;
+import com.example.tp2_mobile2025.R;
 
-public class MainActivity extends AppCompatActivity {
-
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
-        //Lance l'activité Login
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

@@ -17,4 +17,5 @@
 
     <string name="students">Étudiants</string>
 
+    <string name="project_participant">Participant(s): </string>
 </resources>
