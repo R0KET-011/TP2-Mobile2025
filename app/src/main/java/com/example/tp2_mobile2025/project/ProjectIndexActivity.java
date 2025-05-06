@@ -26,6 +26,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tp2_mobile2025.R;
 import com.google.gson.Gson;
@@ -57,7 +59,6 @@ public class ProjectIndexActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_project_index);
 
-        testName =  (TextView) findViewById(R.id.testName);
         Thread thread = new Thread(()-> {
             try {
                 URL url = new URL (domain + "/group/1/projects");
@@ -76,11 +77,9 @@ public class ProjectIndexActivity extends AppCompatActivity {
                 }
                 reader.close();
                 connection.disconnect();
-                //runOnUiThread(() -> testName.setText("Response Serveur: " + response.toString()));
 
             } catch (Exception e) {
                 e.printStackTrace();
-                //runOnUiThread(() -> testName.setText("Erreur: " + e.getMessage()));
             }
         });
         thread.start();
@@ -90,16 +89,17 @@ public class ProjectIndexActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        // Convert StringBuilder string into an ArrayList of Project objects
         Gson gson = new Gson();
         String json = response.toString();
         Type receivedType = new TypeToken<ArrayList<Project>>(){}.getType();
         projectArrayList = gson.fromJson(json, receivedType);
 
-        StringBuilder test = new StringBuilder();
-        for (int i = 0 ; i < projectArrayList.size() ; i++) {
-            test.append(projectArrayList.get(i).toString()).append("|||||");
-        }
-        testName.setText(test.toString());
+        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerView);
+        ProjectAdapter projectAdapter = new ProjectAdapter(this, projectArrayList);
+        recyclerView.setAdapter(projectAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
 
 

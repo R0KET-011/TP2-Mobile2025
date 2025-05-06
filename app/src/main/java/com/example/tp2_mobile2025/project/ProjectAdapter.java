@@ -53,8 +53,8 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.projectName.setText(projectArrayList.get(position).getName());
-        // holder.projectCourse.setText(projectArrayList.get(position)....);
-        // holder.projectGroup.setText(projectArrayList.get(position)....);
+        holder.projectCourse.setText(projectArrayList.get(position).getCourse());
+        holder.projectGroup.setText(projectArrayList.get(position).getGroup());
         String memberCount = String.valueOf(projectArrayList.get(position).getMinPerTeam());
         memberCount += " - ";
         memberCount += String.valueOf(projectArrayList.get(position).getMaxPerTeam());
