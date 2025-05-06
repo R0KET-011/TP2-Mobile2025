@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.example.tp2_mobile2025.R;
+import com.example.tp2_mobile2025.students.Student;
 
 import java.util.ArrayList;
 import java.util.List;
