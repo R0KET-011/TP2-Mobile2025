@@ -19,6 +19,7 @@ package com.example.tp2_mobile2025.project;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +29,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tp2_mobile2025.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -38,6 +41,12 @@ import java.util.ArrayList;
 
 public class ProjectIndexActivity extends AppCompatActivity {
 
+    TextView testName;
+    String domain = "http://10.0.2.2:8000/api";
+    String tokenA = "11|fTsBgrMwGIkGTgZQMaygNoHdmr7R7G5q99xdqpl0378b7300";
+    StringBuilder response = new StringBuilder();
+    ArrayList<Project> projectArrayList = new ArrayList<Project>();
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,21 +54,10 @@ public class ProjectIndexActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_project_index);
 
-
-//        ProjectController projectController = new ProjectController();
-//        try {
-//            ArrayList<Project> projectList = projectController.index();
-//        } catch (JSONException e) {
-//            throw new RuntimeException(e);
-//        }
-
-
-        StringBuilder response = new StringBuilder();
-
-        new Thread(()-> {
+        testName =  (TextView) findViewById(R.id.testName);
+        Thread thread = new Thread(()-> {
             try {
-                URL url = new URL ("http://10.0.2.2:8000/api/group/1/projects");
-                String tokenA = "9|iv0z0veAUU4NFNjjcbmk0LLDS6DXDOsMdaGW81Te802afd4c";
+                URL url = new URL (domain + "/group/1/projects");
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
@@ -75,13 +73,47 @@ public class ProjectIndexActivity extends AppCompatActivity {
                 }
                 reader.close();
                 connection.disconnect();
-                // runOnUiThread(() -> test_name.setText("Response Serveur: " + response.toString
-                // ()));
+                //runOnUiThread(() -> testName.setText("Response Serveur: " + response.toString()));
+
             } catch (Exception e) {
                 e.printStackTrace();
-                // runOnUiThread(() -> test_name.setText("Erreur: " + e.getMessage()));
+                //runOnUiThread(() -> testName.setText("Erreur: " + e.getMessage()));
             }
-        }).start();
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        JSONArray jsonConvert = null;
+        try {
+            jsonConvert = new JSONArray(response.toString());
+
+            for (int i = 0; i < jsonConvert.length(); i++) {
+                JSONObject obj = jsonConvert.getJSONObject(i);
+                Project project = new Project(obj.getInt("id"), obj.getString("name"),
+                        obj.getString("description"), obj.getInt("min_per_team"), obj.getInt(
+                        "max_per_team"), obj.getBoolean("joinable"), obj.getBoolean(
+                        "creatable"), obj.getBoolean("common_classes"),
+                        obj.getInt("group"), obj.getString("course"));
+                testName.setText(project.toString());
+                projectArrayList.add(project);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        StringBuilder test = new StringBuilder();
+        if (projectArrayList.size() != 0) {
+            for (int i = 0 ; i < projectArrayList.size() ; i++) {
+                test.append(projectArrayList.get(i).toString()).append(" |||| ");
+            }
+        }
+        testName.setText(test.toString());
+
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

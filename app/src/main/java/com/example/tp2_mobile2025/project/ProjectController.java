@@ -74,7 +74,8 @@ public class ProjectController {
         for (int i = 0 ; i < projectArray.length() ; i++) {
             JSONObject project = projectArray.getJSONObject(i);
             Project newProject = new Project(project.getInt("id"), project.getString(
-                    "name"), project.getString("description"), project.getInt("min_per_team"), project.getInt("max_per_team"), project.getBoolean("joinable"), project.getBoolean("creatable"), project.getBoolean("common_classes"));
+                    "name"), project.getString("description"), project.getInt("min_per_team"), project.getInt("max_per_team"), project.getBoolean("joinable"), project.getBoolean("creatable"), project.getBoolean("common_classes"),
+                    project.getInt("group"), project.getString("course"));
 
             projects.add(newProject);
         }

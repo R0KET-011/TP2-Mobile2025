@@ -31,7 +31,9 @@ public class Project {
     boolean joinable = false;
     boolean creatable = false;
     boolean common_classes = false;
-    ArrayList<Team> teams = new ArrayList<Team>();
+    int group = 0;
+    String course = "";
+    static ArrayList<Team> teams = new ArrayList<Team>();
 
     /** Constructeur pour objet Projet.
      * @param newId est int
@@ -43,7 +45,8 @@ public class Project {
      * @param newCreatable est boolean
      * @param newCommon est boolean */
     public Project(int newId, String newName, String newDescription, int newMin, int newMax,
-                   boolean newJoinable, boolean newCreatable, boolean newCommon ) {
+                   boolean newJoinable, boolean newCreatable, boolean newCommon, int newGroup,
+                   String newCourse ) {
         this.id = newId;
         this.name = newName;
         this.description = newDescription;
@@ -52,6 +55,8 @@ public class Project {
         this.joinable = newJoinable;
         this.creatable = newCreatable;
         this.common_classes = newCommon;
+        this.group = newGroup;
+        this.course = newCourse;
     }
 
     /** Setter pour l'Id du projet.
@@ -110,4 +115,29 @@ public class Project {
      * @return this.common_classes, boolean*/
     public boolean getCommonClasses() {return this.common_classes; }
 
+    /** Setter pour le code du groupe du projet.
+     * @param newGroup est int */
+    public void setGroup(int newGroup) {this.group = newGroup; }
+    /** Getter pour le code du groupe du projet.
+     * @return this.group, int*/
+    public int getGroup() {return this.group; }
+
+    /** Setter pour le nom du cours du projet.
+     * @param newCourse est string */
+    public void setCourse(String newCourse) {this.course = newCourse; }
+    /** Getter pour lel nom du cours du projet.
+     * @return this.common_classes, boolean*/
+    public String getCourse() {return this.course; }
+
+    /** Getter la liste des équipes d'un projet.
+     * @return un ArrayList */
+    public ArrayList<Team> getProjectList() {
+        return teams;
+    }
+
+    @Override
+    public String toString() {
+        return ("Project: " + this.name + ", " + this.description + ", " + this.min_per_team +
+                "-" + this.max_per_team + ", " + this.joinable + ", " + this.creatable + ", " + this.common_classes + ", " + "Group: " + this.group + ", Course: " + this.course);
+    }
 }
