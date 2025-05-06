@@ -28,6 +28,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tp2_mobile2025.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,6 +37,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -87,29 +90,14 @@ public class ProjectIndexActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        JSONArray jsonConvert = null;
-        try {
-            jsonConvert = new JSONArray(response.toString());
-
-            for (int i = 0; i < jsonConvert.length(); i++) {
-                JSONObject obj = jsonConvert.getJSONObject(i);
-                Project project = new Project(obj.getInt("id"), obj.getString("name"),
-                        obj.getString("description"), obj.getInt("min_per_team"), obj.getInt(
-                        "max_per_team"), obj.getBoolean("joinable"), obj.getBoolean(
-                        "creatable"), obj.getBoolean("common_classes"),
-                        obj.getInt("group"), obj.getString("course"));
-                testName.setText(project.toString());
-                projectArrayList.add(project);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Gson gson = new Gson();
+        String json = response.toString();
+        Type receivedType = new TypeToken<ArrayList<Project>>(){}.getType();
+        projectArrayList = gson.fromJson(json, receivedType);
 
         StringBuilder test = new StringBuilder();
-        if (projectArrayList.size() != 0) {
-            for (int i = 0 ; i < projectArrayList.size() ; i++) {
-                test.append(projectArrayList.get(i).toString()).append(" |||| ");
-            }
+        for (int i = 0 ; i < projectArrayList.size() ; i++) {
+            test.append(projectArrayList.get(i).toString()).append("|||||");
         }
         testName.setText(test.toString());
 
