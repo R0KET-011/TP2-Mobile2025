@@ -4,6 +4,9 @@
     <string name="info">Informations</string>
     <string name="description">Description</string>
 
+    <string name="confirm_create">Confirmer la création</string>
+    <string name="team_description">Description de l\'équipe</string>
+    <string name="team_name">Nom de l\'équipe</string>
     <string name="team_index">Liste des équipes</string>
     <string name="team_create">Création d\'une équipe</string>
     <string name="team_show">Détails de l\'équipe</string>

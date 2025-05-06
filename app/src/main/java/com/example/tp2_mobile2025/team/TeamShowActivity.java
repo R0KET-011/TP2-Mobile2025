@@ -26,13 +26,13 @@ public class TeamShowActivity extends AppCompatActivity {
 
     private void setInfos(Intent intent){
         Team team = intent.getParcelableExtra("team");
+        assert team != null;
 
         TextView name = findViewById(R.id.name);
         TextView state = findViewById(R.id.state);
         TextView size = findViewById(R.id.size);
         TextView description = findViewById(R.id.description);
 
-        assert team != null;
         name.setText(team.getName());
         state.setText(team.getState());
         state.setTextColor(team.getStateColor(this));
