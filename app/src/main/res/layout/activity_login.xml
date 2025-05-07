@@ -41,6 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16sp"
+        android:autofillHints="username"
         android:hint="Numéro de dossier"
         android:inputType="text"
         android:textColor="@color/text_primary"
@@ -51,8 +52,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16sp"
+        android:autofillHints="password"
         android:hint="Mot de passe"
-        android:inputType="text|textMultiLine"
+        android:inputType="textPassword"
         android:textColor="@color/text_primary"
         android:textColorHint="@color/text_secondary" />
 
