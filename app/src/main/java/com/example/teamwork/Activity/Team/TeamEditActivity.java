@@ -5,19 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.R;
 
-import java.util.List;
 
 public class TeamEditActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -38,7 +31,7 @@ public class TeamEditActivity extends AppCompatActivity implements View.OnClickL
                 this, (Team team) -> {
                     this.team = team;
                     setInfos();
-                });;
+                });
 
         findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.confirm).setOnClickListener(this);
