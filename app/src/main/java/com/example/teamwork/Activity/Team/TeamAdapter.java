@@ -7,12 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.teamwork.Database.AppDatabase;
-import com.example.teamwork.Database.AppDatabase_Impl;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.R;
 
@@ -21,17 +18,11 @@ import java.util.List;
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder> {
 
     private final List<Team> teams;
-    private final int maxPerTeam;
-    private final AppDatabase appDatabase;
     private final Context context;
-    ActivityResultLauncher<Intent> launcher;
 
-    public TeamAdapter(Context context, List<Team> teams, int maxPerTeam, ActivityResultLauncher<Intent> launcher) {
+    public TeamAdapter(Context context, List<Team> teams) {
         this.context = context;
-        this.launcher = launcher;
-        this.appDatabase = AppDatabase.getDatabase(context);
         this.teams = teams;
-        this.maxPerTeam = maxPerTeam;
     }
 
     @NonNull
@@ -45,17 +36,16 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
     @Override
     public void onBindViewHolder(@NonNull TeamViewHolder holder, int position) {
         Team team = teams.get(position);
-        int studentCount = appDatabase.teamStudentDao().getStudentCountForTeam(team.getId());
 
         holder.name.setText(team.getName());
         holder.state.setText(team.getState());
         holder.state.setTextColor(team.getStateColor(context));
-        holder.size.setText(String.format("%d/%d", studentCount, maxPerTeam));
+        holder.size.setText(String.format("%d/%d", 2 , 4)); // TODO : Get Team size and project max
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, TeamShowActivity.class);
             intent.putExtra("teamId", team.getId());
-            launcher.launch(intent);
+            context.startActivity(intent);
         });
     }
 

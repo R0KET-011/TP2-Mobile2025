@@ -1,28 +1,29 @@
 package com.example.teamwork.Activity.Team;
 
 import android.os.Bundle;
+import android.view.View;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.teamwork.R;
 
-public class TeamCreateActivity extends AppCompatActivity {
+public class TeamCreateActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_create);
 
-        findViewById(R.id.back).setOnClickListener(v -> {
-            finish();
-        });
+        findViewById(R.id.back).setOnClickListener(this);
+        findViewById(R.id.create).setOnClickListener(this);
+    }
 
-        findViewById(R.id.create).setOnClickListener(v -> {
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.back) {
             finish();
-        });
+        } else if (v.getId() == R.id.create) {
+            finish();
+        }
     }
 }

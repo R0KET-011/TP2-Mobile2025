@@ -1,5 +1,6 @@
 package com.example.teamwork.Database.Dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -27,16 +28,16 @@ public interface TeamStudentDao {
     @Query("SELECT s.* FROM students s " +
             "INNER JOIN team_students ts ON s.id = ts.student_id " +
             "WHERE ts.team_id = :teamId")
-    List<Student> getStudentsForTeam(int teamId);
+    LiveData<List<Student>> getStudentsForTeam(int teamId);
 
     @Query("SELECT t.* FROM teams t " +
             "INNER JOIN team_students ts ON t.id = ts.team_id " +
             "WHERE ts.student_id = :studentId")
-    List<Team> getTeamsForStudent(int studentId);
+    LiveData<List<Team>> getTeamsForStudent(int studentId);
 
     @Query("DELETE FROM team_students WHERE team_id = :teamId")
     void deleteAllStudentsFromTeam(int teamId);
 
     @Query("SELECT COUNT(*) FROM team_students WHERE team_id = :teamId")
-    int getStudentCountForTeam(int teamId);
+    LiveData<Integer> getStudentCountForTeam(int teamId);
 }
