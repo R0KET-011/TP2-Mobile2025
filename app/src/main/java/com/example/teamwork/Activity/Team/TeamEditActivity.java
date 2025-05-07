@@ -2,19 +2,17 @@ package com.example.teamwork.Activity.Team;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.R;
 
-public class TeamEditActivity extends AppCompatActivity {
+
+public class TeamEditActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Team team;
     TextView name, description;
@@ -29,10 +27,14 @@ public class TeamEditActivity extends AppCompatActivity {
         int teamId = intent.getIntExtra("teamId", -1);
 
         appDatabase = AppDatabase.getDatabase(this);
-        team = appDatabase.teamDao().getTeamById(teamId);
+        appDatabase.teamDao().getTeamById(teamId).observe(
+                this, (Team team) -> {
+                    this.team = team;
+                    setInfos();
+                });
 
-        setInfos();
-        setButtons();
+        findViewById(R.id.back).setOnClickListener(this);
+        findViewById(R.id.confirm).setOnClickListener(this);
     }
 
     private void setInfos(){
@@ -43,16 +45,15 @@ public class TeamEditActivity extends AppCompatActivity {
         description.setText(team.getDescription());
     }
 
-    private void setButtons(){
-        findViewById(R.id.back).setOnClickListener(v -> {
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.back) {
             finish();
-        });
-
-        findViewById(R.id.confirm).setOnClickListener(v -> {
+        } else if (v.getId() == R.id.confirm) {
             team.setName(name.getText().toString());
             team.setDescription(description.getText().toString());
             appDatabase.teamDao().update(team);
             finish();
-        });
+        }
     }
 }
