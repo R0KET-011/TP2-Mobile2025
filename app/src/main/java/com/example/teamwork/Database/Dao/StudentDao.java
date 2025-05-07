@@ -1,5 +1,6 @@
 package com.example.teamwork.Database.Dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -27,8 +28,8 @@ public interface StudentDao {
     void delete(Student student);
 
     @Query("SELECT * FROM students")
-    List<Student> getAllStudents();
+    LiveData<List<Student>> getAllStudents();
 
     @Query("SELECT * FROM students WHERE id = :id")
-    Student getStudentById(int id);
+    LiveData<Student> getStudentById(int id);
 }

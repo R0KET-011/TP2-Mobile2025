@@ -22,7 +22,7 @@ import java.util.concurrent.Executors;
 @Database(entities = {Student.class, Team.class, Project.class, TeamStudent.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
-    private static volatile AppDatabase INSTANCE;
+    private static AppDatabase INSTANCE;
 
     public abstract StudentDao studentDao();
     public abstract TeamDao teamDao();
