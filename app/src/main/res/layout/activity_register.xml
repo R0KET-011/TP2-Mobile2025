@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Auth.RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#3f3f3f"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_tertiary"
+            android:gravity="center"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="15dp"
+            android:text="S'inscrire"
+            android:textColor="@color/text_primary"
+            android:textSize="22sp" />
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginVertical="30dp"
+            android:orientation="vertical"
+            android:paddingTop="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
+                android:text="Numéro de dossier"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextNDA"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginVertical="10dp"
+                android:autofillHints="username"
+                android:background="@drawable/rounded_edittext"
+                android:hint="Numéro de dossier"
+                android:inputType="numberSigned"
+                android:paddingLeft="10dp"
+                android:textSize="20sp"
+                app:cornerRadius="10dp" />
+
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="30dp"
+                android:gravity=""
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="70dp"
+                    android:text="Un email vous sera envoyé sur votre courriel du cégep afin de finaliser votre inscription."
+                    android:textAlignment="center"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/buttonFin"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center"
+                    android:layout_marginVertical="10dp"
+                    android:backgroundTint="#808080"
+                    android:text="Envoyer le email d'inscription"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    app:cornerRadius="5dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
