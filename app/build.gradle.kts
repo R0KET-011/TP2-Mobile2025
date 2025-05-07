@@ -43,4 +43,6 @@ dependencies {
 
     implementation(libs.room.runtime)
     annotationProcessor(libs.room.compiler)
+
+    implementation("com.google.code.gson:gson:2.13.1")
 }
