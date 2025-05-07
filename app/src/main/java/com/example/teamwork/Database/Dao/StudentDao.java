@@ -18,7 +18,7 @@ public interface StudentDao {
     void insert(Student student);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<Student> students);
+    void insertAll(Student... students);
 
     @Update
     void update(Student student);

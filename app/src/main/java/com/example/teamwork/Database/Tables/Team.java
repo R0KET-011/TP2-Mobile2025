@@ -1,9 +1,14 @@
 package com.example.teamwork.Database.Tables;
 
+import android.content.Context;
+
 import androidx.room.ColumnInfo;
+import androidx.room.Database;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+
+import com.example.teamwork.R;
 
 @Entity(
         tableName = "teams",
@@ -70,5 +75,16 @@ public class Team {
 
     public void setProjectId(int projectId) {
         this.projectId = projectId;
+    }
+
+    public int  getStateColor(Context context){
+        switch (state) {
+            case "Totalement conforme":
+                return context.getColor(R.color.color_green);
+            case "Partiellement conforme":
+                return context.getColor(R.color.color_yellow);
+            default:
+                return context.getColor(R.color.color_red);
+        }
     }
 }

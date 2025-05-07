@@ -18,7 +18,7 @@ public interface TeamDao {
     void insert(Team team);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<Team> teams);
+    void insertAll(Team... teams);
 
     @Update
     void update(Team team);

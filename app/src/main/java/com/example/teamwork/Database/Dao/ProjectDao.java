@@ -18,7 +18,7 @@ public interface ProjectDao {
     void insert(Project project);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<Project> projects);
+    void insertAll(Project... projects);
 
     @Update
     void update(Project project);

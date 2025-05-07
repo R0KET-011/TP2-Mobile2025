@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">TeamWork</string>
+    <string name="app_name">TP2-Mobile2025</string>
+    <string name="back">Retour</string>
+    <string name="info">Informations</string>
+    <string name="description">Description</string>
+
+    <string name="confirm_create">Confirmer la création</string>
+    <string name="confirm_edit">Confirmer la modification</string>
+    <string name="team_description">Description de l\'équipe</string>
+    <string name="team_name">Nom de l\'équipe</string>
+    <string name="team_index">Liste des équipes</string>
+    <string name="team_create">Création d\'une équipe</string>
+    <string name="team_show">Détails de l\'équipe</string>
+    <string name="team_edit">Modifier l\'équipe</string>
+    <string name="team_join">Rejoindre l\'équipe</string>
+
+    <string name="students">Étudiants</string>
+
+    <string name="project_participant">Participant(s): </string>
 </resources>

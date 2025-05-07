@@ -18,6 +18,9 @@ public interface TeamStudentDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(TeamStudent teamStudent);
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insertAll(TeamStudent... teamStudents);
+
     @Delete
     void delete(TeamStudent teamStudent);
 
@@ -33,4 +36,7 @@ public interface TeamStudentDao {
 
     @Query("DELETE FROM team_students WHERE team_id = :teamId")
     void deleteAllStudentsFromTeam(int teamId);
+
+    @Query("SELECT COUNT(*) FROM team_students WHERE team_id = :teamId")
+    int getStudentCountForTeam(int teamId);
 }

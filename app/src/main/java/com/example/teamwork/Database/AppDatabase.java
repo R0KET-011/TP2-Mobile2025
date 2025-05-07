@@ -2,9 +2,11 @@ package com.example.teamwork.Database;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.teamwork.Database.Dao.ProjectDao;
 import com.example.teamwork.Database.Dao.StudentDao;
@@ -14,6 +16,8 @@ import com.example.teamwork.Database.Tables.Project;
 import com.example.teamwork.Database.Tables.Student;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.TeamStudent;
+
+import java.util.concurrent.Executors;
 
 @Database(entities = {Student.class, Team.class, Project.class, TeamStudent.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
@@ -31,6 +35,16 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     AppDatabase.class, "app_database")
+                            .addCallback(new RoomDatabase.Callback() {
+                                @Override
+                                public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                                    super.onCreate(db);
+                                    Executors.newSingleThreadExecutor().execute(() -> {
+                                        DatabaseSeeder.seed(getDatabase(context));
+                                    });
+                                }
+                            })
+                            .allowMainThreadQueries()
                             .build();
                 }
             }
