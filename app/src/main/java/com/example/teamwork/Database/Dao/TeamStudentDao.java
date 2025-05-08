@@ -40,4 +40,7 @@ public interface TeamStudentDao {
 
     @Query("SELECT COUNT(*) FROM team_students WHERE team_id = :teamId")
     LiveData<Integer> getStudentCountForTeam(int teamId);
+
+    @Query("SELECT comment FROM team_students WHERE team_id = :teamId AND student_id = :studentId")
+    LiveData<String> getCommentFromStudentTeam(int studentId, int teamId);
 }

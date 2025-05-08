@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.teamwork.Database.Tables.Student;
 import com.example.teamwork.R;
 
+import java.util.List;
+
 /**
  * L'adapteur pour le RecyclerView de la liste des élèves.
  */
@@ -21,7 +23,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     /**
      * La liste des élèves à afficher.
      */
-    private Student[] students;
+    private List<Student> students;
     /**
      * Le Context ou le recyclerview est.
      */
@@ -32,7 +34,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
      * @param context
      * @param students
      */
-    public StudentAdapter(Context context, Student[] students) {
+    public StudentAdapter(Context context, List<Student> students) {
         this.context = context;
         this.students = students;
     }
@@ -47,12 +49,12 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tv_name.setText(students[position].getFullName());
+        holder.tv_name.setText(students.get(position).getFullName());
     }
 
     @Override
     public int getItemCount() {
-        return students.length;
+        return students.size();
     }
 
     /**

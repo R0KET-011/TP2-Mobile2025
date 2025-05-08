@@ -22,9 +22,9 @@ public class DatabaseSeeder {
         Student student4 = new Student(4, "Emeric", "Leclerc", "Dédié à la tâche");
         appDatabase.studentDao().insertAll(student1, student2, student3, student4);
 
-        TeamStudent teamStudent1 = new TeamStudent(team1.getId(), student1.getId());
-        TeamStudent teamStudent2 = new TeamStudent(team1.getId(), student2.getId());
-        TeamStudent teamStudent3 = new TeamStudent(team1.getId(), student3.getId());
+        TeamStudent teamStudent1 = new TeamStudent(team1.getId(), student1.getId(), null);
+        TeamStudent teamStudent2 = new TeamStudent(team1.getId(), student2.getId(), null);
+        TeamStudent teamStudent3 = new TeamStudent(team1.getId(), student3.getId(), null);
         appDatabase.teamStudentDao().insertAll(teamStudent1, teamStudent2, teamStudent3);
     }
 }
