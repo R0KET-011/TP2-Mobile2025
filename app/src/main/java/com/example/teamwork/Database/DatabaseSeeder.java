@@ -7,8 +7,14 @@ import com.example.teamwork.Database.Tables.TeamStudent;
 
 public class DatabaseSeeder {
     public static void seed(AppDatabase appDatabase) {
-        Project project1 = new Project(1, 2, 5, "Projet intégrateur - Web", "Dans ce module, vous aurez la possibilité de mettre en pratique tous les éléments des cours 420-404-SH Méthodologie du développement logiciel, 420-446-SH Développement d'applications mobiles de même que le cours de Web actuel et ce, dans le cadre d'un projet intégrateur. Environ une semaine sera dédiée pour chacun des cours afin de réaliser le projet intégrateur.", true, true, true);
-        Project project2 = new Project(2, 3, 6, "Projet intégrateur - Mobile", "Description", true, true, false);
+        Project project1 = new Project(1, "Projet intégrateur - Web", "Dans ce module, vous " +
+                "aurez" + " la possibilité de mettre en pratique tous les éléments des cours " +
+                "420-404-SH Méthodologie du développement logiciel, 420-446-SH Développement " +
+                "d'applications mobiles de même que le cours de Web actuel et ce, dans le cadre " +
+                "d'un projet intégrateur. Environ une semaine sera dédiée pour chacun des cours " +
+                "afin de réaliser le projet intégrateur.", 2, 5, true, true, true, 10021, "Hello");
+        Project project2 = new Project(2, "name", "description", 2,
+                4, true, true, false, 10000, "hello2");
         appDatabase.projectDao().insertAll(project1, project2);
 
         Team team1 = new Team(1, "TeamWork", "Totalement conforme", "Ce logiciel aura pour objectif d'orchestrer la formation des groupe.", project1.getId());
