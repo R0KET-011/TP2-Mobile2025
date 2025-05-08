@@ -34,6 +34,7 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.join).setOnClickListener(this);
         findViewById(R.id.edit).setOnClickListener(this);
+        findViewById(R.id.students).setOnClickListener(this);
     }
 
     private void setInfos(){
@@ -57,6 +58,11 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
             finish();
         } else if (v.getId() == R.id.edit) {
             Intent intent = new Intent(this, TeamEditActivity.class);
+            intent.putExtra("teamId", team.getId());
+            startActivity(intent);
+        }
+        else if (v.getId() == R.id.students) {
+            Intent intent = new Intent(this, StudentListActivity.class);
             intent.putExtra("teamId", team.getId());
             startActivity(intent);
         }

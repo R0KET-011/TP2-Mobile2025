@@ -1,6 +1,7 @@
 package com.example.teamwork.Activity.Students;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,7 +78,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
             iv_comment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    context.startActivity(new Intent(context, CommentPopupActivity.class));
                 }
             });
 

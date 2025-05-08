@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.teamwork.Activity.Students.CommentPopupActivity;
 import com.example.teamwork.Activity.Students.StudentListActivity;
 import com.example.teamwork.Activity.Team.TeamIndexActivity;
 import com.example.teamwork.Database.AppDatabase;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("projectId", 1);
         startActivity(intent);
 
-        /*Intent intent = new Intent(this, StudentListActivity.class);
+        /*Intent intent = new Intent(this, CommentPopupActivity.class);
         intent.putExtra("teamId", 3);
         startActivity(intent);*/
 

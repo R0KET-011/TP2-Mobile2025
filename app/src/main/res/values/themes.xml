@@ -6,4 +6,9 @@
     </style>
 
     <style name="Theme.TeamWork" parent="Base.Theme.TeamWork" />
+
+    <style name="Theme.Popup" parent="Theme.TeamWork">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
 </resources>
