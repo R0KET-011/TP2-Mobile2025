@@ -25,6 +25,7 @@ public class Project {
     int group = 0;
     String course = "";
 
+    public Project() {}
     /** Constructeur pour objet Projet.
      * @param newId est int
      * @param newName est String
@@ -65,24 +66,24 @@ public class Project {
 
     /** Setter pour la description du projet.
      * @param newDescription est String */
-    public void setDescrption(String newDescription) {this.description = newDescription; }
+    public void setDescription(String newDescription) {this.description = newDescription; }
     /** Getter pour la description du projet.
      * @return this.description, String */
     public String getDescription() {return this.description; }
 
     /** Setter pour le minimum de membres par équipe dans le projet.
      * @param newMin est int plus grand que 0 */
-    public void setMinPetTeam(int newMin) {this.min_per_team = newMin; }
+    public void setMin_per_team(int newMin) {this.min_per_team = newMin; }
     /** Getter pour le minimum de membres par équipe dans le projet.
      * @return this.min_per_team, int plus grand que 0 */
-    public int getMinPerTeam() {return this.min_per_team; }
+    public int getMin_per_team() {return this.min_per_team; }
 
     /** Setter pour le maximum de membres par équipe dans le projet.
      * @param newMax est int plus petit que 99 */
     public void setMax_per_team(int newMax) {this.max_per_team = newMax; }
     /** Getter pour le maximum de membres par équipe dans le projet.
      * @return max_per_team, int plus petit que 99 */
-    public int getMaxPerTeam() {return this.max_per_team; }
+    public int getMax_per_team() {return this.max_per_team; }
 
     /** Setter pour le statut rejoignable des équipes du projet.
      * @param  newJoinable est boolean */
@@ -100,10 +101,10 @@ public class Project {
 
     /** Setter pour le statut de cours commun requis pour les équipes du projet.
      * @param newCommon est boolean */
-    public void setCommonClasses(boolean newCommon) {this.common_classes = newCommon; }
+    public void setCommon_classes(boolean newCommon) {this.common_classes = newCommon; }
     /** Getter pour le statut de cours commun requis dans les équipes du projet.
      * @return this.common_classes, boolean*/
-    public boolean getCommonClasses() {return this.common_classes; }
+    public boolean getCommon_classes() {return this.common_classes; }
 
     /** Setter pour le code du groupe du projet.
      * @param newGroup est int */
