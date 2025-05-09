@@ -9,6 +9,7 @@
  Historique de modifications :
  Date           Nom                 Description
  05/05/2025     Samy Larochelle     Création
+ 05/07/2025     Samy Larochelle     Recréation de la vue
  =========================================================
  ****************************************/
 
@@ -29,11 +30,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        findViewById(R.id.back).setOnClickListener(this);
+        findViewById(R.id.buttonRegister).setOnClickListener(this);
+        findViewById(R.id.buttonLogin).setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
+        if (v.getId() == R.id.back) {
+            finish();
+        }
         if (v.getId() == R.id.buttonRegister) {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
