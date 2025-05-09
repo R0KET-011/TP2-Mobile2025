@@ -3,6 +3,7 @@ package com.example.teamwork.Activity.Team;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +27,8 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
         AppDatabase db = AppDatabase.getDatabase(this);
 
         db.projectDao().getProjectById(projectId).observe(this, project -> {
+            TextView description = findViewById(R.id.description);
+            description.setText(project.getDescription());
             db.teamDao().getTeamsByProjectId(projectId).observe(this, teams -> {
                 TeamAdapter adapter = new TeamAdapter(this, teams, project, db);
                 RecyclerView recyclerView = findViewById(R.id.recyclerView);
