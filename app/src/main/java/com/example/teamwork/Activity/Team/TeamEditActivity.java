@@ -3,6 +3,7 @@ package com.example.teamwork.Activity.Team;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +16,7 @@ import com.example.teamwork.R;
 public class TeamEditActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Team team;
-    TextView name, description;
+    TextView nameEditText, descriptionEditText;
     AppDatabase appDatabase;
 
     @Override
@@ -38,11 +39,11 @@ public class TeamEditActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void setInfos(){
-        name = findViewById(R.id.name);
-        description = findViewById(R.id.description);
+        nameEditText = findViewById(R.id.name);
+        descriptionEditText = findViewById(R.id.description);
 
-        name.setText(team.getName());
-        description.setText(team.getDescription());
+        nameEditText.setText(team.getName());
+        descriptionEditText.setText(team.getDescription());
     }
 
     @Override
@@ -50,8 +51,29 @@ public class TeamEditActivity extends AppCompatActivity implements View.OnClickL
         if (v.getId() == R.id.back) {
             finish();
         } else if (v.getId() == R.id.confirm) {
-            team.setName(name.getText().toString());
-            team.setDescription(description.getText().toString());
+            String name = nameEditText.getText().toString().trim();
+            String description = descriptionEditText.getText().toString().trim();
+
+            if (name.isEmpty()) {
+                nameEditText.setError("Le nom est requis");
+                nameEditText.requestFocus();
+                return;
+            }
+            AppDatabase db = AppDatabase.getDatabase(this);
+            if (db.teamDao().isNameTakenEdit(name, team.getProjectId(), team.getId()) > 0) {
+                nameEditText.setError("Le nom est déjà pris");
+                nameEditText.requestFocus();
+                return;
+            }
+
+            if (description.isEmpty()) {
+                descriptionEditText.setError("Une description est requise");
+                descriptionEditText.requestFocus();
+                return;
+            }
+
+            team.setName(name);
+            team.setDescription(description);
             appDatabase.teamDao().update(team);
             finish();
         }

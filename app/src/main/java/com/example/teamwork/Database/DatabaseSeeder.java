@@ -7,14 +7,31 @@ import com.example.teamwork.Database.Tables.TeamStudent;
 
 public class DatabaseSeeder {
     public static void seed(AppDatabase appDatabase) {
-        Project project1 = new Project(1, "Projet intégrateur - Web", "Dans ce module, vous " +
-                "aurez" + " la possibilité de mettre en pratique tous les éléments des cours " +
-                "420-404-SH Méthodologie du développement logiciel, 420-446-SH Développement " +
-                "d'applications mobiles de même que le cours de Web actuel et ce, dans le cadre " +
-                "d'un projet intégrateur. Environ une semaine sera dédiée pour chacun des cours " +
-                "afin de réaliser le projet intégrateur.", 2, 5, true, true, true, 10021, "Hello");
-        Project project2 = new Project(2, "name", "description", 2,
-                4, true, true, false, 10000, "hello2");
+        Project project1 = new Project(
+                1,
+                "Projet intégrateur - Web",
+                "Ce projet permet d'appliquer les compétences acquises dans les cours 420-404-SH (Méthodologie du développement logiciel) 420-446-SH (Développement d'applications mobiles), ainsi que le cours Web actuel. Chaque volet du projet est consacré à l’un de ces cours, sur une période d’environ une semaine, afin de créer une solution intégrée complète.",
+                2,
+                5,
+                true,
+                true,
+                true,
+                4118,
+                "Développement Web avancé"
+        );
+
+        Project project2 = new Project(
+                2,
+                "Conception d'un thermostat connecté",
+                "Ce projet vous permettra de développer un thermostat connecté complet en CircuitPython. Vous allez acquérir des données de température, les traiter, les afficher, les stocker localement et les partager sur le cloud. Ce projet intègre plusieurs concepts importants en IoT : acquisition de données, traitement, stockage, affichage et communication.",
+                2,
+                4,
+                true,
+                true,
+                false,
+                4118,
+                "Introduction à l'utilisation d'objets connectés"
+        );
         appDatabase.projectDao().insertAll(project1, project2);
 
         Team team1 = new Team(1, "TeamWork", "Totalement conforme", "Ce logiciel aura pour objectif d'orchestrer la formation des groupe.", project1.getId());
@@ -31,6 +48,7 @@ public class DatabaseSeeder {
         TeamStudent teamStudent1 = new TeamStudent(team1.getId(), student1.getId(), null);
         TeamStudent teamStudent2 = new TeamStudent(team1.getId(), student2.getId(), null);
         TeamStudent teamStudent3 = new TeamStudent(team1.getId(), student3.getId(), null);
-        appDatabase.teamStudentDao().insertAll(teamStudent1, teamStudent2, teamStudent3);
+        TeamStudent teamStudent4 = new TeamStudent(team1.getId(), student4.getId(), null);
+        appDatabase.teamStudentDao().insertAll(teamStudent1, teamStudent2, teamStudent3, teamStudent4);
     }
 }

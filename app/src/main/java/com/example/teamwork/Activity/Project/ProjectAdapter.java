@@ -18,27 +18,29 @@
 
 package com.example.teamwork.Activity.Project;
 
+import com.example.teamwork.Activity.Team.TeamIndexActivity;
+import com.example.teamwork.Activity.Team.TeamShowActivity;
 import com.example.teamwork.R;
+
+import android.content.Intent;
 import android.view.View;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
+import java.util.List;
 import com.example.teamwork.Database.Tables.Project;
 
 
 public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.MyViewHolder> {
-    private ArrayList<Project> projectArrayList = new ArrayList<Project>();
+    private List<Project> projectList;
     private Context context;
 
-    public ProjectAdapter(Context context, ArrayList<Project> projectArrayList) {
+    public ProjectAdapter(Context context, List<Project> projectArrayList) {
         this.context = context;
-        this.projectArrayList = projectArrayList;
+        this.projectList = projectArrayList;
     }
 
     @NonNull
@@ -52,21 +54,27 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.projectName.setText(projectArrayList.get(position).getName());
-        holder.projectCourse.setText(projectArrayList.get(position).getCourse());
-        String groupText = context.getResources().getString(R.string.project_group);
-        groupText += String.valueOf(projectArrayList.get(position).getGroup());
-        holder.projectGroup.setText(groupText);
-        String memberCount = context.getResources().getString(R.string.project_participant);
-        memberCount += String.valueOf(projectArrayList.get(position).getMin_per_team());
+        Project project = projectList.get(position);
+
+        holder.projectName.setText(project.getName());
+        holder.projectCourse.setText(project.getCourse());
+        holder.projectGroup.setText(String.valueOf(project.getGroup()));
+
+        String memberCount = String.valueOf(project.getMin_per_team());
         memberCount += " - ";
-        memberCount += String.valueOf(projectArrayList.get(position).getMax_per_team());
+        memberCount += String.valueOf(project.getMax_per_team());
         holder.projectMembersCount.setText(memberCount);
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, TeamIndexActivity.class);
+            intent.putExtra("projectId", project.getId());
+            context.startActivity(intent);
+        });
     }
 
     @Override
     public int getItemCount() {
-        return projectArrayList.size();
+        return projectList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

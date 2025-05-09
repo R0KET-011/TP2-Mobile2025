@@ -9,34 +9,33 @@
  Historique de modifications :
  Date           Nom                 Description
  05/05/2025     Samy Larochelle     Création
+ 05/07/2025     Samy Larochelle     Recréation de la vue
  =========================================================
  ****************************************/
 
 package com.example.teamwork.Activity.Auth;
 
 import android.os.Bundle;
+import android.view.View;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.teamwork.R;
 
-public class InitializePasswordActivity extends AppCompatActivity {
+public class InitializePasswordActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_initialize_password);
 
+        findViewById(R.id.back).setOnClickListener(this);
+    }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.back) {
+            finish();
+        }
     }
 }
