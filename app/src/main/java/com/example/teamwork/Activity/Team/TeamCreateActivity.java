@@ -32,12 +32,31 @@ public class TeamCreateActivity extends AppCompatActivity implements View.OnClic
         if (v.getId() == R.id.back) {
             finish();
         } else if (v.getId() == R.id.create) {
-            String name = String.valueOf(((EditText) findViewById(R.id.name)).getText());
-            String description = String.valueOf(((EditText) findViewById(R.id.description)).getText());
+            EditText nameEditText = findViewById(R.id.name);
+            EditText descriptionEditText = findViewById(R.id.description);
 
-            // TODO : Faire l'ajout par API et ensuite prendre les donne retourner afin de les mettre
-            Team team = new Team(4, name, "Non conforme", description , projectId);
+            String name = nameEditText.getText().toString().trim();
+            String description = descriptionEditText.getText().toString().trim();
+
+            if (name.isEmpty()) {
+                nameEditText.setError("Le nom est requis");
+                nameEditText.requestFocus();
+                return;
+            }
             AppDatabase db = AppDatabase.getDatabase(this);
+            if (db.teamDao().isNameTaken(name, projectId) > 0){
+                nameEditText.setError("Le nom est déjà pris");
+                nameEditText.requestFocus();
+                return;
+            }
+
+            if (description.isEmpty()) {
+                descriptionEditText.setError("Une description est requise");
+                descriptionEditText.requestFocus();
+                return;
+            }
+            // TODO : Validation par API et Pour l'Id
+            Team team = new Team(4, name, "Non conforme", description , projectId);
             db.teamDao().insert(team);
             finish();
         }

@@ -7,11 +7,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 
+import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Activity.Students.StudentListActivity;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Project;
 import com.example.teamwork.Database.Tables.Team;
+import com.example.teamwork.Database.Tables.TeamStudent;
 import com.example.teamwork.R;
 
 public class TeamShowActivity extends AppCompatActivity implements View.OnClickListener {
@@ -28,6 +31,9 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
         Intent intent = this.getIntent();
         int teamId = intent.getIntExtra("teamId", -1);
 
+        findViewById(R.id.back).setOnClickListener(this);
+        findViewById(R.id.students).setOnClickListener(this);
+
         db = AppDatabase.getDatabase(this);
         db.teamDao().getTeamById(teamId).observe(this, team -> {
             if (team == null) {
@@ -35,17 +41,50 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
                 return;
             }
             this.team = team;
+
             db.projectDao().getProjectById(team.getProjectId()).observe(this, project -> {
                 this.project = project;
                 setInfos();
             });
-        });
 
-        findViewById(R.id.back).setOnClickListener(this);
-        findViewById(R.id.join).setOnClickListener(this);
-        findViewById(R.id.edit).setOnClickListener(this);
-        findViewById(R.id.students).setOnClickListener(this);
-        findViewById(R.id.delete).setOnClickListener(this);
+            View deleteButton = findViewById(R.id.delete);
+            View editButton = findViewById(R.id.edit);
+            View joinButton = findViewById(R.id.join);
+            View quitButton = findViewById(R.id.quit);
+
+            if (Authentication.isStudent()) {
+                deleteButton.setVisibility(View.GONE);
+                editButton.setVisibility(View.GONE);
+
+                db.teamStudentDao().getStudentInTeam(team.getId(), Authentication.getId())
+                        .observe(this, teamStudent -> {
+                            if (teamStudent != null) {
+                                quitButton.setVisibility(View.VISIBLE);
+                                joinButton.setVisibility(View.GONE);
+                                quitButton.setOnClickListener(v1 -> {
+                                    db.teamStudentDao().delete(teamStudent);
+                                    quitButton.setVisibility(View.GONE);
+                                    joinButton.setVisibility(View.VISIBLE);
+                                });
+                            } else {
+                                joinButton.setVisibility(View.VISIBLE);
+                                quitButton.setVisibility(View.GONE);
+                                joinButton.setOnClickListener(v1 -> {
+                                    TeamStudent ts = new TeamStudent(team.getId(), Authentication.getId(), "");
+                                    db.teamStudentDao().deleteStudentFromProject(Authentication.getId(), project.getId());
+                                    db.teamStudentDao().insert(ts);
+                                    joinButton.setVisibility(View.GONE);
+                                    quitButton.setVisibility(View.VISIBLE);
+                                });
+                            }
+                        });
+            } else {
+                joinButton.setVisibility(View.GONE);
+                quitButton.setVisibility(View.GONE);
+                editButton.setOnClickListener(this);
+                deleteButton.setOnClickListener(this);
+            }
+        });
     }
 
     private void setInfos(){
@@ -69,8 +108,6 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.back) {
-            finish();
-        } else if (v.getId() == R.id.join) {
             finish();
         } else if (v.getId() == R.id.edit) {
             Intent intent = new Intent(this, TeamEditActivity.class);
