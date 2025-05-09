@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.teamwork.Database.Tables.Student;
@@ -29,15 +31,17 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
      * Le Context ou le recyclerview est.
      */
     private Context context;
+    private int team_id;
 
     /**
      * Constructeur de l'adapter qui requière la liste des élèves et le context
-     * @param context
-     * @param students
+     * @param context context of the adapter
+     * @param students list of the students to put in the adapter
      */
-    public StudentAdapter(Context context, List<Student> students) {
+    public StudentAdapter(Context context, List<Student> students, int team_id) {
         this.context = context;
         this.students = students;
+        this.team_id = team_id;
     }
 
     @NonNull
@@ -51,6 +55,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tv_name.setText(students.get(position).getFullName());
+        holder.setCommentListener(context, team_id, students.get(position).getId());
+
     }
 
     @Override
@@ -75,13 +81,6 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
             tv_name = itemView.findViewById(R.id.tv_nom);
             iv_comment = itemView.findViewById(R.id.comment_icon);
 
-            iv_comment.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    context.startActivity(new Intent(context, CommentPopupActivity.class));
-                }
-            });
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -89,6 +88,21 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
                 }
             });
 
+        }
+
+        public void setCommentListener(Context context, int teamId, int studentId) {
+            iv_comment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (context instanceof AppCompatActivity) {
+                        CommentPopupDialogFragment popup = new CommentPopupDialogFragment(context, teamId, studentId);
+                        popup.show(((AppCompatActivity) context).getSupportFragmentManager(), "CommentDialog");
+                    }
+                    else {
+                        Toast.makeText(context, "Context is not an activity", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         }
     }
 }

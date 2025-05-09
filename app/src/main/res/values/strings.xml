@@ -17,6 +17,8 @@
     <string name="students">Étudiants</string>
     <string name="students_index">Liste des étudiants</string>
 
+    <string name="comment">Commentaire</string>
+
     <string name="project_title">Liste des Projets</string>
     <string name="project_participant">Participant(s): </string>
     <string name="project_group">Groupe: </string>

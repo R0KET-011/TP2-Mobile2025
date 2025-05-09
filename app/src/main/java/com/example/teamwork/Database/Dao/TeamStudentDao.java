@@ -1,5 +1,6 @@
 package com.example.teamwork.Database.Dao;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -43,4 +44,7 @@ public interface TeamStudentDao {
 
     @Query("SELECT comment FROM team_students WHERE team_id = :teamId AND student_id = :studentId")
     LiveData<String> getCommentFromStudentTeam(int studentId, int teamId);
+
+    @Query("UPDATE team_students SET comment = :comment WHERE student_id = :studentId AND team_id = :teamId")
+    void setCommentWhereStudentTeam(@Nullable String comment, int studentId, int teamId);
 }
