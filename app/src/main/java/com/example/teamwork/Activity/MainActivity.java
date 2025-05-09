@@ -23,10 +23,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ProjectActivity.class);
         startActivity(intent);
 
-        /*Intent intent = new Intent(this, CommentPopupActivity.class);
-        intent.putExtra("teamId", 3);
-        startActivity(intent);*/
-
-
     }
 }
