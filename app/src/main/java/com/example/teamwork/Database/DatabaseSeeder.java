@@ -31,6 +31,7 @@ public class DatabaseSeeder {
         TeamStudent teamStudent1 = new TeamStudent(team1.getId(), student1.getId(), null);
         TeamStudent teamStudent2 = new TeamStudent(team1.getId(), student2.getId(), null);
         TeamStudent teamStudent3 = new TeamStudent(team1.getId(), student3.getId(), null);
-        appDatabase.teamStudentDao().insertAll(teamStudent1, teamStudent2, teamStudent3);
+        TeamStudent teamStudent4 = new TeamStudent(team1.getId(), student4.getId(), null);
+        appDatabase.teamStudentDao().insertAll(teamStudent1, teamStudent2, teamStudent3, teamStudent4);
     }
 }

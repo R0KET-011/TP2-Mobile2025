@@ -13,6 +13,7 @@
     <string name="team_show">Détails de l\'équipe</string>
     <string name="team_edit">Modifier l\'équipe</string>
     <string name="team_join">Rejoindre l\'équipe</string>
+    <string name="team_delete">Dissocier l\'équipe</string>
 
     <string name="students">Étudiants</string>
     <string name="students_index">Liste des étudiants</string>

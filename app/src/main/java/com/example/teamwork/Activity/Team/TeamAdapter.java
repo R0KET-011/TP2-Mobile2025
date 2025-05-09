@@ -8,21 +8,31 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.teamwork.Database.AppDatabase;
+import com.example.teamwork.Database.Tables.Project;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.R;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder> {
 
     private final List<Team> teams;
+    private final Project project;
     private final Context context;
+    private final  AppDatabase db;
+    private final Map<Integer, Integer> studentCounts = new HashMap<>();
 
-    public TeamAdapter(Context context, List<Team> teams) {
+    public TeamAdapter(Context context, List<Team> teams, Project project, AppDatabase db) {
         this.context = context;
         this.teams = teams;
+        this.project = project;
+        this.db = db;
     }
 
     @NonNull
@@ -40,7 +50,18 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
         holder.name.setText(team.getName());
         holder.state.setText(team.getState());
         holder.state.setTextColor(team.getStateColor(context));
-        holder.size.setText(String.format("%d/%d", 2 , 4)); // TODO : Get Team size and project max
+
+        Integer count = studentCounts.get(team.getId());
+        if (count != null) {
+            holder.size.setText(String.format("%d/%d", count, project.getMax_per_team()));
+        } else {
+            db.teamStudentDao().getStudentCountForTeam(team.getId()).observe(
+                    (LifecycleOwner) context, c -> {
+                        studentCounts.put(team.getId(), c);
+                        holder.size.setText(String.format("%d/%d", c, project.getMax_per_team()));
+                    }
+            );
+        }
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, TeamShowActivity.class);
