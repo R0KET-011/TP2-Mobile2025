@@ -5,7 +5,12 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.teamwork.Activity.Auth.LoginActivity;
+import com.example.teamwork.Activity.Project.ProjectActivity;
+import com.example.teamwork.Activity.Students.CommentPopupActivity;
+import com.example.teamwork.Activity.Students.StudentListActivity;
+import com.example.teamwork.Activity.Team.TeamIndexActivity;
+import com.example.teamwork.Database.AppDatabase;
+import com.example.teamwork.Database.DatabaseSeeder;
 import com.example.teamwork.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,8 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.putExtra("projectId", 1);
+        Intent intent = new Intent(this, ProjectActivity.class);
         startActivity(intent);
 
         /*Intent intent = new Intent(this, CommentPopupActivity.class);
