@@ -12,7 +12,7 @@ public class DatabaseSeeder {
                 "Projet intégrateur - Web",
                 "Ce projet permet d'appliquer les compétences acquises dans les cours 420-404-SH (Méthodologie du développement logiciel) 420-446-SH (Développement d'applications mobiles), ainsi que le cours Web actuel. Chaque volet du projet est consacré à l’un de ces cours, sur une période d’environ une semaine, afin de créer une solution intégrée complète.",
                 2,
-                5,
+                3,
                 true,
                 true,
                 true,
@@ -45,10 +45,9 @@ public class DatabaseSeeder {
         Student student4 = new Student(4, "Emeric", "Leclerc", "Dédié à la tâche");
         appDatabase.studentDao().insertAll(student1, student2, student3, student4);
 
-        TeamStudent teamStudent1 = new TeamStudent(team1.getId(), student1.getId(), null);
         TeamStudent teamStudent2 = new TeamStudent(team1.getId(), student2.getId(), null);
         TeamStudent teamStudent3 = new TeamStudent(team1.getId(), student3.getId(), null);
         TeamStudent teamStudent4 = new TeamStudent(team1.getId(), student4.getId(), null);
-        appDatabase.teamStudentDao().insertAll(teamStudent1, teamStudent2, teamStudent3, teamStudent4);
+        appDatabase.teamStudentDao().insertAll(teamStudent2, teamStudent3, teamStudent4);
     }
 }

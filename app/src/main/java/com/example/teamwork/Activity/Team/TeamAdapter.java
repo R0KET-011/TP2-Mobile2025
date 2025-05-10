@@ -22,10 +22,10 @@ import java.util.Map;
 
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder> {
 
+    private final Context context;
     private final List<Team> teams;
     private final Project project;
-    private final Context context;
-    private final  AppDatabase db;
+    private final AppDatabase db;
     private final Map<Integer, Integer> studentCounts = new HashMap<>();
 
     public TeamAdapter(Context context, List<Team> teams, Project project, AppDatabase db) {
@@ -45,29 +45,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull TeamViewHolder holder, int position) {
-        Team team = teams.get(position);
-
-        holder.name.setText(team.getName());
-        holder.state.setText(team.getState());
-        holder.state.setTextColor(team.getStateColor(context));
-
-        Integer count = studentCounts.get(team.getId());
-        if (count != null) {
-            holder.size.setText(String.format("%d/%d", count, project.getMax_per_team()));
-        } else {
-            db.teamStudentDao().getStudentCountForTeam(team.getId()).observe(
-                    (LifecycleOwner) context, c -> {
-                        studentCounts.put(team.getId(), c);
-                        holder.size.setText(String.format("%d/%d", c, project.getMax_per_team()));
-                    }
-            );
-        }
-
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, TeamShowActivity.class);
-            intent.putExtra("teamId", team.getId());
-            context.startActivity(intent);
-        });
+        holder.bind(teams.get(position));
     }
 
     @Override
@@ -75,14 +53,48 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
         return teams.size();
     }
 
-    public static class TeamViewHolder extends RecyclerView.ViewHolder {
-        private final TextView name, state, size;
+    class TeamViewHolder extends RecyclerView.ViewHolder {
+        private final TextView nameTextView, stateTextView, sizeTextView;
 
         public TeamViewHolder(View team_item) {
             super(team_item);
-            name = team_item.findViewById(R.id.name);
-            state = team_item.findViewById(R.id.state);
-            size = team_item.findViewById(R.id.size);
+            nameTextView = team_item.findViewById(R.id.name);
+            stateTextView = team_item.findViewById(R.id.state);
+            sizeTextView = team_item.findViewById(R.id.size);
+        }
+
+        public void bind(Team team){
+            nameTextView.setText(team.getName());
+            stateTextView.setText(team.getState());
+            stateTextView.setTextColor(team.getStateColor(context));
+
+            Integer count = studentCounts.get(team.getId());
+            if (count != null)
+                setSizeText(count);
+            else
+                observeStudentCounts(team);
+
+            setClickListener(team);
+        }
+
+        private void observeStudentCounts(Team team){
+            db.teamStudentDao().getStudentCountForTeam(team.getId())
+                    .observe((LifecycleOwner) context, count -> {
+                        studentCounts.put(team.getId(), count);
+                        setSizeText(count);
+                    });
+        }
+
+        private void setSizeText(int count) {
+            sizeTextView.setText(String.format("%d/%d", count, project.getMax_per_team()));
+        }
+
+        private void setClickListener(Team team) {
+            itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(context, TeamShowActivity.class);
+                intent.putExtra("teamId", team.getId());
+                context.startActivity(intent);
+            });
         }
     }
 }

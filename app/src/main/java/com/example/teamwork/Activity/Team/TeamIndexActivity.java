@@ -10,44 +10,81 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.teamwork.Database.AppDatabase;
+import com.example.teamwork.Database.Tables.Project;
 import com.example.teamwork.R;
+
+/****************************************
+ Fichier : TeamIndexActivity
+ Auteur : Antoine Blouin
+ Fonctionnalité : 32.5
+ Date : 2025-05-05
+
+ Vérification :
+ Date Nom Approuvé
+ =========================================================
+ Historique de modifications :
+ Date Nom Description
+ =========================================================
+ ****************************************/
 
 public class TeamIndexActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private int projectId;
+    private Project project;
+    private AppDatabase db;
+    private TextView descriptionTextView;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_index);
 
-        Intent intent = getIntent();
-        projectId = intent.getIntExtra("projectId",-1);
+        int projectId = getIntent().getIntExtra("projectId",-1);
 
-        AppDatabase db = AppDatabase.getDatabase(this);
+        db = AppDatabase.getDatabase(this);
 
-        db.projectDao().getProjectById(projectId).observe(this, project -> {
-            TextView description = findViewById(R.id.description);
-            description.setText(project.getDescription());
-            db.teamDao().getTeamsByProjectId(projectId).observe(this, teams -> {
-                TeamAdapter adapter = new TeamAdapter(this, teams, project, db);
-                RecyclerView recyclerView = findViewById(R.id.recyclerView);
-                recyclerView.setAdapter(adapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            });
-        });
+        setupView();
+        setupButtons();
+        observeProject(projectId);
+    }
 
+    private void setupView(){
+        descriptionTextView = findViewById(R.id.description);
+        recyclerView = findViewById(R.id.recyclerView);
+    }
+
+    private void setupButtons() {
         findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.create).setOnClickListener(this);
+    }
+
+    public void observeProject(int projectId){
+        db.projectDao().getProjectById(projectId).observe(this, project -> {
+            this.project = project;
+            descriptionTextView.setText(project.getDescription());
+            setupRecyclerView(project.getId());
+        });
+    }
+
+    private void setupRecyclerView(int projectId){
+        db.teamDao().getTeamsByProjectId(projectId).observe(this, teams -> {
+            TeamAdapter adapter = new TeamAdapter(this, teams, project, db);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(adapter);
+        });
     }
 
     public void onClick(View v) {
         if (v.getId() == R.id.back) {
             finish();
         } else if (v.getId() == R.id.create) {
-            Intent intent = new Intent(this, TeamCreateActivity.class);
-            intent.putExtra("projectId", projectId);
-            startActivity(intent);
+            startTeamCreateActivity();
         }
+    }
+
+    private void startTeamCreateActivity(){
+        Intent intent = new Intent(this, TeamCreateActivity.class);
+        intent.putExtra("projectId", project.getId());
+        startActivity(intent);
     }
 }
