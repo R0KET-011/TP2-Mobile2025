@@ -15,7 +15,7 @@
     <string name="team_join">Rejoindre l\'équipe</string>
     <string name="team_quit">Quitter l\'équipe</string>
     <string name="team_delete">Dissocier l\'équipe</string>
-
+    <string name="comment">Commentaire</string>
     <string name="students">Étudiants</string>
     <string name="students_index">Liste des étudiants</string>
 

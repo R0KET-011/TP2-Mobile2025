@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Activity.Project.ProjectActivity;
-import com.example.teamwork.Activity.Students.CommentPopupActivity;
 import com.example.teamwork.Activity.Students.StudentListActivity;
 import com.example.teamwork.Activity.Team.TeamIndexActivity;
 import com.example.teamwork.Database.AppDatabase;
