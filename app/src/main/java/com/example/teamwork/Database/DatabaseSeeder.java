@@ -57,9 +57,9 @@ public class DatabaseSeeder {
         TeamStudent teamStudent7 = new TeamStudent(team3.getId(), student7.getId(), null);
         appDatabase.teamStudentDao().insertAll(teamStudent2, teamStudent3, teamStudent4, teamStudent5, teamStudent6, teamStudent7);
 
-        Todo todo1 = new Todo(1, 1, "Manger les saucisses", "Avec fourchette", "");
-        Todo todo2 = new Todo(2, 1, "Sauter sur le trampoline", "", "");
-        Todo todo3 = new Todo(3, 1, "Lui avouer", "C'est dur", "");
+        Todo todo1 = new Todo(1, "Manger les saucisses", "Avec fourchette", "", false);
+        Todo todo2 = new Todo(1, "Sauter sur le trampoline", "", "", false);
+        Todo todo3 = new Todo(1, "Lui avouer", "C'est dur", "", false);
         appDatabase.todoDao().insertAll(todo1, todo2, todo3);
     }
 }

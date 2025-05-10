@@ -1,3 +1,18 @@
+/****************************************
+ Fichier : TodoAdapter.java
+ Auteur : Samy Larochelle
+ Fonctionnalité : Fonctionalités 36.4, Affichage des tâches
+ Date : 05/05/2025
+ Vérification :
+ Date           Nom                 Approuvé
+ =========================================================
+ Historique de modifications :
+ Date           Nom                 Description
+ 05/09/2025     Samy Larochelle     Création
+ 05/10/2025     Samy Larochelle     Correction
+ =========================================================
+ ****************************************/
+
 package com.example.teamwork.Activity.ToDo;
 
 import android.content.Context;
@@ -5,6 +20,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +41,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         this.todos = todos;
     }
 
+
     @NonNull
     @Override
     public TodoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,8 +60,14 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         else
             holder.description.setText(todo.getDescription());
 
+        if (todo.isCompleted()) {
+            holder.layout.setBackground(context.getResources().getDrawable(R.drawable.rv_task_completed));
+        } else {
+            holder.layout.setBackground(context.getResources().getDrawable(R.drawable.rv_bottom_border));
+        }
+
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, TodoIndexActivity.class);
+            Intent intent = new Intent(context, TodoShowActivity.class);
             intent.putExtra("todoId", todo.getId());
             context.startActivity(intent);
         });
@@ -57,11 +80,13 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
 
     public static class TodoViewHolder extends RecyclerView.ViewHolder {
         private final TextView name, description;
+        private final LinearLayout layout;
 
         public TodoViewHolder(View todo_item) {
             super(todo_item);
             name = todo_item.findViewById(R.id.name);
             description = todo_item.findViewById(R.id.description);
+            layout = todo_item.findViewById(R.id.layout);
         }
     }
 }

@@ -1,3 +1,17 @@
+/****************************************
+ Fichier : TodoDao.java
+ Auteur : Samy Larochelle
+ Fonctionnalité : Fonctionalités 36, Gestion des tâches
+ Date : 05/05/2025
+ Vérification :
+ Date           Nom                 Approuvé
+ =========================================================
+ Historique de modifications :
+ Date           Nom                 Description
+ 05/09/2025     Samy Larochelle     Création
+ 05/10/2025     Samy Larochelle     Correction
+ =========================================================
+ ****************************************/
 package com.example.teamwork.Database.Dao;
 
 import androidx.lifecycle.LiveData;
@@ -33,6 +47,6 @@ public interface TodoDao {
     @Query("SELECT * FROM todos WHERE id = :id")
     LiveData<Todo> getTodoById(int id);
 
-    @Query("SELECT * FROM todos WHERE project_id = :projectId")
+    @Query("SELECT * FROM todos WHERE project_id = :projectId ORDER BY completed")
     LiveData<List<Todo>> getTodosByProjectId(int projectId);
 }
