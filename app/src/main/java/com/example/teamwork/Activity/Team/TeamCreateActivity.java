@@ -6,8 +6,10 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Team;
+import com.example.teamwork.Database.Tables.TeamStudent;
 import com.example.teamwork.R;
 
 /****************************************
@@ -67,7 +69,17 @@ public class TeamCreateActivity extends AppCompatActivity implements View.OnClic
         // TODO : Validation par API et Pour l'Id
         Team team = new Team(4, name, "Non conforme", description , projectId);
         db.teamDao().insert(team);
+
+        if (Authentication.isStudent())
+            addStudentToTeam(team);
+
         finish();
+    }
+
+    private void addStudentToTeam(Team team){
+        TeamStudent teamStudent = new TeamStudent(team.getId(), Authentication.getId(), "");
+        db.teamStudentDao().deleteStudentFromProject(Authentication.getId(), projectId);
+        db.teamStudentDao().insert(teamStudent);
     }
 
     private boolean validateInputs(String name, String description) {

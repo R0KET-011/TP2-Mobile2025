@@ -114,9 +114,11 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void showJoinButton() {
-        db.teamStudentDao().getStudentCountForTeam(team.getId()).observe(this, count ->{
+        joinButton.setVisibility(View.VISIBLE); // TODO : Ptit bug de timing ici (quand tu quite et que sa delete, sa affiche)
+        quitButton.setVisibility(View.GONE);
+
+        db.teamStudentDao().getStudentCountForTeamExcluding(team.getId(), Authentication.getId()).observe(this, count ->{
             if (count < project.getMax_per_team()){
-                joinButtonVisibility();
                 joinButtonAction();
             }else{
                 quitButton.setVisibility(View.GONE);
@@ -127,33 +129,20 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
 
     private void joinButtonAction(){
         joinButton.setOnClickListener(v -> {
-            TeamStudent newEntry = new TeamStudent(team.getId(), Authentication.getId(), "");
+            TeamStudent teamStudent = new TeamStudent(team.getId(), Authentication.getId(), "");
             db.teamStudentDao().deleteStudentFromProject(Authentication.getId(), project.getId());
-            db.teamStudentDao().insert(newEntry);
-
-            quitButtonVisibility();
+            db.teamStudentDao().insert(teamStudent);
         });
     }
 
     private void showQuitButton(TeamStudent membership) {
-        quitButtonVisibility();
+        joinButton.setVisibility(View.GONE);
+        quitButton.setVisibility(View.VISIBLE);
 
         quitButton.setOnClickListener(v -> {
             db.teamStudentDao().delete(membership);
             deleteTeamOnLastStudent();
-
-            joinButtonVisibility();
         });
-    }
-
-    private void joinButtonVisibility(){
-        joinButton.setVisibility(View.VISIBLE);
-        quitButton.setVisibility(View.GONE);
-    }
-
-    private void quitButtonVisibility(){
-        joinButton.setVisibility(View.GONE);
-        quitButton.setVisibility(View.VISIBLE);
     }
 
     private void deleteTeamOnLastStudent() {

@@ -39,15 +39,21 @@ public class DatabaseSeeder {
         Team team3 = new Team(3, "Walmart", "Non conforme", "Description", project1.getId());
         appDatabase.teamDao().insertAll(team1, team2, team3);
 
-        Student student1 = new Student(1, "Antoine", "Blouin", "Essayer d'aider, marche comme ça peut");
-        Student student2 = new Student(2, "Samy", "Larochelle", "Bonne compréhension du projet");
-        Student student3 = new Student(3, "Kevin", "Larochelle", "Plonger dans son API");
-        Student student4 = new Student(4, "Emeric", "Leclerc", "Dédié à la tâche");
-        appDatabase.studentDao().insertAll(student1, student2, student3, student4);
+        Student student1 = new Student(1, "Antoine", "Blouin");
+        Student student2 = new Student(2, "Samy", "Larochelle");
+        Student student3 = new Student(3, "Kevin", "Larochelle");
+        Student student4 = new Student(4, "Emeric", "Leclerc");
+        Student student5 = new Student(5, "Arnaud", "Lecuyer");
+        Student student6 = new Student(6, "Samuel", "Pomerleau");
+        Student student7 = new Student(7, "Jeremy", "Drapeau");
+        appDatabase.studentDao().insertAll(student1, student2, student3, student4, student5, student6, student7);
 
         TeamStudent teamStudent2 = new TeamStudent(team1.getId(), student2.getId(), null);
         TeamStudent teamStudent3 = new TeamStudent(team1.getId(), student3.getId(), null);
         TeamStudent teamStudent4 = new TeamStudent(team1.getId(), student4.getId(), null);
-        appDatabase.teamStudentDao().insertAll(teamStudent2, teamStudent3, teamStudent4);
+        TeamStudent teamStudent5 = new TeamStudent(team2.getId(), student5.getId(), null);
+        TeamStudent teamStudent6 = new TeamStudent(team2.getId(), student6.getId(), null);
+        TeamStudent teamStudent7 = new TeamStudent(team3.getId(), student7.getId(), null);
+        appDatabase.teamStudentDao().insertAll(teamStudent2, teamStudent3, teamStudent4, teamStudent5, teamStudent6, teamStudent7);
     }
 }

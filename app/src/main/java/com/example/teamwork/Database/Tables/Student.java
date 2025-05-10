@@ -12,13 +12,11 @@ public class Student {
     private String firstName;
     @ColumnInfo(name = "last_name")
     private String lastName;
-    private String comment;
 
-    public Student(int id, String firstName, String lastName, String comment){
+    public Student(int id, String firstName, String lastName){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.comment = comment;
     }
 
     public int getId() {
@@ -43,14 +41,6 @@ public class Student {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 
     public String getFullName() {
