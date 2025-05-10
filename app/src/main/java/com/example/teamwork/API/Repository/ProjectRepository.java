@@ -1,3 +1,21 @@
+/****************************************
+ Fichier : ProjectRepository.java
+ Auteur : Kevin Larochelle
+ Fonctionnalité :
+ Manager entre Api et Database pour projets.
+
+ Date : 05/09/2025
+
+ Vérification :
+ Date Nom Approuvé
+
+ =========================================================
+ Historique de modifications :
+ Date Nom Description
+
+ =========================================================
+ ****************************************/
+
 package com.example.teamwork.API.Repository;
 
 import android.content.Context;
@@ -16,6 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProjectRepository {
+
     private ProjectDao projectDao;
 
     public ProjectRepository(Context context) {
@@ -23,16 +42,17 @@ public class ProjectRepository {
         projectDao = db.projectDao();
     }
 
-    public void fetchInsertProjects(ApiInterface api, int userId) {
-        Call<List<Project>> call = api.getProjects(userId);
-        Log.v("API Call", "Call done.");
+    public void fetchInsertProjects(ApiInterface api) {
+        Call<List<Project>> call = api.getProjects();
+        Log.v("Project API Call", "Call done.");
 
         call.enqueue(new Callback<List<Project>>() {
             @Override
             public void onResponse(Call<List<Project>> call, Response<List<Project>> response) {
-                Log.v("Response", "Response received");
+                Log.v("Project Response", "Response received",
+                        new Throwable(String.valueOf(response)));
                 if (response.isSuccessful() && response.body() != null) {
-                    Log.v("Response Body", "Contains something");
+                    Log.v("Project Response Body", "Contains something");
                     try {
                         new Thread (() -> {
                             projectDao.insertProjects(response.body());
@@ -44,14 +64,14 @@ public class ProjectRepository {
                     }
                 }
                 else {
-                    Log.v("Response Body", "Issues detected");
+                    Log.v("Project Response Body", "Issues detected");
                 }
             }
 
             @Override
             public void onFailure(Call<List<Project>> call, Throwable t) {
                 t.printStackTrace();
-                Log.v("Call Fail", "Failure", t);
+                Log.v("Project Call Fail", "Failure", t);
             }
         });
     }
