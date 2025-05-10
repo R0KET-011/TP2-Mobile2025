@@ -32,4 +32,7 @@ public interface TodoDao {
 
     @Query("SELECT * FROM todos WHERE id = :id")
     LiveData<Todo> getTodoById(int id);
+
+    @Query("SELECT * FROM todos WHERE project_id = :projectId")
+    LiveData<List<Todo>> getTodosByProjectId(int projectId);
 }
