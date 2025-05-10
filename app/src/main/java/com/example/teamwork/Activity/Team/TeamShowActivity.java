@@ -63,6 +63,12 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
                                 joinButton.setVisibility(View.GONE);
                                 quitButton.setOnClickListener(v1 -> {
                                     db.teamStudentDao().delete(teamStudent);
+                                    db.teamStudentDao().getStudentCountForTeam(team.getId())
+                                            .observeForever(count -> {
+                                                if (count != null && count < 1) {
+                                                    db.teamDao().delete(team);
+                                                }
+                                            });
                                     quitButton.setVisibility(View.GONE);
                                     joinButton.setVisibility(View.VISIBLE);
                                 });
