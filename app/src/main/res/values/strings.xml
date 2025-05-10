@@ -13,11 +13,14 @@
     <string name="team_show">Détails de l\'équipe</string>
     <string name="team_edit">Modifier l\'équipe</string>
     <string name="team_join">Rejoindre l\'équipe</string>
-
+    <string name="team_quit">Quitter l\'équipe</string>
+    <string name="team_delete">Dissocier l\'équipe</string>
+    <string name="comment">Commentaire</string>
     <string name="students">Étudiants</string>
     <string name="students_index">Liste des étudiants</string>
 
-    <string name="project_title">Liste des Projets</string>
-    <string name="project_participant">Participant(s): </string>
-    <string name="project_group">Groupe: </string>
+    <string name="project_title">Liste des projets</string>
+    <string name="project_participant">Participant(s) : </string>
+    <string name="project_group">Groupe : </string>
+    <string name="project_description">Description du projet</string>
 </resources>

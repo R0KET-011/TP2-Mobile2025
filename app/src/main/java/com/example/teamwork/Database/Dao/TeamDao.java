@@ -38,4 +38,10 @@ public interface TeamDao {
 
     @Query("SELECT * FROM teams WHERE project_id = :projectId")
     LiveData<List<Team>> getTeamsByProjectId(int projectId);
+
+    @Query("SELECT COUNT(*) FROM teams WHERE LOWER(name) = LOWER(:name) AND project_id = :projectId")
+    int isNameTaken(String name, int projectId);
+
+    @Query("SELECT COUNT(*) FROM teams WHERE LOWER(name) = LOWER(:name) AND project_id = :projectId AND id != :teamId")
+    int isNameTakenEdit(String name, int projectId, int teamId);
 }

@@ -5,8 +5,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Activity.Project.ProjectActivity;
-import com.example.teamwork.Activity.Students.CommentPopupActivity;
 import com.example.teamwork.Activity.Students.StudentListActivity;
 import com.example.teamwork.Activity.Team.TeamIndexActivity;
 import com.example.teamwork.Database.AppDatabase;
@@ -20,13 +20,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Authentication.setId(1);
+        Authentication.setIsStudent(true);
+
         Intent intent = new Intent(this, ProjectActivity.class);
         startActivity(intent);
-
-        /*Intent intent = new Intent(this, CommentPopupActivity.class);
-        intent.putExtra("teamId", 3);
-        startActivity(intent);*/
-
-
     }
 }

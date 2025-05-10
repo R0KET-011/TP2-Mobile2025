@@ -1,9 +1,13 @@
 package com.example.teamwork.Activity.Students;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -20,7 +24,7 @@ import com.example.teamwork.R;
 
 import java.util.List;
 
-public class StudentListActivity extends AppCompatActivity {
+public class StudentListActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,7 @@ public class StudentListActivity extends AppCompatActivity {
         //get students de la database
         AppDatabase appDatabase = AppDatabase.getDatabase(this);
         appDatabase.teamStudentDao().getStudentsForTeam(teamId).observe(this, (List<Student> students) -> {
-            StudentAdapter adapter = new StudentAdapter(this, students);
+            StudentAdapter adapter = new StudentAdapter(this, students, teamId);
             RecyclerView recyclerView = findViewById(R.id.rv_students);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -55,10 +59,20 @@ public class StudentListActivity extends AppCompatActivity {
             }
         });
 
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        PopupWindow pw = new PopupWindow(inflater.inflate(R.layout.activity_comment_popup, null, false),100,100, true);
+
+        pw.showAtLocation(v, Gravity.CENTER, 0, 0);
     }
 }

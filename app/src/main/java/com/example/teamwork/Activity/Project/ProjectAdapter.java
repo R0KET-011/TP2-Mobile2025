@@ -18,7 +18,11 @@
 
 package com.example.teamwork.Activity.Project;
 
+import com.example.teamwork.Activity.Team.TeamIndexActivity;
+import com.example.teamwork.Activity.Team.TeamShowActivity;
 import com.example.teamwork.R;
+
+import android.content.Intent;
 import android.view.View;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -50,16 +54,22 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.projectName.setText(projectList.get(position).getName());
-        holder.projectCourse.setText(projectList.get(position).getCourse());
-        String groupText = context.getResources().getString(R.string.project_group);
-        groupText += String.valueOf(projectList.get(position).getGroup());
-        holder.projectGroup.setText(groupText);
-        String memberCount = context.getResources().getString(R.string.project_participant);
-        memberCount += String.valueOf(projectList.get(position).getMin_per_team());
+        Project project = projectList.get(position);
+
+        holder.projectName.setText(project.getName());
+        holder.projectCourse.setText(project.getCourse());
+        holder.projectGroup.setText(String.valueOf(project.getGroup()));
+
+        String memberCount = String.valueOf(project.getMin_per_team());
         memberCount += " - ";
-        memberCount += String.valueOf(projectList.get(position).getMax_per_team());
+        memberCount += String.valueOf(project.getMax_per_team());
         holder.projectMembersCount.setText(memberCount);
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, TeamIndexActivity.class);
+            intent.putExtra("projectId", project.getId());
+            context.startActivity(intent);
+        });
     }
 
     @Override

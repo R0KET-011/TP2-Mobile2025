@@ -9,33 +9,60 @@
  Historique de modifications :
  Date           Nom                 Description
  05/05/2025     Samy Larochelle     Création
+ 05/07/2025     Samy Larochelle     Recréation de la vue
  =========================================================
  ****************************************/
 package com.example.teamwork.Activity.Auth;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.teamwork.R;
+import com.google.android.material.snackbar.Snackbar;
 
-public class RegisterActivity extends AppCompatActivity {
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+    EditText input;
+    LinearLayout layout;
+    Pattern p = Pattern.compile("^[0-9]{9}$");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register);
 
+        findViewById(R.id.back).setOnClickListener(this);
+        findViewById(R.id.buttonSendMail).setOnClickListener(this);
+        layout = findViewById(R.id.layout);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.back) {
+            finish();
+        }
+        if (v.getId() == R.id.buttonSendMail) {
+            input = findViewById(R.id.editTextNDA);
+            String inputText = input.getText().toString();
+
+            Matcher m = p.matcher(inputText);
+            boolean bFormatCorrect = m.matches();
+
+            if (inputText.isEmpty()) {
+                Snackbar.make(layout, "Veuillez entrer votre numéro de dossier.", Snackbar.LENGTH_SHORT).show();
+            } else if (!bFormatCorrect) {
+                Snackbar.make(layout, "Le numéro de dossier doit contenir 9 chiffres", Snackbar.LENGTH_SHORT).show();
+            } else {
+                //Todo : call api
+                finish();
+            }
+        }
     }
 }

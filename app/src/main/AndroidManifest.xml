@@ -17,9 +17,8 @@
         android:theme="@style/Theme.TeamWork"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.Students.CommentPopupActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Popup"/>
+            android:name=".Activity.ToDo.TodoIndexActivity"
+            android:exported="false" />
         <activity
             android:name=".Activity.Students.StudentListActivity"
             android:exported="false" />
