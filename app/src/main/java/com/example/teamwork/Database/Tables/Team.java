@@ -29,6 +29,8 @@ public class Team {
     @ColumnInfo(name = "project_id")
     private int projectId;
 
+    public Team() {}
+
     public Team(int id, String name, String state, String description, int projectId) {
         this.id = id;
         this.name = name;
@@ -86,5 +88,9 @@ public class Team {
             default:
                 return context.getColor(R.color.color_red);
         }
+    }
+
+    public String toString() {
+        return "project_id = " + this.getProjectId();
     }
 }

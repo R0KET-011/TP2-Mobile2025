@@ -21,6 +21,9 @@ public interface TeamDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(Team... teams);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertTeams(List<Team> teams);
+
     @Update
     void update(Team team);
 

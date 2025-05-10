@@ -1,3 +1,21 @@
+/****************************************
+ Fichier : ProjectAdapter.java
+ Auteur : Kevin Larochelle
+ Fonctionnalité :
+ Intercept la requête http pour ajouter un token d'autentification.
+
+ Date : 05/09/2025
+
+ Vérification :
+ Date Nom Approuvé
+
+ =========================================================
+ Historique de modifications :
+ Date Nom Description
+
+ =========================================================
+ ****************************************/
+
 package com.example.teamwork.API;
 
 import java.io.IOException;

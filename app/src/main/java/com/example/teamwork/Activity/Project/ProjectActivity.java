@@ -1,8 +1,28 @@
+/****************************************
+ Fichier : ProjectActivity.java
+ Auteur : Kevin Larochelle
+ Fonctionnalité :
+ View de la liste des projets.
+
+ Date : 05/05/2025
+
+ Vérification :
+ Date Nom Approuvé
+
+ =========================================================
+ Historique de modifications :
+ Date Nom Description
+
+ =========================================================
+ ****************************************/
+
 package com.example.teamwork.Activity.Project;
 
 import com.example.teamwork.API.ApiInterface;
 import com.example.teamwork.API.Repository.ProjectRepository;
+import com.example.teamwork.API.Repository.TeamRepository;
 import com.example.teamwork.Database.AppDatabase;
+import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.R;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +32,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import com.example.teamwork.API.ApiClient;
 
 import com.example.teamwork.Database.Tables.Project;
@@ -27,35 +50,52 @@ public class ProjectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_project);
 
         AppDatabase db = AppDatabase.getDatabase(this);
-        updateDatabase(db);
+
+        // Au cas où les inserts sont async somehow.. aucune idée c'est quoi le problème tbh..
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(()-> {
+            updateProjectDatabase(db);
+            updateTeamDatabase(db);
+            }
+        );
 
         db.projectDao().getAllProjects().observe(
                 this, (List<Project> projects) -> {
-                    try {
-                        Log.d("test de projet: ", projects.get(0).getName());
-                        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-                        ProjectAdapter projectAdapter = new ProjectAdapter(this, projects);
-                        recyclerView.setAdapter(projectAdapter);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                    }
-                    catch(Exception e) {
-                        Log.d("RecycleView ERROR", "onCreate() returned: " + e);
-                    }
-                });
+                try {
+                    RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                    ProjectAdapter projectAdapter = new ProjectAdapter(this, projects);
+                    recyclerView.setAdapter(projectAdapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                }
+                catch(Exception e) {
+                    Log.d("RecycleView ERROR", "onCreate() returned: " + e);
+                }
+            });
+
+        db.teamDao().getAllTeams().observe(this, (List<Team> teams) -> {
+            for (Team team: teams) {
+                try {
+                    Log.d("test d'équipe: ", team.getName());
+                }
+                catch(Exception e) {
+                    Log.d("test bad", "no team");
+                }
+
+            }
+
+        });
 
     }
 
-    public void updateDatabase(AppDatabase db) {
+    public void updateProjectDatabase(AppDatabase db) {
         ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
         ProjectRepository repository = new ProjectRepository(this);
-        repository.fetchInsertProjects(api, 1);
+        repository.fetchInsertProjects(api);
+    }
 
-        new Handler().postDelayed(() ->{
-            repository.getAllProjects().observe(this, projects -> {
-                for (Project p: projects) {
-                    Log.d("MainActivity", "Project: " + p.getName());
-                }
-            });
-        }, 5000);
+    public void updateTeamDatabase(AppDatabase db) {
+        ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+        TeamRepository repository = new TeamRepository(this);
+        repository.fetchInsertTeams(api);
     }
 }

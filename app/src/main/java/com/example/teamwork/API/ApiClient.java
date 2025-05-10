@@ -1,3 +1,21 @@
+/****************************************
+ Fichier : ApiClient.java
+ Auteur : Kevin Larochelle
+ Fonctionnalité :
+ Connextion de base pour l'api.
+
+ Date : 05/09/2025
+
+ Vérification :
+ Date Nom Approuvé
+
+ =========================================================
+ Historique de modifications :
+ Date Nom Description
+
+ =========================================================
+ ****************************************/
+
 package com.example.teamwork.API;
 
 import okhttp3.OkHttpClient;
