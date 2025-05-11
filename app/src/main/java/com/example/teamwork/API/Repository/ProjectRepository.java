@@ -49,8 +49,6 @@ public class ProjectRepository {
         call.enqueue(new Callback<List<Project>>() {
             @Override
             public void onResponse(Call<List<Project>> call, Response<List<Project>> response) {
-                Log.v("Project Response", "Response received",
-                        new Throwable(String.valueOf(response)));
                 if (response.isSuccessful() && response.body() != null) {
                     Log.v("Project Response Body", "Contains something");
                     try {

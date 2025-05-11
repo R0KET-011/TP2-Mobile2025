@@ -35,4 +35,8 @@ public interface ProjectDao {
 
     @Query("SELECT * FROM projects WHERE id = :id")
     LiveData<Project> getProjectById(int id);
+
+    @Query("SELECT p.* FROM projects p WHERE p.id IN " +
+            "(SELECT t.project_id FROM teams t INNER JOIN team_students ts ON ts.team_id = t.id WHERE ts.student_id = :userId)")
+    LiveData<List<Project>> getProjectByUser(int userId);
 }

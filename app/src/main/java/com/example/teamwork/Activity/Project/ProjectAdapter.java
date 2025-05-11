@@ -23,6 +23,7 @@ import com.example.teamwork.Activity.Team.TeamShowActivity;
 import com.example.teamwork.R;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -68,6 +69,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.MyViewHo
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, TeamIndexActivity.class);
             intent.putExtra("projectId", project.getId());
+            String projectId = String.valueOf(project.getId());
             context.startActivity(intent);
         });
     }

@@ -20,7 +20,15 @@
     <string name="students_index">Liste des étudiants</string>
 
     <string name="project_title">Liste des projets</string>
+    <string name="project_notitle">Aucun projet</string>
     <string name="project_participant">Participant(s) : </string>
     <string name="project_group">Groupe : </string>
     <string name="project_description">Description du projet</string>
+    <string name="project_creation">Création d\'un projet</string>
+    <string name="project_name">Nom du projet</string>
+    <string name="project_min">Minimum par équipe</string>
+    <string name="project_max">Maximum par équipe</string>
+    <string name="project_joinable">Permission de rejoindre une équipe</string>
+    <string name="project_creatable">Création d\'équipe possible</string>
+    <string name="project_common_classes">Cours commun requis</string>
 </resources>

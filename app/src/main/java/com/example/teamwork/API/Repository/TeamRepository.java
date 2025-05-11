@@ -53,28 +53,23 @@ public class TeamRepository {
         call.enqueue(new Callback<List<Team>>() {
             @Override
             public void onResponse(Call<List<Team>> call, Response<List<Team>> response) {
-                Log.v("TeamResponse", "Response received", new Throwable(String.valueOf(response)));
-
                 if (response.isSuccessful() && response.body() != null) {
                     Log.v("Team Response Body", "Contains something");
                     try {
                         new Thread (() -> {
                             Gson gson = new Gson();
                             String json = gson.toJson(response.body());
-                            Log.d("DEBUG TEAMS", json);
                             Type typeList = new TypeToken<List<Team>>() {}.getType();
                             List<Team> teams = gson.fromJson(json, typeList);
                             for (Team team: teams) {
                                 Gson gsonTeam = new Gson();
                                 String jsonTeam = gsonTeam.toJson(team);
-                                Log.d("DEBUG TEAM", jsonTeam);
 
                                 Team teamInsert = new Team();
                                 teamInsert.setId(team.getId());
                                 teamInsert.setName(team.getName());
                                 teamInsert.setDescription(team.getDescription());
                                 teamInsert.setProjectId(team.getProjectId());
-                                Log.d("DEBUG MADE TEAM", teamInsert.toString());
                                 teamDao.insert(teamInsert);
                             }
                             Log.v("Team Insertion", "Team insertions successful");
