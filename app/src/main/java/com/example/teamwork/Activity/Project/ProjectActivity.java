@@ -82,8 +82,9 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 //            }
 //        );
 
+        // Pour la raison du test d'insert, laisser sur AllProjects
         // getProjectByUser(userId) | getAllProjects()
-        db.projectDao().getProjectByUser(userId).observe(
+        db.projectDao().getAllProjects().observe(
                 this, projects -> {
                 try {
                     if (projects.isEmpty()) {

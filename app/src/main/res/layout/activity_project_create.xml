@@ -64,7 +64,7 @@ android:background="@color/color_tertiary">
         android:layout_margin="16sp"
         android:textColor="@color/text_primary"
         android:textColorHint="@color/text_secondary"
-        android:inputType="text|textMultiLine"/>
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/max_per_team"
@@ -74,7 +74,7 @@ android:background="@color/color_tertiary">
         android:layout_margin="16sp"
         android:textColor="@color/text_primary"
         android:textColorHint="@color/text_secondary"
-        android:inputType="text|textMultiLine"/>
+        android:inputType="number"/>
 
     <CheckBox
         android:id="@+id/joinable_checkbox"

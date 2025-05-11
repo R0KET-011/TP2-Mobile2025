@@ -31,4 +31,10 @@
     <string name="project_joinable">Permission de rejoindre une équipe</string>
     <string name="project_creatable">Création d\'équipe possible</string>
     <string name="project_common_classes">Cours commun requis</string>
+
+    <string name="error_name">Un nom est requis.</string>
+    <string name="error_min">Un chiffre est requis pour le minimum</string>
+    <string name="error_max">Un chiffre est requis pour le maximum</string>
+    <string name="error_maxLow">Le maximum doit être plus grand que le minimum</string>
+    <string name="error_minLow">Le minimum ne peut pas être zero.</string>
 </resources>

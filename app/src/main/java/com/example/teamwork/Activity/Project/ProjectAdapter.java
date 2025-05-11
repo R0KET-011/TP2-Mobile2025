@@ -58,8 +58,8 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.MyViewHo
         Project project = projectList.get(position);
 
         holder.projectName.setText(project.getName());
-        holder.projectCourse.setText(project.getCourse());
-        holder.projectGroup.setText(String.valueOf(project.getGroup()));
+//        holder.projectCourse.setText(project.getCourse());
+//        holder.projectGroup.setText(String.valueOf(project.getGroup()));
 
         String memberCount = String.valueOf(project.getMin_per_team());
         memberCount += " - ";

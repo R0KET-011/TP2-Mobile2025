@@ -16,9 +16,9 @@ public class DatabaseSeeder {
                 3,
                 true,
                 true,
-                true,
-                4118,
-                "Développement Web avancé"
+                true//,
+//                4118,
+//                "Développement Web avancé"
         );
 
         Project project2 = new Project(
@@ -29,9 +29,9 @@ public class DatabaseSeeder {
                 4,
                 true,
                 true,
-                false,
-                4118,
-                "Introduction à l'utilisation d'objets connectés"
+                false//,
+//                4118,
+//                "Introduction à l'utilisation d'objets connectés"
         );
         appDatabase.projectDao().insertAll(project1, project2);
 

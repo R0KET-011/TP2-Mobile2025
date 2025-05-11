@@ -22,8 +22,8 @@ public class Project {
     boolean creatable = false;
     @ColumnInfo(name = "is_common_classes")
     boolean common_classes = false;
-    int group = 0;
-    String course = "";
+//    int group = 0;
+//    String course = "";
 
     public Project() {}
     /** Constructeur pour objet Projet.
@@ -36,8 +36,9 @@ public class Project {
      * @param newCreatable est boolean
      * @param newCommon est boolean */
     public Project(int newId, String newName, String newDescription, int newMin, int newMax,
-                   boolean newJoinable, boolean newCreatable, boolean newCommon, int newGroup,
-                   String newCourse ) {
+                   boolean newJoinable, boolean newCreatable, boolean newCommon
+//            , int newGroup, String newCourse
+    ) {
         this.id = newId;
         this.name = newName;
         this.description = newDescription;
@@ -46,8 +47,6 @@ public class Project {
         this.joinable = newJoinable;
         this.creatable = newCreatable;
         this.common_classes = newCommon;
-        this.group = newGroup;
-        this.course = newCourse;
     }
 
     /** Setter pour l'Id du projet.
@@ -106,23 +105,25 @@ public class Project {
      * @return this.common_classes, boolean*/
     public boolean getCommon_classes() {return this.common_classes; }
 
-    /** Setter pour le code du groupe du projet.
-     * @param newGroup est int */
-    public void setGroup(int newGroup) {this.group = newGroup; }
-    /** Getter pour le code du groupe du projet.
-     * @return this.group, int*/
-    public int getGroup() {return this.group; }
-
-    /** Setter pour le nom du cours du projet.
-     * @param newCourse est string */
-    public void setCourse(String newCourse) {this.course = newCourse; }
-    /** Getter pour lel nom du cours du projet.
-     * @return this.common_classes, boolean*/
-    public String getCourse() {return this.course; }
+//    /** Setter pour le code du groupe du projet.
+//     * @param newGroup est int */
+//    public void setGroup(int newGroup) {this.group = newGroup; }
+//    /** Getter pour le code du groupe du projet.
+//     * @return this.group, int*/
+//    public int getGroup() {return this.group; }
+//
+//    /** Setter pour le nom du cours du projet.
+//     * @param newCourse est string */
+//    public void setCourse(String newCourse) {this.course = newCourse; }
+//    /** Getter pour lel nom du cours du projet.
+//     * @return this.common_classes, boolean*/
+//    public String getCourse() {return this.course; }
 
     @Override
     public String toString() {
         return ("Project: " + this.name + ", " + this.description + ", " + this.min_per_team +
-                "-" + this.max_per_team + ", " + this.joinable + ", " + this.creatable + ", " + this.common_classes + ", " + "Group: " + this.group + ", Course: " + this.course);
+                "-" + this.max_per_team + ", " + this.joinable + ", " + this.creatable + ", " + this.common_classes
+//                + ", " + "Group: " + this.group + ", Course: " + this.course
+        );
     }
 }
