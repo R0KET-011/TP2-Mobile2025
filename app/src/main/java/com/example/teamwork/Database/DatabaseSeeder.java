@@ -4,6 +4,7 @@ import com.example.teamwork.Database.Tables.Project;
 import com.example.teamwork.Database.Tables.Student;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.TeamStudent;
+import com.example.teamwork.Database.Tables.Todo;
 
 public class DatabaseSeeder {
     public static void seed(AppDatabase appDatabase) {
@@ -55,5 +56,10 @@ public class DatabaseSeeder {
         TeamStudent teamStudent6 = new TeamStudent(team2.getId(), student6.getId(), null);
         TeamStudent teamStudent7 = new TeamStudent(team3.getId(), student7.getId(), null);
         appDatabase.teamStudentDao().insertAll(teamStudent2, teamStudent3, teamStudent4, teamStudent5, teamStudent6, teamStudent7);
+
+        Todo todo1 = new Todo(1, "Manger les saucisses", "Avec fourchette", "", false);
+        Todo todo2 = new Todo(1, "Sauter sur le trampoline", "", "", false);
+        Todo todo3 = new Todo(1, "Lui avouer", "C'est dur", "", false);
+        appDatabase.todoDao().insertAll(todo1, todo2, todo3);
     }
 }
