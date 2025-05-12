@@ -25,7 +25,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Todo;
 import com.example.teamwork.R;
-import com.google.android.material.snackbar.Snackbar;
 
 public class TodoCreateActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -60,9 +59,10 @@ public class TodoCreateActivity extends AppCompatActivity implements View.OnClic
             finish();
         }
         if (v.getId() == R.id.buttonAdd) {
-            if (nameEditText.getText().toString().isEmpty())
-                Snackbar.make(layout, "Veuillez entrer un nom de tâche", Snackbar.LENGTH_SHORT).show();
-            else {
+            if (nameEditText.getText().toString().isEmpty()) {
+                nameEditText.setError("Veuillez entrer un nom de tâche");
+                nameEditText.requestFocus();
+            } else {
                 Todo todo = new Todo(this.projectId, nameEditText.getText().toString(), descriptionEditText.getText().toString(), "", false);
                 todo.setNom(nameEditText.getText().toString());
                 todo.setDescription(descriptionEditText.getText().toString());

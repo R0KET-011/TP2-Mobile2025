@@ -2,7 +2,7 @@
  Fichier : TodoIndexActivity.java
  Auteur : Samy Larochelle
  Fonctionnalité : Fonctionalités 36.4, Affichage des tâches
- Date : 05/05/2025
+ Date : 05/09/2025
  Vérification :
  Date           Nom                 Approuvé
  =========================================================

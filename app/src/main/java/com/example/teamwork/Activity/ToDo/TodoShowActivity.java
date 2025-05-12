@@ -2,7 +2,7 @@
  Fichier : TodoShowActivity.java
  Auteur : Samy Larochelle
  Fonctionnalité : Fonctionalités 36.2 et 36.3 : Modification/Suppression d'une tâche
- Date : 05/05/2025
+ Date : 05/10/2025
  Vérification :
  Date           Nom                 Approuvé
  =========================================================
@@ -25,7 +25,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Todo;
 import com.example.teamwork.R;
-import com.google.android.material.snackbar.Snackbar;
 
 public class TodoShowActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -72,9 +71,10 @@ public class TodoShowActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.back) {
-            if (nameEditText.getText().toString().isEmpty())
-                Snackbar.make(layout, "Veuillez entrer un nom de tâche", Snackbar.LENGTH_SHORT).show();
-            else {
+            if (nameEditText.getText().toString().isEmpty()) {
+                nameEditText.setError("Veuillez entrer un nom de tâche");
+                nameEditText.requestFocus();
+            } else {
                 todo.setNom(nameEditText.getText().toString());
                 todo.setDescription(descriptionEditText.getText().toString());
                 db.todoDao().update(todo);

@@ -22,7 +22,6 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.teamwork.R;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,11 +55,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             boolean bFormatCorrect = m.matches();
 
             if (inputText.isEmpty()) {
-                Snackbar.make(layout, "Veuillez entrer votre numéro de dossier.", Snackbar.LENGTH_SHORT).show();
+                input.setError("Veuillez entrer votre numéro de dossier.");
+                input.requestFocus();
             } else if (!bFormatCorrect) {
-                Snackbar.make(layout, "Le numéro de dossier doit contenir 9 chiffres", Snackbar.LENGTH_SHORT).show();
+                input.setError("Le numéro de dossier doit contenir 9 chiffres");
+                input.requestFocus();
             } else {
-                //Todo : call api
+                //Todo : call api to send email
                 finish();
             }
         }
