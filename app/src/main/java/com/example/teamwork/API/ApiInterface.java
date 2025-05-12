@@ -20,11 +20,12 @@ package com.example.teamwork.API;
 
 import java.util.List;
 import com.example.teamwork.Database.Tables.Project;
+import com.example.teamwork.Database.Tables.Student;
 import com.example.teamwork.Database.Tables.Team;
+import com.example.teamwork.Database.Tables.TeamStudent;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 
 public interface ApiInterface {
 
@@ -34,5 +35,11 @@ public interface ApiInterface {
 
     @GET("teams")
     Call<List<Team>> getTeams();
+
+    @GET("students")
+    Call<List<Student>> getStudents();
+
+    @GET("student_team")
+    Call<List<TeamStudent>> getTeamStudent();
 
 }

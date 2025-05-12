@@ -54,7 +54,7 @@ public class TeamRepository {
             @Override
             public void onResponse(Call<List<Team>> call, Response<List<Team>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Log.v("Team Response Body", "Contains something");
+                    Log.v("Team API Response Body", "Contains something");
                     try {
                         new Thread (() -> {
                             Gson gson = new Gson();
@@ -72,7 +72,7 @@ public class TeamRepository {
                                 teamInsert.setProjectId(team.getProjectId());
                                 teamDao.insert(teamInsert);
                             }
-                            Log.v("Team Insertion", "Team insertions successful");
+                            Log.v("Team API Insertion", "Team insertions successful");
                         }).start();
                     }
                     catch(Exception e) {
@@ -85,7 +85,7 @@ public class TeamRepository {
             @Override
             public void onFailure(Call<List<Team>> call, Throwable t) {
                 t.printStackTrace();
-                Log.v("Team Call Fail", "Failure", t);
+                Log.v("Team Call API Fail", "Failure", t);
             }
         });
     }

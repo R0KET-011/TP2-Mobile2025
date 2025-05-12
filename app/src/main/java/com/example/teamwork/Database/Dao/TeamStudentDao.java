@@ -23,8 +23,14 @@ public interface TeamStudentDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertAll(TeamStudent... teamStudents);
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insertTeamStudent(List<TeamStudent> teamStudent);
+
     @Delete
     void delete(TeamStudent teamStudent);
+
+    @Query("SELECT * FROM team_students")
+    LiveData<List<TeamStudent>> getTeamStudent();
 
     @Query("SELECT s.* FROM students s " +
             "INNER JOIN team_students ts ON s.id = ts.student_id " +

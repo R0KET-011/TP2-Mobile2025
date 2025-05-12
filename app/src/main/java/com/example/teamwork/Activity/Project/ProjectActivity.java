@@ -20,10 +20,13 @@ package com.example.teamwork.Activity.Project;
 
 import com.example.teamwork.API.ApiInterface;
 import com.example.teamwork.API.Repository.ProjectRepository;
+import com.example.teamwork.API.Repository.StudentRepository;
 import com.example.teamwork.API.Repository.TeamRepository;
+import com.example.teamwork.API.Repository.TeamStudentRepository;
 import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Team;
+import com.example.teamwork.Database.Tables.TeamStudent;
 import com.example.teamwork.R;
 
 import android.content.Intent;
@@ -75,16 +78,23 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 
         // Au cas où les inserts sont async somehow.. aucune idée c'est quoi le problème tbh..
         // Commenter si dessous pour prévenir l'appel API
-//        ExecutorService executor = Executors.newSingleThreadExecutor();
-//        executor.execute(()-> {
-//            updateProjectDatabase(db);
-//            updateTeamDatabase(db);
-//            }
-//        );
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+
+        executor.execute(()-> {
+            updateProjectDatabase(db);
+            updateStudentDatabase(db);
+            updateTeamDatabase(db);
+            }
+        );
+
+        executor.execute(() -> {
+            updateTeamStudentDatabase(db);
+        });
+
 
         // Pour la raison du test d'insert, laisser sur AllProjects
         // getProjectByUser(userId) | getAllProjects()
-        db.projectDao().getAllProjects().observe(
+        db.projectDao().getProjectByUser(userId).observe(
                 this, projects -> {
                 try {
                     if (projects.isEmpty()) {
@@ -128,10 +138,22 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
         repository.fetchInsertProjects(api);
     }
 
+    public void updateStudentDatabase(AppDatabase db) {
+        ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+        StudentRepository repository = new StudentRepository(this);
+        repository.fetchInsertStudents(api);
+    }
+
     public void updateTeamDatabase(AppDatabase db) {
         ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
         TeamRepository repository = new TeamRepository(this);
         repository.fetchInsertTeams(api);
+    }
+
+    public void updateTeamStudentDatabase(AppDatabase db) {
+        ApiInterface api = ApiClient.getClient(authToken).create((ApiInterface.class));
+        TeamStudentRepository repository = new TeamStudentRepository(this);
+        repository.fetchInsertTeamStudent(api);
     }
 
 

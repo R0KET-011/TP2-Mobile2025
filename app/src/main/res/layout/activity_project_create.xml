@@ -82,7 +82,6 @@ android:background="@color/color_tertiary">
         android:layout_height="wrap_content"
         android:layout_margin="16sp"
         android:text="@string/project_joinable"
-        android:layoutDirection="rtl"
         android:textColor="@color/text_primary"
         android:textColorHint="@color/text_secondary"/>
 
@@ -92,7 +91,6 @@ android:background="@color/color_tertiary">
         android:layout_height="wrap_content"
         android:layout_margin="16sp"
         android:text="@string/project_creatable"
-        android:layoutDirection="rtl"
         android:textColor="@color/text_primary"
         android:textColorHint="@color/text_secondary"/>
 
@@ -102,7 +100,6 @@ android:background="@color/color_tertiary">
         android:layout_height="wrap_content"
         android:layout_margin="16sp"
         android:text="@string/project_common_classes"
-        android:layoutDirection="rtl"
         android:textColor="@color/text_primary"
         android:textColorHint="@color/text_secondary"/>
 

@@ -50,11 +50,11 @@ public class ProjectRepository {
             @Override
             public void onResponse(Call<List<Project>> call, Response<List<Project>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Log.v("Project Response Body", "Contains something");
+                    Log.v("Project API Response Body", "Contains something");
                     try {
                         new Thread (() -> {
                             projectDao.insertProjects(response.body());
-                            Log.v("Insertion", "Project insertions successful");
+                            Log.v("Insertion", "Project API insertions successful");
                         }).start();
                     }
                     catch (Exception e) {
@@ -62,23 +62,15 @@ public class ProjectRepository {
                     }
                 }
                 else {
-                    Log.v("Project Response Body", "Issues detected");
+                    Log.v("Project API Response Body", "Issues detected");
                 }
             }
 
             @Override
             public void onFailure(Call<List<Project>> call, Throwable t) {
                 t.printStackTrace();
-                Log.v("Project Call Fail", "Failure", t);
+                Log.v("Project API Call Fail", "Failure", t);
             }
         });
-    }
-
-    private void insertProjects(List<Project> projects) {
-        AsyncTask.execute(()-> projectDao.insertProjects(projects));
-    }
-
-    public LiveData<List<Project>> getAllProjects() {
-        return projectDao.getAllProjects();
     }
 }

@@ -60,4 +60,9 @@ public class TeamStudent {
     public String getComment() {return comment;}
 
     public void setComment(@Nullable String comment) {this.comment = comment;}
+
+    @Override
+    public String toString() {
+        return ("TeamStudent: " + this.getTeamId() + ", " + this.getStudentId());
+    }
 }

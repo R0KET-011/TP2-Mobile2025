@@ -1,5 +1,7 @@
 package com.example.teamwork.Database.Dao;
 
+import android.service.autofill.OnClickAction;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -20,6 +22,9 @@ public interface StudentDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(Student... students);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertStudents(List<Student> students);
 
     @Update
     void update(Student student);

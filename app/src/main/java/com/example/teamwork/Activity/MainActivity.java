@@ -6,7 +6,10 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.teamwork.Activity.Auth.Authentication;
+import com.example.teamwork.Activity.Auth.LoginActivity;
+import com.example.teamwork.Activity.Project.ProjectActivity;
 import com.example.teamwork.Activity.ToDo.TodoIndexActivity;
+import com.example.teamwork.Database.Tables.Project;
 import com.example.teamwork.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Authentication.setId(2);
+        Authentication.setId(5);
         Authentication.setIsStudent(true);
 
         Intent intent = new Intent(this, TodoIndexActivity.class);
