@@ -18,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Student;
 import com.example.teamwork.R;
@@ -29,7 +30,6 @@ public class StudentListActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_student_list);
         // check for the team id
         Intent intent = getIntent();
@@ -65,6 +65,25 @@ public class StudentListActivity extends AppCompatActivity implements View.OnCli
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        studentAddListener(teamId);
+    }
+
+    private void studentAddListener(int teamId){
+        ImageView addIcon = findViewById(R.id.add);
+        if (Authentication.isStudent())
+            addIcon.setVisibility(View.GONE);
+        else {
+            addIcon.setOnClickListener( v -> {
+                startStudentAddActivity(teamId);
+            });
+        }
+    }
+
+    private void startStudentAddActivity(int teamId){
+        Intent intent = new Intent(this, StudentAddActivity.class);
+        intent.putExtra("teamId", teamId);
+        startActivity(intent);
     }
 
     @Override

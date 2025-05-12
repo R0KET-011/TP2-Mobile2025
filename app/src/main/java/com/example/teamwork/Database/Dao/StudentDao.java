@@ -37,4 +37,7 @@ public interface StudentDao {
 
     @Query("SELECT * FROM students WHERE id = :id")
     LiveData<Student> getStudentById(int id);
+
+    @Query("SELECT * FROM students WHERE code = :code")
+    Student getStudentByCode(int code);
 }

@@ -63,4 +63,7 @@ public interface TeamStudentDao {
 
     @Query("UPDATE team_students SET comment = :comment WHERE student_id = :studentId AND team_id = :teamId")
     void setCommentWhereStudentTeam(@Nullable String comment, int studentId, int teamId);
+
+    @Query("DELETE FROM team_students WHERE team_id = :teamId AND student_id = :studentId")
+    void deleteStudentFromTeam(int teamId, int studentId);
 }

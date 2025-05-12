@@ -36,6 +36,9 @@ public interface TeamDao {
     @Query("SELECT * FROM teams WHERE id = :id")
     LiveData<Team> getTeamById(int id);
 
+    @Query("SELECT * FROM teams WHERE id = :id")
+    Team getTeamByIdClass(int id);
+
     @Query("SELECT * FROM teams WHERE project_id = :projectId")
     LiveData<List<Team>> getTeamsByProjectId(int projectId);
 

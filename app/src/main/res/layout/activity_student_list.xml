@@ -32,6 +32,15 @@
             android:textColor="@color/text_primary"
             android:textSize="20sp" />
 
+        <ImageView
+            android:id="@+id/add"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/student_add"
+            android:src="@drawable/plus" />
+
     </RelativeLayout>
 
     <View

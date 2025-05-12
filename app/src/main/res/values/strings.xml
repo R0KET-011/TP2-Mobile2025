@@ -4,6 +4,7 @@
     <string name="info">Informations</string>
     <string name="description">Description</string>
 
+    <string name="confirm_add">Confirmer l\'ajout</string>
     <string name="confirm_create">Confirmer la création</string>
     <string name="confirm_edit">Confirmer la modification</string>
     <string name="team_description">Description de l\'équipe</string>
@@ -15,9 +16,12 @@
     <string name="team_join">Rejoindre l\'équipe</string>
     <string name="team_quit">Quitter l\'équipe</string>
     <string name="team_delete">Dissocier l\'équipe</string>
+
     <string name="comment">Commentaire</string>
     <string name="students">Étudiants</string>
     <string name="students_index">Liste des étudiants</string>
+    <string name="student_add">Ajouter un étudiant</string>
+    <string name="student_code">Code de l\'étudiant</string>
 
     <string name="project_title">Liste des projets</string>
     <string name="project_notitle">Aucun projet</string>

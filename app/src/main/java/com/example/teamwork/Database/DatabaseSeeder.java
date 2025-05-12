@@ -40,13 +40,13 @@ public class DatabaseSeeder {
         Team team3 = new Team(3, "Walmart", "Non conforme", "Description", project1.getId());
         appDatabase.teamDao().insertAll(team1, team2, team3);
 
-        Student student1 = new Student(1, "Antoine", "Blouin");
-        Student student2 = new Student(2, "Samy", "Larochelle");
-        Student student3 = new Student(3, "Kevin", "Larochelle");
-        Student student4 = new Student(4, "Emeric", "Leclerc");
-        Student student5 = new Student(5, "Arnaud", "Lecuyer");
-        Student student6 = new Student(6, "Samuel", "Pomerleau");
-        Student student7 = new Student(7, "Jeremy", "Drapeau");
+        Student student1 = new Student(1, 206242440 , "Antoine", "Blouin");
+        Student student2 = new Student(2, 202648441, "Samy", "Larochelle");
+        Student student3 = new Student(3, 202694862, "Kevin", "Larochelle");
+        Student student4 = new Student(4, 208476863, "Emeric", "Leclerc");
+        Student student5 = new Student(5, 209852364, "Arnaud", "Lecuyer");
+        Student student6 = new Student(6, 283751255, "Samuel", "Pomerleau");
+        Student student7 = new Student(7, 208471256, "Jeremy", "Drapeau");
         appDatabase.studentDao().insertAll(student1, student2, student3, student4, student5, student6, student7);
 
         TeamStudent teamStudent2 = new TeamStudent(team1.getId(), student2.getId(), null);

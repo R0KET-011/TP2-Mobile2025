@@ -13,7 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.teamwork.Activity.Auth.Authentication;
+import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Student;
+import com.example.teamwork.Database.Tables.TeamStudent;
 import com.example.teamwork.R;
 
 import java.util.List;
@@ -54,9 +57,12 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tv_name.setText(students.get(position).getFullName());
-        holder.setCommentListener(context, team_id, students.get(position).getId());
+        Student student = students.get(position);
+        holder.tv_name.setText(student.getFullName());
+        holder.setCommentListener(context, team_id, student.getId());
 
+        if (!Authentication.isStudent())
+            holder.setDeleteListener(student.getId());
     }
 
     @Override
@@ -76,10 +82,19 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
          * ImageView qui contien l'icone de commentaire
          */
         ImageView iv_comment;
+
+        /**
+         * ImageView qui contien l'icone de delete
+         */
+        ImageView iv_delete;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_name = itemView.findViewById(R.id.tv_nom);
             iv_comment = itemView.findViewById(R.id.comment_icon);
+            iv_delete = itemView.findViewById(R.id.delete);
+
+            if (Authentication.isStudent())
+                iv_delete.setVisibility(View.GONE);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,6 +103,13 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
                 }
             });
 
+        }
+
+        public void setDeleteListener(int studentId){
+            iv_delete.setOnClickListener(v -> {
+                AppDatabase db = AppDatabase.getDatabase(context);
+                db.teamStudentDao().deleteStudentFromTeam(team_id, studentId);
+            });
         }
 
         public void setCommentListener(Context context, int teamId, int studentId) {
