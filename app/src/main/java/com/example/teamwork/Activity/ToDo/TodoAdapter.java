@@ -31,17 +31,37 @@ import com.example.teamwork.R;
 
 import java.util.List;
 
+/**
+ * L'adapteur pour le recycler view de la to do liste.
+ */
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder> {
-
+    /**
+     * La liste des élément a mettre dans le recycler view.
+     */
     private final List<Todo> todos;
+    /**
+     * Contexte ou le recycler view est.
+     */
     private final Context context;
 
+    /**
+     * Constructeur pour l'adapter
+     * @param context du recyclerview
+     * @param todos la liste des élément d'une to do list à afficher.
+     */
     public TodoAdapter(Context context, List<Todo> todos) {
         this.context = context;
         this.todos = todos;
     }
 
-
+    /**
+     * Override onCreateViewHolder pour créer la ViewHolder de l'adapter.
+     * @param parent The ViewGroup into which the new View will be added after it is bound to
+     *               an adapter position.
+     * @param viewType The view type of the new View.
+     *
+     * @return return le ViewHolder qui a été créé.
+     */
     @NonNull
     @Override
     public TodoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,6 +70,12 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         return new TodoViewHolder(view);
     }
 
+    /**
+     * Override onBindViewHolder pour set les vues dans le recycler view.
+     * @param holder The ViewHolder which should be updated to represent the contents of the
+     *        item at the given position in the data set.
+     * @param position The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder(@NonNull TodoViewHolder holder, int position) {
         Todo todo = todos.get(position);
@@ -73,15 +99,32 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         });
     }
 
+    /**
+     *
+     * @return le nombre d'item dans la liste des éléments.
+     */
     @Override
     public int getItemCount() {
         return todos.size();
     }
 
+    /**
+     * Classe qui extends ViewHolder. contien la vue de chaque élément de la to do list.
+     */
     public static class TodoViewHolder extends RecyclerView.ViewHolder {
+        /**
+         * Text views du nom (titre) et descriptions de l'élément de la to do liste.
+         */
         private final TextView name, description;
+        /**
+         * Layout principale de la vue.
+         */
         private final LinearLayout layout;
 
+        /**
+         * Constructeur du ViewHolder
+         * @param todo_item l'item de la to do liste qui sera mit dans le ViewHolder.
+         */
         public TodoViewHolder(View todo_item) {
             super(todo_item);
             name = todo_item.findViewById(R.id.name);

@@ -91,10 +91,19 @@ public class AudioPlayer {
         }
     }
 
+    /**
+     * Retourne l'état du mediaPlayer, s'il est en train de jouer quelque chose ou non.
+     * @return si le lecteur joue ou non
+     */
     public boolean isPlaying() {
         return mediaPlayer != null && mediaPlayer.isPlaying();
     }
 
+    /**
+     * Delete un enregistrement au path désigné.
+     * @param path chemain du fichier a supprimer.
+     * @return si le ficher a été supprimer ou non.
+     */
     public boolean trash(String path) {
         if (path == null || path.trim().isEmpty()) {
             Toast.makeText(context, "path is null", Toast.LENGTH_SHORT).show();

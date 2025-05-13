@@ -32,20 +32,37 @@ import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Todo;
 import com.example.teamwork.R;
 
+/**
+ * L'activité qui permet de read/update (montrer et modifier) un élément d'une to do list.
+ */
 public class TodoShowActivity extends AppCompatActivity implements View.OnClickListener {
-
+    /**
+     * Fields inputs pour le nom et la description de l'élément de la to do list.
+     */
     EditText nameEditText, descriptionEditText;
+    /**
+     * Layout principale de l'activité.
+     */
     LinearLayout layout;
+    /**
+     *  Élément de la to do list qui vas être modifier.
+     */
     private Todo todo;
+    /**
+     * Instance de la database.
+     */
     private AppDatabase db;
-    private Button buttonDelete, buttonEdit, buttonComplete;
+    /**
+     * Le boutons qui marque l'élément comme complété.
+     */
+    private Button buttonComplete;
 
     /**
-     * image view pour représenter les boutons play, enregistrer et delete
+     * image view pour représenter les boutons play, enregistrer et delete.
      */
     private ImageView audio_play, audio_record, audio_trash;
     /**
-     * Audio recorder pour enregistrer les messages vocaux
+     * Audio recorder pour enregistrer les messages vocaux.
      */
     private AudioRecorder audioRecorder;
     /**
@@ -57,7 +74,12 @@ public class TodoShowActivity extends AppCompatActivity implements View.OnClickL
      */
     private boolean record_status = false;
 
-
+    /**
+     * Override de la méthode onCreate. Initialise les différentes variables et les écouteurs d'événements.
+     * @param savedInstanceState Si l'activité est recréée après avoir été arrêtée précédemment,
+     *     ce Bundle contient les données fournies précédemment par {@link #onSaveInstanceState}.
+     *     <b><i>Remarque : Sinon, cette valeur est nulle.</i></b>
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +96,9 @@ public class TodoShowActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
+    /**
+     * Méthode pour set les views.
+     */
     public void setViews() {
         nameEditText = findViewById(R.id.name);
         descriptionEditText = findViewById(R.id.description);
@@ -92,6 +117,10 @@ public class TodoShowActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.buttonDelete).setOnClickListener(this);
     }
 
+    /**
+     * Set ce que font les différent buttons lorsque l'on clique dessus.
+     * @param v La vue qui a été cliquer.
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.back) {
@@ -119,7 +148,6 @@ public class TodoShowActivity extends AppCompatActivity implements View.OnClickL
             else
                 buttonComplete.setText("Marquer comme\ncomplété");
         }
-
         //audio
         else if (v.getId() == R.id.iv_audio_mic) {
             mic_btn();

@@ -30,9 +30,20 @@ import com.example.teamwork.R;
 
 import java.util.List;
 
+/**
+ * Activité qui affiche une to do liste pour un projet. Affiche tout les élément présent pour la to do liste du projet en question.
+ */
 public class TodoIndexActivity extends AppCompatActivity implements View.OnClickListener {
+    /**
+     * L'id du projet pour le quel la to do list sera afficher.
+      */
     private int projectId;
-
+    /**
+     * Override de la méthode onCreate. Initialise les différentes variables et les écouteurs d'événements.
+     * @param savedInstanceState Si l'activité est recréée après avoir été arrêtée précédemment,
+     *     ce Bundle contient les données fournies précédemment par {@link #onSaveInstanceState}.
+     *     <b><i>Remarque : Sinon, cette valeur est nulle.</i></b>
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +54,6 @@ public class TodoIndexActivity extends AppCompatActivity implements View.OnClick
 
         Intent intent = getIntent();
         projectId = intent.getIntExtra("projectId", -1);
-        projectId = 1; //! debug
 
 
         AppDatabase db = AppDatabase.getDatabase(this);
@@ -59,7 +69,10 @@ public class TodoIndexActivity extends AppCompatActivity implements View.OnClick
                     }
                 });
     }
-
+    /**
+     * Set ce que font les différent buttons lorsque l'on clique dessus.
+     * @param v La vue qui a été cliquer.
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.back) {

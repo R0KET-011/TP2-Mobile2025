@@ -33,20 +33,34 @@ import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Todo;
 import com.example.teamwork.R;
 
+/**
+ * L'activité a afficher pour créer un élément d'une to do liste.
+ */
 public class TodoCreateActivity extends AppCompatActivity implements View.OnClickListener {
 
+    /**
+     * Field pour le nom et description de l'élément de la to do list.
+     */
     EditText nameEditText, descriptionEditText;
+    /**
+     * Layout principale de l'activité.
+     */
     LinearLayout layout;
+    /**
+     * L'id du projet au quel l'élément sera attacher.
+     */
     private int projectId;
+    /**
+     * Instance de la database.
+     */
     private AppDatabase db;
-    private Button buttonAdd;
 
     /**
-     * image view pour représenter les boutons play, enregistrer et delete
+     * image view pour représenter les boutons play, enregistrer et delete.
      */
     private ImageView audio_play, audio_record, audio_trash;
     /**
-     * Audio recorder pour enregistrer les messages vocaux
+     * Audio recorder pour enregistrer les messages vocaux.
      */
     private AudioRecorder audioRecorder;
     /**
@@ -63,7 +77,12 @@ public class TodoCreateActivity extends AppCompatActivity implements View.OnClic
     @Nullable
     private String audioPath = null;
 
-
+    /**
+     * Override de la méthode onCreate. Initialise les différentes variables et les écouteurs d'événements.
+     * @param savedInstanceState Si l'activité est recréée après avoir été arrêtée précédemment,
+     *     ce Bundle contient les données fournies précédemment par {@link #onSaveInstanceState}.
+     *     <b><i>Remarque : Sinon, cette valeur est nulle.</i></b>
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +94,7 @@ public class TodoCreateActivity extends AppCompatActivity implements View.OnClic
 
         nameEditText = findViewById(R.id.name);
         descriptionEditText = findViewById(R.id.description);
-        buttonAdd = findViewById(R.id.buttonAdd);
+        Button buttonAdd = findViewById(R.id.buttonAdd);
         layout = findViewById(R.id.layout);
 
         setAudio();
@@ -84,6 +103,11 @@ public class TodoCreateActivity extends AppCompatActivity implements View.OnClic
         findViewById(R.id.back).setOnClickListener(this);
     }
 
+
+    /**
+     * Set ce que font les différent buttons lorsque l'on clique dessus.
+     * @param v La vue qui a été cliquer.
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.back) {
