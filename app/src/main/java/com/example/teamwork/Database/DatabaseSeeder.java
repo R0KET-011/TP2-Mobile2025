@@ -14,8 +14,8 @@ public class DatabaseSeeder {
                 "Ce projet permet d'appliquer les compétences acquises dans les cours 420-404-SH (Méthodologie du développement logiciel) 420-446-SH (Développement d'applications mobiles), ainsi que le cours Web actuel. Chaque volet du projet est consacré à l’un de ces cours, sur une période d’environ une semaine, afin de créer une solution intégrée complète.",
                 2,
                 3,
-                true,
-                true,
+                false,
+                false,
                 true//,
 //                4118,
 //                "Développement Web avancé"

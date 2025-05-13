@@ -50,7 +50,6 @@ public class ProjectCreate extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_project_create);
 
         db = AppDatabase.getDatabase(this);

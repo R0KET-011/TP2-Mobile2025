@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_height="match_parent"
-android:layout_width="match_parent"
-android:orientation="vertical"
-android:fitsSystemWindows="true"
-android:background="@color/color_tertiary">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/color_tertiary">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@ android:background="@color/color_tertiary">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/project_creation"
+            android:text="@string/project_edit"
             android:textColor="@color/text_primary"
             android:textSize="20sp"
             android:layout_centerInParent="true"/>
@@ -105,12 +105,12 @@ android:background="@color/color_tertiary">
 
 
     <Button
-    android:id="@+id/create"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:backgroundTint="@color/color_secondary"
-    android:text="@string/confirm_create"
-    android:textColor="@color/text_secondary"
-    android:layout_margin="16dp"/>
+        android:id="@+id/edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/color_secondary"
+        android:text="@string/confirm_edit"
+        android:textColor="@color/text_secondary"
+        android:layout_margin="16dp"/>
 
 </LinearLayout>

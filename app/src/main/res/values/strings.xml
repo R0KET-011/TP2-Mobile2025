@@ -35,6 +35,8 @@
     <string name="project_joinable">Permission de rejoindre une équipe</string>
     <string name="project_creatable">Création d\'équipe possible</string>
     <string name="project_common_classes">Cours commun requis</string>
+    <string name="project_delete">Supprimer le projet</string>
+    <string name="project_edit">Modifier le projet</string>
 
     <string name="error_name">Un nom est requis.</string>
     <string name="error_min">Un chiffre est requis pour le minimum</string>

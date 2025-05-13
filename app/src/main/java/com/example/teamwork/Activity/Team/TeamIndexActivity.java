@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.teamwork.Activity.Auth.Authentication;
+import com.example.teamwork.Activity.Project.ProjectEditActivity;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Project;
 import com.example.teamwork.R;
@@ -56,10 +58,27 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
     private void setupButtons() {
         findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.create).setOnClickListener(this);
+
+        if (Authentication.isStudent()){
+            findViewById(R.id.project_delete).setVisibility(View.GONE);
+            findViewById(R.id.project_edit).setVisibility(View.GONE);
+        }else{
+            findViewById(R.id.project_delete).setOnClickListener(this);
+            findViewById(R.id.project_edit).setOnClickListener(this);
+        }
+
     }
 
     public void observeProject(int projectId){
         db.projectDao().getProjectById(projectId).observe(this, project -> {
+            if (project == null){
+                finish();
+                return;
+            }
+
+            if (!project.getCreatable())
+                findViewById(R.id.create).setVisibility(View.GONE);
+
             this.project = project;
             descriptionTextView.setText(project.getDescription());
             setupRecyclerView(project.getId());
@@ -79,9 +98,21 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
             finish();
         } else if (v.getId() == R.id.create) {
             startTeamCreateActivity();
+        } else if (v.getId() == R.id.project_delete){
+            deleteProject();
+        } else if (v.getId() == R.id.project_edit){
+            startProjectEditActivity();
         }
     }
 
+    private void deleteProject(){
+
+    }
+    private void startProjectEditActivity(){
+        Intent intent = new Intent(this, ProjectEditActivity.class);
+        intent.putExtra("projectId", project.getId());
+        startActivity(intent);
+    }
     private void startTeamCreateActivity(){
         Intent intent = new Intent(this, TeamCreateActivity.class);
         intent.putExtra("projectId", project.getId());

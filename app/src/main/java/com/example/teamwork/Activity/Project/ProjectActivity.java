@@ -100,7 +100,6 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
                     if (projects.isEmpty()) {
                         Log.d("projects", "Null");
                         titleView.setText(R.string.project_notitle);
-                        return;
                     }
                     else {
                         titleView.setText(R.string.project_title);

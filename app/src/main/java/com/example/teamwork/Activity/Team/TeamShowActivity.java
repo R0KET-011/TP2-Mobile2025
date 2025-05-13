@@ -67,13 +67,19 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
 
             this.team = team;
             observeProject(team.getProjectId());
-            roleBasedUI();
         });
     }
 
     private void observeProject(int projectId) {
         db.projectDao().getProjectById(projectId).observe(this, project -> {
             this.project = project;
+
+            if (!project.getJoinable()){
+                joinButton.setVisibility(View.GONE);
+                quitButton.setVisibility(View.GONE);
+            }
+
+            roleBasedUI();
             showTeamInfos();
         });
     }
@@ -81,7 +87,8 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
     private void roleBasedUI() {
         if (Authentication.isStudent()) {
             hideTeacherButton();
-            observeMembership();
+            if (project.getJoinable())
+                observeMembership();
         } else {
             hideStudentButton();
             teacherButtonListeners();
