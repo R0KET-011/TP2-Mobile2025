@@ -40,9 +40,21 @@ public class TodoShowActivity extends AppCompatActivity implements View.OnClickL
     private AppDatabase db;
     private Button buttonDelete, buttonEdit, buttonComplete;
 
+    /**
+     * image view pour représenter les boutons play, enregistrer et delete
+     */
     private ImageView audio_play, audio_record, audio_trash;
+    /**
+     * Audio recorder pour enregistrer les messages vocaux
+     */
     private AudioRecorder audioRecorder;
+    /**
+     * Audio player pour jouer les messages enregistrés.
+     */
     private AudioPlayer audioPlayer;
+    /**
+     * state de si le record est on ou off.
+     */
     private boolean record_status = false;
 
 
@@ -126,6 +138,9 @@ public class TodoShowActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    /**
+     * S'assure que tout les components pour l'audio est bien set.
+     */
     private void setAudio() {
         audio_play = findViewById(R.id.iv_audio_play);
         audio_record = findViewById(R.id.iv_audio_mic);
@@ -142,6 +157,9 @@ public class TodoShowActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    /**
+     * Fait la logique du bouton d'enregistrement. enregistre ou stop dépendament de si le micro enregistre ou non.
+     */
     private void mic_btn() {
         //is recording, need to stop
         if (record_status) {
@@ -172,10 +190,13 @@ public class TodoShowActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    /**
+     * Fait la logique pour le boutton play. joue ou stop dépendament de si un enregistrement joue.
+     */
     private void play_btn(){
         //is playing, need to pause
         if (audioPlayer.isPlaying()) {
-            audioPlayer.pause();
+            audioPlayer.stop();
             //set texture to play
             audio_play.setImageResource(R.drawable.player_play);
 
@@ -185,11 +206,22 @@ public class TodoShowActivity extends AppCompatActivity implements View.OnClickL
             audioPlayer.start(todo.getLien_audio());
             //set texture to pause if playing
             if (audioPlayer.isPlaying()) {
-                audio_play.setImageResource(R.drawable.player_pause);
+                audio_play.setImageResource(R.drawable.player_stop);
             }
         }
     }
 
+    /**
+     * Vérifie si la permission d'utiliser l'audio a été accordée.
+     * @param requestCode Le code de requête passé dans {@link #requestPermissions}.
+     * @param permissions Les permissions demandées. Jamais null.
+     * @param grantResults Les résultats d'autorisation correspondants, qui sont soit
+     *                     {@link android.content.pm.PackageManager#PERMISSION_GRANTED},
+     *                     soit {@link android.content.pm.PackageManager#PERMISSION_DENIED}. Jamais null.
+     * @param deviceId L'identifiant de l'appareil pour lequel les permissions ont été demandées.
+     *                 L'appareil principal/physique est associé à {@link Context#DEVICE_ID_DEFAULT},
+     *                 et les appareils virtuels reçoivent des identifiants uniques.
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults, int deviceId) {
         if (AudioPermissionManager.wasRecordAudioPermissionGranted(requestCode, grantResults)) {

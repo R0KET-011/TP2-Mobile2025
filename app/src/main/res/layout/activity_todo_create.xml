@@ -67,6 +67,48 @@
             android:textColorHint="@color/text_secondary" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_audio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/audio"
+        android:textColor="@color/text_secondary"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:id="@+id/iv_audio_play"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/player_play"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/iv_audio_mic"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/microphone"/>
+
+        <ImageView
+            android:id="@+id/iv_audio_trash"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/trash"
+            android:visibility="gone"/>
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
