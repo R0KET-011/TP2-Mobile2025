@@ -7,6 +7,20 @@ import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+/****************************************
+ Fichier : AudioPermissionManager
+ Auteur : Émeric Leclerc
+ Fonctionnalité :
+ Date : 2025-05-13
+
+ Vérification :
+ Date Nom Approuvé
+ =========================================================
+ Historique de modifications :
+ Date Nom Description
+ =========================================================
+ ****************************************/
+
 
 /**
  * Classe pour Gérer la permission d'enregistrer.

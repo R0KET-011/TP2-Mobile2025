@@ -6,6 +6,19 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
+/****************************************
+ Fichier : AudioPlayer
+ Auteur : Émeric Leclerc
+ Fonctionnalité : 36.6 et 36.7
+ Date : 2025-05-13
+
+ Vérification :
+ Date Nom Approuvé
+ =========================================================
+ Historique de modifications :
+ Date Nom Description
+ =========================================================
+ ****************************************/
 
 /**
  * Classe pour gérer un MediaPlayer. play des audio file provided avec un path
