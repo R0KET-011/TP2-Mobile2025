@@ -1,3 +1,21 @@
+/****************************************
+ Fichier : Project.java
+ Auteur : Kevin Larochelle
+ Fonctionnalité :
+ Class pour objet.
+
+ Date : 05/09/2025
+
+ Vérification :
+ Date Nom Approuvé
+
+ =========================================================
+ Historique de modifications :
+ Date Nom Description
+
+ =========================================================
+ ****************************************/
+
 package com.example.teamwork.Database.Tables;
 
 import androidx.room.ColumnInfo;
