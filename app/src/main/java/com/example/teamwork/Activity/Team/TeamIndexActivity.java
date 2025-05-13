@@ -30,13 +30,41 @@ import com.example.teamwork.R;
  =========================================================
  ****************************************/
 
+/**
+ * L'activité qui permet d'afficher toutes les équipes et les informations du projet courant.
+ *
+ * @author Antoine Blouin
+ * @version 1.0
+ * @since 2025-05-05
+ */
 public class TeamIndexActivity extends AppCompatActivity implements View.OnClickListener {
 
+    /**
+     * Le projet en lien avec les équipes.
+     */
     private Project project;
+
+    /**
+     * Instance de la base de données.
+     */
     private AppDatabase db;
+
+    /**
+     * La vue contenant la description du projet.
+     */
     private TextView descriptionTextView;
+
+    /**
+     * Le RecyclerView qui contient toutes les équipes du projet.
+     */
     private RecyclerView recyclerView;
 
+    /**
+     * Constructeur de TeamIndex qui initialise les variables de base.
+     *
+     * @param savedInstanceState Si l'activité est recréée après une fermeture,
+     *                           ce Bundle contient les données précédemment enregistrées.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +79,18 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
         observeProject(projectId);
     }
 
+    /**
+     * Permet de définir les vues en les associant aux variables via les IDs du fichier XML.
+     */
     private void setupView(){
         descriptionTextView = findViewById(R.id.description);
         recyclerView = findViewById(R.id.recyclerView);
     }
 
+    /**
+     * Définit la visibilité des boutons selon le type d'utilisateur (élève ou non).
+     * Ajoute également les listeners.
+     */
     private void setupButtons() {
         findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.create).setOnClickListener(this);
@@ -71,6 +106,11 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+    /**
+     * Observe le projet et met à jour l'interface graphique lorsqu'il y a un changement dans la BD.
+     *
+     * @param projectId l'ID du projet à observer
+     */
     public void observeProject(int projectId){
         db.projectDao().getProjectById(projectId).observe(this, project -> {
             if (project == null){
@@ -87,6 +127,12 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
+    /**
+     * Configure le RecyclerView et observe la liste des équipes.
+     * Lorsqu’un changement est détecté, le RecyclerView est mis à jour pour refléter les données.
+     *
+     * @param projectId l'ID du projet courant
+     */
     private void setupRecyclerView(int projectId){
         db.teamDao().getTeamsByProjectId(projectId).observe(this, teams -> {
             TeamAdapter adapter = new TeamAdapter(this, teams, project, db);
@@ -95,6 +141,11 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
+    /**
+     * Exécute les actions associées aux vues cliquées.
+     *
+     * @param v la vue cliquée
+     */
     public void onClick(View v) {
         if (v.getId() == R.id.back) {
             finish();
@@ -110,14 +161,25 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    /**
+     * La logique pour permettre la suppression du projet courant.
+     */
     private void deleteProject(){
-
+        // TODO : Implémenter la suppression du projet
     }
+
+    /**
+     * Lance l'activité permettant de modifier le projet actuel.
+     */
     private void startProjectEditActivity(){
         Intent intent = new Intent(this, ProjectEditActivity.class);
         intent.putExtra("projectId", project.getId());
         startActivity(intent);
     }
+
+    /**
+     * Lance l'activité permettant de créer une nouvelle équipe.
+     */
     private void startTeamCreateActivity(){
         Intent intent = new Intent(this, TeamCreateActivity.class);
         intent.putExtra("projectId", project.getId());

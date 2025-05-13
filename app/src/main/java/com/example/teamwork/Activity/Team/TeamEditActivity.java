@@ -24,12 +24,36 @@ import com.example.teamwork.R;
  =========================================================
  ****************************************/
 
+/**
+ * L'activité qui permet de modifier une équipe.
+ *
+ * @author Antoine Blouin
+ * @version 1.0
+ * @since 2025-05-05
+ */
 public class TeamEditActivity extends AppCompatActivity implements View.OnClickListener{
 
+    /**
+     * L'équipe qui se fait modifier
+     */
     private Team team;
+
+    /**
+     * Les champs liés à la modification de l'équipe
+     */
     private EditText nameEditText, descriptionEditText;
+
+    /**
+     * Instance de la base de données
+     */
     private AppDatabase db;
 
+    /**
+     * Constructeur de TeamEdit qui initialise les variables de base.
+     *
+     * @param savedInstanceState Si l'activité est recréée après une fermeture,
+     * ce Bundle contient les données précédemment enregistrées.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +65,11 @@ public class TeamEditActivity extends AppCompatActivity implements View.OnClickL
         observeTeam(teamId);
     }
 
+    /**
+     * Observe l'équipe et redéfinit l'UI et les variables lorsqu'il y a un changement dans la BD
+     *
+     * @param teamId l'équipe à observer
+     */
     private void observeTeam(int teamId){
         db.teamDao().getTeamById(teamId).observe(this, team -> {
             this.team = team;
@@ -48,6 +77,10 @@ public class TeamEditActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
+    /**
+     * Permet de définir les vues comme les champs et les boutons,
+     * de relier leurs actions et d'associer les variables aux IDs du fichier XML.
+     */
     private void setViews(){
         nameEditText = findViewById(R.id.name);
         descriptionEditText = findViewById(R.id.description);
@@ -59,6 +92,11 @@ public class TeamEditActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.confirm).setOnClickListener(this);
     }
 
+    /**
+     * Permet d'exécuter les actions associées à la vue cliquée.
+     *
+     * @param v la vue qui est cliquée
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.back) {
@@ -68,6 +106,10 @@ public class TeamEditActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    /**
+     * Permet de soumettre le formulaire une fois le bouton appuyé,
+     * vérifie les champs et modifie l'équipe dans la base de données.
+     */
     private void submitEdit(){
         String name = nameEditText.getText().toString().trim();
         String description = descriptionEditText.getText().toString().trim();
@@ -80,6 +122,14 @@ public class TeamEditActivity extends AppCompatActivity implements View.OnClickL
         finish();
     }
 
+    /**
+     * Permet de valider les champs. Si une erreur est détectée,
+     * on retourne false et on affiche un message d'erreur sur le champ problématique.
+     *
+     * @param name le nom de l'équipe
+     * @param description la description de l'équipe
+     * @return true si la validation est correcte, false sinon
+     */
     private boolean validateInputs(String name, String description) {
         if (name.isEmpty()) {
             nameEditText.setError("Le nom est requis");
