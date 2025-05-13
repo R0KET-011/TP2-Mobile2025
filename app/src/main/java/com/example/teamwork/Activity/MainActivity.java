@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Authentication.setId(5);
-        Authentication.setIsStudent(false);
+        Authentication.setIsStudent(true);
 
         Intent intent = new Intent(this, ProjectActivity.class);
         startActivity(intent);

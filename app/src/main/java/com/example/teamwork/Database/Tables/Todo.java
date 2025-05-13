@@ -15,6 +15,7 @@
 
 package com.example.teamwork.Database.Tables;
 
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -25,6 +26,7 @@ public class Todo {
     private int project_id;
     private String nom;
     private String description;
+    @Nullable
     private String lien_audio;
     private boolean completed;
 
@@ -102,6 +104,7 @@ public class Todo {
     /**
      * @return the file path to the audio file associated with the to-do
      */
+    @Nullable
     public String getLien_audio() {
         return lien_audio;
     }
@@ -109,7 +112,7 @@ public class Todo {
     /**
      * @param lien_audio the file path to the audio file associated with the to-do
      */
-    public void setLien_audio(String lien_audio) {
+    public void setLien_audio(@Nullable String lien_audio) {
         this.lien_audio = lien_audio;
     }
 

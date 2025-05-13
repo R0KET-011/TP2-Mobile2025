@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Activity.Project.ProjectEditActivity;
+import com.example.teamwork.Activity.ToDo.TodoIndexActivity;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Project;
 import com.example.teamwork.R;
@@ -58,6 +59,7 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
     private void setupButtons() {
         findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.create).setOnClickListener(this);
+        findViewById(R.id.todo).setOnClickListener(this);
 
         if (Authentication.isStudent()){
             findViewById(R.id.project_delete).setVisibility(View.GONE);
@@ -102,6 +104,9 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
             deleteProject();
         } else if (v.getId() == R.id.project_edit){
             startProjectEditActivity();
+        }
+        else if (v.getId() == R.id.todo) {
+            startActivity(new Intent(TeamIndexActivity.this, TodoIndexActivity.class));
         }
     }
 

@@ -43,4 +43,7 @@
     <string name="error_max">Un chiffre est requis pour le maximum</string>
     <string name="error_maxLow">Le maximum doit être plus grand que le minimum</string>
     <string name="error_minLow">Le minimum ne peut pas être zero.</string>
+
+    <string name="audio">Audio (facultatif)</string>
+    <string name="todo">TODO liste</string>
 </resources>
