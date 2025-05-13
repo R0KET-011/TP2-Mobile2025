@@ -1,3 +1,20 @@
+/****************************************
+ Fichier ProjectDao.java
+ Auteur : Kevin Larochelle
+ Fonctionnalité :
+ SQL pour base de donnée mobile.
+
+ Date : 05/09/2025
+
+ Vérification :
+ Date Nom Approuvé
+
+ =========================================================
+ Historique de modifications :
+ Date Nom Description
+
+ =========================================================
+ ****************************************/
 package com.example.teamwork.Database.Dao;
 
 import androidx.lifecycle.LiveData;

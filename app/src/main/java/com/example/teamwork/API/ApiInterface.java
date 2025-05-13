@@ -19,6 +19,10 @@
 package com.example.teamwork.API;
 
 import java.util.List;
+
+import com.example.teamwork.Database.Tables.Course;
+import com.example.teamwork.Database.Tables.Group;
+import com.example.teamwork.Database.Tables.GroupProject;
 import com.example.teamwork.Database.Tables.Project;
 import com.example.teamwork.Database.Tables.Student;
 import com.example.teamwork.Database.Tables.Team;
@@ -41,5 +45,14 @@ public interface ApiInterface {
 
     @GET("student_team")
     Call<List<TeamStudent>> getTeamStudent();
+
+    @GET("cours")
+    Call<List<Course>> getCourses();
+
+    @GET("groups")
+    Call<List<Group>> getGroups();
+
+    @GET("group_project")
+    Call<List<GroupProject>> getGroupProject();
 
 }

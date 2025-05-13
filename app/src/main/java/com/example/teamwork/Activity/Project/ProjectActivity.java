@@ -19,6 +19,9 @@
 package com.example.teamwork.Activity.Project;
 
 import com.example.teamwork.API.ApiInterface;
+import com.example.teamwork.API.Repository.CourseRepository;
+import com.example.teamwork.API.Repository.GroupProjectRepository;
+import com.example.teamwork.API.Repository.GroupRepository;
 import com.example.teamwork.API.Repository.ProjectRepository;
 import com.example.teamwork.API.Repository.StudentRepository;
 import com.example.teamwork.API.Repository.TeamRepository;
@@ -51,8 +54,10 @@ import com.example.teamwork.Database.Tables.Project;
 
 public class ProjectActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private AppDatabase db;
     private RecyclerView recyclerView;
     String authToken = "1|o3jMkGcucX5pzzSybbhWZaXy2P0axZzYGPqlzxIf434977a3";
+    int userId;
     TextView titleView;
     ImageView createView;
 
@@ -68,7 +73,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 
         // Hides or Show certain buttons
         //checkRole();
-        int userId = Authentication.getId();
+        userId = Authentication.getId();
 
         // Prepare for database manipulation
         // To be moved to activity between login and project with loading bar.
@@ -81,38 +86,41 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
         ExecutorService executor = Executors.newSingleThreadExecutor();
 
         executor.execute(()-> {
-            updateProjectDatabase(db);
-            updateStudentDatabase(db);
-            updateTeamDatabase(db);
+            updateProjectDatabase();
+            updateStudentDatabase();
+            updateTeamDatabase();
+            updateCourseDatabase();
             }
         );
 
         executor.execute(() -> {
-            updateTeamStudentDatabase(db);
+            updateTeamStudentDatabase();
+            updateGroupDatabase();
+            updateGroupProjectDatabase();
         });
 
 
-        // Pour la raison du test d'insert, laisser sur AllProjects
-        // getProjectByUser(userId) | getAllProjects()
+        // Voulait mettre cela dans une fonction en bas mais ça marche pas. Ça fait que crasher.
         db.projectDao().getProjectByUser(userId).observe(
                 this, projects -> {
-                try {
-                    if (projects.isEmpty()) {
-                        Log.d("projects", "Null");
-                        titleView.setText(R.string.project_notitle);
+                    try {
+                        if (projects.isEmpty()) {
+                            Log.d("projects", "Null");
+                            titleView.setText(R.string.project_notitle);
+                        }
+                        else {
+                            titleView.setText(R.string.project_title);
+                        }
+                        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                        ProjectAdapter projectAdapter = new ProjectAdapter(this, projects);
+                        recyclerView.setAdapter(projectAdapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(this));
                     }
-                    else {
-                        titleView.setText(R.string.project_title);
+                    catch(Exception e) {
+                        Log.d("RecycleView ERROR", " returned: " + e);
                     }
-                    RecyclerView recyclerView = findViewById(R.id.recyclerView);
-                    ProjectAdapter projectAdapter = new ProjectAdapter(this, projects);
-                    recyclerView.setAdapter(projectAdapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                }
-                catch(Exception e) {
-                    Log.d("RecycleView ERROR", " returned: " + e);
-                }
-            });
+                });
+
     }
 
     public void checkRole() {
@@ -131,29 +139,46 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    public void updateProjectDatabase(AppDatabase db) {
+    public void updateProjectDatabase() {
         ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
         ProjectRepository repository = new ProjectRepository(this);
         repository.fetchInsertProjects(api);
     }
 
-    public void updateStudentDatabase(AppDatabase db) {
+    public void updateStudentDatabase() {
         ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
         StudentRepository repository = new StudentRepository(this);
         repository.fetchInsertStudents(api);
     }
 
-    public void updateTeamDatabase(AppDatabase db) {
+    public void updateTeamDatabase() {
         ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
         TeamRepository repository = new TeamRepository(this);
         repository.fetchInsertTeams(api);
     }
 
-    public void updateTeamStudentDatabase(AppDatabase db) {
+    public void updateCourseDatabase() {
+      ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+        CourseRepository repository = new CourseRepository(this);
+        repository.fetchInsertCourses(api);
+    }
+
+    public void updateTeamStudentDatabase() {
         ApiInterface api = ApiClient.getClient(authToken).create((ApiInterface.class));
         TeamStudentRepository repository = new TeamStudentRepository(this);
         repository.fetchInsertTeamStudent(api);
     }
 
+    public void updateGroupDatabase() {
+        ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+        GroupRepository repository = new GroupRepository(this);
+        repository.fetchInsertGroups(api);
+    }
+
+    public void updateGroupProjectDatabase() {
+        ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+        GroupProjectRepository repository = new GroupProjectRepository(this);
+        repository.fetchInsertGroupProject(api);
+    }
 
 }

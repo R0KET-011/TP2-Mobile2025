@@ -1,0 +1,32 @@
+/****************************************
+ Fichier GroupDao.java
+ Auteur : Kevin Larochelle
+ Fonctionnalité :
+ SQL pour base de donnée mobile.
+
+ Date : 05/13/2025
+
+ Vérification :
+ Date Nom Approuvé
+
+ =========================================================
+ Historique de modifications :
+ Date Nom Description
+
+ =========================================================
+ ****************************************/
+package com.example.teamwork.Database.Dao;
+
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
+
+import com.example.teamwork.Database.Tables.Group;
+
+import java.util.List;
+
+@Dao
+public interface GroupDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertGroups(List<Group> groups);
+}

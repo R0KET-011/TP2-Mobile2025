@@ -51,9 +51,6 @@ public class TeamStudentRepository {
             public void onResponse(Call<List<TeamStudent>> call, Response<List<TeamStudent>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Log.v("TeamStudent API Response Body", "Contains something");
-                    Gson gson = new Gson();
-                    String jsonResponse = gson.toJson(response.body());
-                    Log.d("DEBUGA", jsonResponse);
                     try {
                         new Thread(() -> {
                             teamStudentDao.insertTeamStudent(response.body());
