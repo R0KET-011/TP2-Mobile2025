@@ -6,6 +6,9 @@ import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.TeamStudent;
 import com.example.teamwork.Database.Tables.Todo;
 
+/**
+ * Permet de créer de fausses données dans la base de données afin de faire des tests.
+ */
 public class DatabaseSeeder {
     public static void seed(AppDatabase appDatabase) {
         Project project1 = new Project(
