@@ -12,6 +12,19 @@ import androidx.core.content.ContextCompat;
 
 import java.io.IOException;
 import java.util.Objects;
+/****************************************
+ Fichier : AudioRecorder
+ Auteur : Émeric Leclerc
+ Fonctionnalité : 36.5
+ Date : 2025-05-13
+
+ Vérification :
+ Date Nom Approuvé
+ =========================================================
+ Historique de modifications :
+ Date Nom Description
+ =========================================================
+ ****************************************/
 
 /**
  * Classe pour gérer un MediaRecorder. dois avoir les permissions pour RECORD_AUDIO.

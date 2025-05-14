@@ -17,13 +17,44 @@ import com.example.teamwork.Database.Tables.Student;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.TeamStudent;
 import com.example.teamwork.R;
+/****************************************
+ Fichier : StudentAddActivity
+ Auteur : Antoine Blouin
+ Fonctionnalité : 32.2
+ Date : 2025-05-13
 
+ Vérification :
+ Date Nom Approuvé
+ =========================================================
+ Historique de modifications :
+ Date Nom Description
+ =========================================================
+ ****************************************/
+
+/**
+ * Activité pour ajouter un Étudiant a une équipe.
+ */
 public class StudentAddActivity extends AppCompatActivity implements View.OnClickListener {
-
+    /**
+     * Field texte pour le code de l'étudiant.
+     */
     private EditText codeEditText;
+    /**
+     * L'objet team au quel add l'élève.
+     */
     private Team team;
+    /**
+     * Instance de la database.
+     */
     private AppDatabase db;
 
+    /**
+     * Override onCreate, set les variables et inputes de la vue.
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +69,18 @@ public class StudentAddActivity extends AppCompatActivity implements View.OnClic
         codeEditText = findViewById(R.id.code);
     }
 
+    /**
+     * set les boutons back et confirmer.
+     */
     private void setupButtons(){
         findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.confirm).setOnClickListener(this);
     }
 
+    /**
+     * Override on click. fait les onClickListener des boutons.
+     * @param v The view that was clicked.
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.back){
@@ -52,6 +90,9 @@ public class StudentAddActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    /**
+     * Ajoute l'étudiant a l'équipe dans la bd.
+     */
     private void addStudent() {
         String codeText = codeEditText.getText().toString().trim();
 

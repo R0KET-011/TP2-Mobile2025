@@ -24,9 +24,33 @@ import com.example.teamwork.Database.Tables.Student;
 import com.example.teamwork.R;
 
 import java.util.List;
+/****************************************
+ Fichier : StudentListActivity
+ Auteur : Émeric Leclerc
+ Fonctionnalité : 32.5
+ Date : 2025-05-05
 
+ Vérification :
+ Date Nom Approuvé
+ =========================================================
+ Historique de modifications :
+ Date Nom Description
+ =========================================================
+ ****************************************/
+
+
+/**
+ * Activité qui listes les étudiants de la BD.
+ */
 public class StudentListActivity extends AppCompatActivity implements View.OnClickListener {
 
+    /**
+     * Override onCreate, set le recycler view et autre élément de la vue.
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +93,10 @@ public class StudentListActivity extends AppCompatActivity implements View.OnCli
         studentAddListener(teamId);
     }
 
+    /**
+     * Set le listener du bouton pour ajouter des élèves.
+     * @param teamId l'id de l'équipe au quel la vue appartient.
+     */
     private void studentAddListener(int teamId){
         ImageView addIcon = findViewById(R.id.add);
         if (Authentication.isStudent())
@@ -80,12 +108,20 @@ public class StudentListActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    /**
+     * Start l'activité pour ajouter des élèves a une équipe.
+     * @param teamId l'équipe au quel l'élève sera ajouter.
+     */
     private void startStudentAddActivity(int teamId){
         Intent intent = new Intent(this, StudentAddActivity.class);
         intent.putExtra("teamId", teamId);
         startActivity(intent);
     }
 
+    /**
+     * Override onClick, fait les onClickListener des divers boutons.
+     * @param v The view that was clicked.
+     */
     @Override
     public void onClick(View v) {
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

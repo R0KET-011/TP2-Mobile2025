@@ -20,6 +20,19 @@ import com.example.teamwork.Database.Tables.TeamStudent;
 import com.example.teamwork.R;
 
 import java.util.List;
+/****************************************
+ Fichier : StudentAdapter
+ Auteur : Émeric Leclerc
+ Fonctionnalité :
+ Date : 2025-05-05
+
+ Vérification :
+ Date Nom Approuvé
+ =========================================================
+ Historique de modifications :
+ Date Nom Description
+ =========================================================
+ ****************************************/
 
 /**
  * L'adapteur pour le RecyclerView de la liste des élèves.
@@ -34,10 +47,13 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
      * Le Context ou le recyclerview est.
      */
     private Context context;
+    /**
+     * L'id au quel la liste d'étudiant appartien.
+     */
     private int team_id;
 
     /**
-     * Constructeur de l'adapter qui requière la liste des élèves et le context
+     * Constructeur de l'adapter qui requière la liste des élèves et le context.
      * @param context context of the adapter
      * @param students list of the students to put in the adapter
      */
@@ -47,6 +63,14 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         this.team_id = team_id;
     }
 
+    /**
+     * Override de onCreateViewHolder, créer le viewHolder pour les élèves.
+     * @param parent The ViewGroup into which the new View will be added after it is bound to
+     *               an adapter position.
+     * @param viewType The view type of the new View.
+     *
+     * @return
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -55,6 +79,12 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         return new ViewHolder(view);
     }
 
+    /**
+     * Override onBindViewHolder, set la vue dans le ViewHolder.
+     * @param holder The ViewHolder which should be updated to represent the contents of the
+     *        item at the given position in the data set.
+     * @param position The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Student student = students.get(position);
@@ -65,6 +95,10 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
             holder.setDeleteListener(student.getId());
     }
 
+    /**
+     * Get le nombre d'élèves dans la liste donner lors de l'initialisation de l'adapter.
+     * @return
+     */
     @Override
     public int getItemCount() {
         return students.size();
@@ -87,6 +121,11 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
          * ImageView qui contien l'icone de delete
          */
         ImageView iv_delete;
+
+        /**
+         * Constructeur du ViewHolder.
+         * @param itemView
+         */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_name = itemView.findViewById(R.id.tv_nom);
@@ -105,6 +144,10 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
 
         }
 
+        /**
+         * Set le delete Listener pour supprimer le lien entre l'étudiant et l'équipe dans la bd.
+         * @param studentId
+         */
         public void setDeleteListener(int studentId){
             iv_delete.setOnClickListener(v -> {
                 AppDatabase db = AppDatabase.getDatabase(context);
@@ -112,6 +155,12 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
             });
         }
 
+        /**
+         * Set le comment listemenr pour afficher la vue de commentaire.
+         * @param context L'activité de l'apadteur
+         * @param teamId L'id de team au quel le student appartien.
+         * @param studentId L'id de l'étudiant.
+         */
         public void setCommentListener(Context context, int teamId, int studentId) {
             iv_comment.setOnClickListener(new View.OnClickListener() {
                 @Override
