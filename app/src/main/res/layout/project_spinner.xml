@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/groupSelector"
+    android:textColor="@color/text_primary"
+    android:textColorHint="@color/text_secondary"
+    android:textAlignment="center"
+    android:background="@color/color_primary"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:text="@string/project_select_group"/>

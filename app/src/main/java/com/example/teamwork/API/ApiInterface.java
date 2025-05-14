@@ -29,8 +29,10 @@ import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.TeamStudent;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
@@ -56,6 +58,9 @@ public interface ApiInterface {
 
     @GET("group_project")
     Call<List<GroupProject>> getGroupProject();
+
+    @POST("group/{id_group}/newproject")
+    Call<Void> createProject(@Path("id_group") int id, @Body Project project);
 
     @DELETE("project-destroy/{id_project}")
     Call<Void> deleteProject(@Path("id_project")int id);

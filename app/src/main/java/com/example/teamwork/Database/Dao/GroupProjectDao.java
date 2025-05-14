@@ -32,4 +32,7 @@ public interface GroupProjectDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertGroupProject(List<GroupProject> groupProject);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertEntry(GroupProject groupProject);
 }

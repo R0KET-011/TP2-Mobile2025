@@ -36,6 +36,12 @@ android:background="@color/color_tertiary">
         android:layout_height="1dp"
         android:background="@color/color_primary" />
 
+    <Spinner
+        android:id="@+id/groupSelector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown" />
+
     <EditText
         android:id="@+id/name"
         android:layout_width="match_parent"

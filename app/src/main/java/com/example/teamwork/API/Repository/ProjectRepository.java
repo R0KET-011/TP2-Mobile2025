@@ -74,6 +74,30 @@ public class ProjectRepository {
         });
     }
 
+    public void sendCreateProject(ApiInterface api, Project project, int groupID) {
+        Call<Void> call = api.createProject(groupID, project);
+        Log.v("Project Create API", "Call done");
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                if(response.isSuccessful()) {
+                    Log.v("Project API Creation", "Inserted.");
+                }
+                else {
+                    Log.v("Project API Creation", "Failed.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.v("Project API Call Fail", "Failure", t);
+            }
+        });
+
+    }
+
     public void sendDeleteProject(ApiInterface api, int id) {
         Call<Void> call = api.deleteProject(id);
         Log.v("Project Delete API", "Call done.");

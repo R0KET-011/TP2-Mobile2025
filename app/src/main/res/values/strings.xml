@@ -27,6 +27,7 @@
     <string name="project_notitle">Aucun projet</string>
     <string name="project_participant">Participant(s) : </string>
     <string name="project_group">Groupe : </string>
+    <string name="project_select_group"> Choisir le groupe</string>
     <string name="project_description">Description du projet</string>
     <string name="project_creation">Création d\'un projet</string>
     <string name="project_name">Nom du projet</string>

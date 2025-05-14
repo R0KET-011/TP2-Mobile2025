@@ -21,6 +21,7 @@ package com.example.teamwork.Database.Dao;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
+import androidx.room.Query;
 
 import com.example.teamwork.Database.Tables.Course;
 
@@ -31,4 +32,7 @@ public interface CourseDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertCourses(List<Course> courses);
+
+    @Query("SELECT * FROM courses")
+    List<Course> getAllCourses();
 }

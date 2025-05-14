@@ -97,4 +97,9 @@ public class Group {
     public String getSemester() {
         return semester;
     }
+
+    @Override
+    public String toString() {
+        return String .valueOf(this.code);
+    }
 }

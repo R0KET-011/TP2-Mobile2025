@@ -28,6 +28,8 @@ import com.example.teamwork.API.Repository.TeamRepository;
 import com.example.teamwork.API.Repository.TeamStudentRepository;
 import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Database.AppDatabase;
+import com.example.teamwork.Database.Tables.Course;
+import com.example.teamwork.Database.Tables.Group;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.TeamStudent;
 import com.example.teamwork.R;
@@ -42,6 +44,7 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
@@ -51,6 +54,7 @@ import java.util.concurrent.Executors;
 import com.example.teamwork.API.ApiClient;
 
 import com.example.teamwork.Database.Tables.Project;
+import com.google.gson.Gson;
 
 public class ProjectActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -135,6 +139,23 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if (v.getId() == R.id.add) {
             Intent intent = new Intent(ProjectActivity.this, ProjectCreate.class);
+            db = AppDatabase.getDatabase(this);
+
+            // Send all groups to Create Project Activity
+            List<Group> groups = db.groupDao().getAllGroups();
+            Gson gson = new Gson();
+            String toJson = gson.toJson(groups);
+            Log.v("JSON TEST", toJson);
+            intent.putExtra("groups", toJson);
+
+            // Send all courses to Create Project Activity
+            List<Course> courses = db.courseDao().getAllCourses();
+            toJson = gson.toJson(courses);
+            intent.putExtra("courses", toJson);
+
+            // auith token
+            intent.putExtra("authToken", authToken);
+
             startActivity(intent);
         }
     }
