@@ -73,4 +73,26 @@ public class ProjectRepository {
             }
         });
     }
+
+    public void sendDeleteProject(ApiInterface api, int id) {
+        Call<Void> call = api.deleteProject(id);
+        Log.v("Project Delete API", "Call done.");
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()) {
+                    Log.v("Project Delete API", "Delete success.");
+                }
+                else {
+                    Log.v("Project Delete API", "Delete failed.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.v("Project Delete API", "Response failed.");
+            }
+        });
+    }
 }

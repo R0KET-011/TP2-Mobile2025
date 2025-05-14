@@ -56,7 +56,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 
     private AppDatabase db;
     private RecyclerView recyclerView;
-    String authToken = "1|o3jMkGcucX5pzzSybbhWZaXy2P0axZzYGPqlzxIf434977a3";
+    String authToken = "1|8O00lRImUMuFqpeCguRmjVSBrThyLJK9XcE6aSeg0abad55f";
     int userId;
     TextView titleView;
     ImageView createView;
@@ -94,9 +94,9 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
         );
 
         executor.execute(() -> {
-            updateTeamStudentDatabase();
             updateGroupDatabase();
             updateGroupProjectDatabase();
+            updateTeamStudentDatabase();
         });
 
 
@@ -112,7 +112,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
                             titleView.setText(R.string.project_title);
                         }
                         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-                        ProjectAdapter projectAdapter = new ProjectAdapter(this, projects);
+                        ProjectAdapter projectAdapter = new ProjectAdapter(this, projects, authToken);
                         recyclerView.setAdapter(projectAdapter);
                         recyclerView.setLayoutManager(new LinearLayoutManager(this));
                     }

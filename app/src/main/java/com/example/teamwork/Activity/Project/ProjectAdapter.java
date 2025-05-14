@@ -37,11 +37,13 @@ import com.example.teamwork.Database.Tables.Project;
 
 public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.MyViewHolder> {
     private List<Project> projectList;
+    private String authToken;
     private Context context;
 
-    public ProjectAdapter(Context context, List<Project> projectArrayList) {
+    public ProjectAdapter(Context context, List<Project> projectArrayList, String authToken) {
         this.context = context;
         this.projectList = projectArrayList;
+        this.authToken = authToken;
     }
 
     @NonNull
@@ -69,6 +71,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.MyViewHo
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, TeamIndexActivity.class);
             intent.putExtra("projectId", project.getId());
+            intent.putExtra("authToken", authToken);
             String projectId = String.valueOf(project.getId());
             context.startActivity(intent);
         });

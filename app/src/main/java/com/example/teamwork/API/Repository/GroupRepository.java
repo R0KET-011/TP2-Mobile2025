@@ -47,9 +47,6 @@ public class GroupRepository {
         call.enqueue(new Callback<List<Group>>() {
             @Override
             public void onResponse(Call<List<Group>> call, Response<List<Group>> response) {
-                Gson gson = new Gson();
-                String jsonResponse = gson.toJson(response.body());
-                Log.d("DEBUGA", jsonResponse);
                 if (response.isSuccessful() && response.body() != null) {
                     Log.v("Group API Response Body", "Contains something");
                     try {

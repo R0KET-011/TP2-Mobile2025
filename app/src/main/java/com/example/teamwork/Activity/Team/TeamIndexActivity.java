@@ -2,6 +2,7 @@ package com.example.teamwork.Activity.Team;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.teamwork.API.ApiClient;
+import com.example.teamwork.API.ApiInterface;
+import com.example.teamwork.API.Repository.ProjectRepository;
 import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Activity.Project.ProjectEditActivity;
 import com.example.teamwork.Activity.ToDo.TodoIndexActivity;
@@ -59,6 +63,9 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
      */
     private RecyclerView recyclerView;
 
+    /** Authentification Token */
+    private String authToken;
+
     /**
      * Constructeur de TeamIndex qui initialise les variables de base.
      *
@@ -71,6 +78,7 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_team_index);
 
         int projectId = getIntent().getIntExtra("projectId",-1);
+        authToken = getIntent().getStringExtra("authToken");
 
         db = AppDatabase.getDatabase(this);
 
@@ -165,7 +173,11 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
      * La logique pour permettre la suppression du projet courant.
      */
     private void deleteProject(){
-        // TODO : Implémenter la suppression du projet
+        db.projectDao().delete(project);
+
+        ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+        ProjectRepository repository = new ProjectRepository(this);
+        repository.sendDeleteProject(api, project.getId());
     }
 
     /**

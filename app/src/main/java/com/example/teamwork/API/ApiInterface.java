@@ -29,7 +29,9 @@ import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.TeamStudent;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface ApiInterface {
 
@@ -54,5 +56,8 @@ public interface ApiInterface {
 
     @GET("group_project")
     Call<List<GroupProject>> getGroupProject();
+
+    @DELETE("project-destroy/{id_project}")
+    Call<Void> deleteProject(@Path("id_project")int id);
 
 }
