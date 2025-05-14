@@ -119,4 +119,26 @@ public class ProjectRepository {
             }
         });
     }
+
+    public void sendUpdateProject(ApiInterface api, Project project){
+        Call<Void> call = api.updateProject(project);
+        Log.v("Project PUT Api", "Call done");
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()){
+                    Log.v("Project PUT API", "Update success.");
+                }
+                else{
+                    Log.v("Project PUT API", "Update success.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.v("Project API Call Fail", "Failure.", t);
+            }
+        });
+    }
 }

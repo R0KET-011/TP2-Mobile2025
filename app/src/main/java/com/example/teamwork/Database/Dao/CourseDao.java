@@ -35,4 +35,7 @@ public interface CourseDao {
 
     @Query("SELECT * FROM courses")
     List<Course> getAllCourses();
+
+    @Query("SELECT name FROM courses WHERE id = (SELECT id_group FROM groups WHERE code = :groupCode)")
+    String getCourseName(int groupCode);
 }

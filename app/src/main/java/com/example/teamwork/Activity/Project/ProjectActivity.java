@@ -76,7 +76,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.add).setOnClickListener(this);
 
         // Hides or Show certain buttons
-        //checkRole();
+        checkRole();
         userId = Authentication.getId();
 
         // Prepare for database manipulation
@@ -105,25 +105,48 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 
 
         // Voulait mettre cela dans une fonction en bas mais ça marche pas. Ça fait que crasher.
-        db.projectDao().getProjectByUser(userId).observe(
-                this, projects -> {
-                    try {
-                        if (projects.isEmpty()) {
-                            Log.d("projects", "Null");
-                            titleView.setText(R.string.project_notitle);
+        if (Authentication.isStudent()) {
+            db.projectDao().getProjectByUser(userId).observe(
+                    this, projects -> {
+                        try {
+                            if (projects.isEmpty()) {
+                                Log.d("projects", "Null");
+                                titleView.setText(R.string.project_notitle);
+                            }
+                            else {
+                                titleView.setText(R.string.project_title);
+                            }
+                            RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                            ProjectAdapter projectAdapter = new ProjectAdapter(this, projects, authToken);
+                            recyclerView.setAdapter(projectAdapter);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(this));
                         }
-                        else {
-                            titleView.setText(R.string.project_title);
+                        catch(Exception e) {
+                            Log.d("RecycleView ERROR", " returned: " + e);
                         }
-                        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-                        ProjectAdapter projectAdapter = new ProjectAdapter(this, projects, authToken);
-                        recyclerView.setAdapter(projectAdapter);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-                    }
-                    catch(Exception e) {
-                        Log.d("RecycleView ERROR", " returned: " + e);
-                    }
-                });
+                    });
+        }
+        else {
+            db.projectDao().getAllProjects().observe(
+                    this, projects -> {
+                        try {
+                            if (projects.isEmpty()) {
+                                Log.d("projects", "Null");
+                                titleView.setText(R.string.project_notitle);
+                            }
+                            else {
+                                titleView.setText(R.string.project_title);
+                            }
+                            RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                            ProjectAdapter projectAdapter = new ProjectAdapter(this, projects, authToken);
+                            recyclerView.setAdapter(projectAdapter);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                        }
+                        catch(Exception e) {
+                            Log.d("RecycleView ERROR", " returned: " + e);
+                        }
+                    });
+        }
 
     }
 

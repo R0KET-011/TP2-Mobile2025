@@ -20,6 +20,8 @@ package com.example.teamwork.Activity.Project;
 
 import com.example.teamwork.Activity.Team.TeamIndexActivity;
 import com.example.teamwork.Activity.Team.TeamShowActivity;
+import com.example.teamwork.Database.AppDatabase;
+import com.example.teamwork.Database.Tables.Group;
 import com.example.teamwork.R;
 
 import android.content.Intent;
@@ -60,8 +62,14 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.MyViewHo
         Project project = projectList.get(position);
 
         holder.projectName.setText(project.getName());
-//        holder.projectCourse.setText(project.getCourse());
-//        holder.projectGroup.setText(String.valueOf(project.getGroup()));
+
+//        Group group =
+//                AppDatabase.getDatabase(context.getApplicationContext()).groupDao().getGroupByIdProject(project.getId());
+//        holder.projectGroup.setText(String.valueOf(group.getCode()));
+
+//        String courseName =
+//                AppDatabase.getDatabase(context.getApplicationContext()).courseDao().getCourseName(groupCode);
+//        holder.projectCourse.setText(courseName);
 
         String memberCount = String.valueOf(project.getMin_per_team());
         memberCount += " - ";

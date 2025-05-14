@@ -120,7 +120,7 @@ public class ProjectCreate extends AppCompatActivity implements View.OnClickList
         joinableBox = findViewById(R.id.joinable_checkbox);
         creatableBox = findViewById(R.id.creatable_checkbox);
         commonClassesBox = findViewById(R.id.common_classes_checkbox);
-        authToken = getIntent().getStringExtra("authtoken");
+        authToken = getIntent().getStringExtra("authToken");
     }
 
     public void setDropdownMenus() {

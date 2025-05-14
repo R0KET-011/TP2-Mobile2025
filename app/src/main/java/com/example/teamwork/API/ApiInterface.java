@@ -33,6 +33,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
@@ -64,5 +65,8 @@ public interface ApiInterface {
 
     @DELETE("project-destroy/{id_project}")
     Call<Void> deleteProject(@Path("id_project")int id);
+
+    @PUT("projects/update")
+    Call<Void> updateProject(@Body Project project);
 
 }

@@ -186,6 +186,7 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
     private void startProjectEditActivity(){
         Intent intent = new Intent(this, ProjectEditActivity.class);
         intent.putExtra("projectId", project.getId());
+        intent.putExtra("authToken", authToken);
         startActivity(intent);
     }
 
