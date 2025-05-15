@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -55,6 +56,9 @@ public class TodoIndexActivity extends AppCompatActivity implements View.OnClick
         Intent intent = getIntent();
         projectId = intent.getIntExtra("projectId", -1);
 
+        if (projectId == -1) {
+            Toast.makeText(this, "Error with project id", Toast.LENGTH_SHORT).show();
+        }
 
         AppDatabase db = AppDatabase.getDatabase(this);
         db.todoDao().getTodosByProjectId(projectId).observe(

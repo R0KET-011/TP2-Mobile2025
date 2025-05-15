@@ -165,7 +165,9 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
             startProjectEditActivity();
         }
         else if (v.getId() == R.id.todo) {
-            startActivity(new Intent(TeamIndexActivity.this, TodoIndexActivity.class));
+            Intent intent = new Intent(TeamIndexActivity.this, TodoIndexActivity.class);
+            intent.putExtra("projectId", project.getId());
+            startActivity(intent);
         }
     }
 
