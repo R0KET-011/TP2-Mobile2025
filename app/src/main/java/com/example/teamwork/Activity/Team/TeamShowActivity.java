@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.teamwork.API.ApiClient;
+import com.example.teamwork.API.ApiInterface;
+import com.example.teamwork.API.Repository.TeamRepository;
 import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Activity.Students.StudentListActivity;
 import com.example.teamwork.Database.AppDatabase;
@@ -59,6 +62,7 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
      * Les boutons du UI.
      */
     private Button deleteButton, editButton, joinButton, quitButton;
+    private String authToken;
 
 
     /**
@@ -73,6 +77,7 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_team_show);
 
         int teamId = getIntent().getIntExtra("teamId", -1);
+        authToken = getIntent().getStringExtra("authToken");
 
         db = AppDatabase.getDatabase(this);
         setupButtons();
@@ -270,6 +275,12 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
             startStudentListActivity();
         } else if (v.getId() == R.id.delete) {
             db.teamDao().delete(team);
+
+            int teamId = getIntent().getIntExtra("teamId", -1);
+            ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+            TeamRepository repository = new TeamRepository(this);
+            repository.sendDeleteTeam(api, teamId);
+
         }
     }
 
@@ -279,6 +290,7 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
     private void startEditActivity() {
         Intent intent = new Intent(this, TeamEditActivity.class);
         intent.putExtra("teamId", team.getId());
+        intent.putExtra("authToken", authToken);
         startActivity(intent);
     }
 

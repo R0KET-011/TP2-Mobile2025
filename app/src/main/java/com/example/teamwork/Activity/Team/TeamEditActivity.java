@@ -6,6 +6,9 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.teamwork.API.ApiClient;
+import com.example.teamwork.API.ApiInterface;
+import com.example.teamwork.API.Repository.TeamRepository;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.R;
@@ -47,6 +50,7 @@ public class TeamEditActivity extends AppCompatActivity implements View.OnClickL
      * Instance de la base de données
      */
     private AppDatabase db;
+    private String authToken;
 
     /**
      * Constructeur de TeamEdit qui initialise les variables de base.
@@ -60,6 +64,7 @@ public class TeamEditActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_team_edit);
 
         int teamId = getIntent().getIntExtra("teamId", -1);
+        authToken = getIntent().getStringExtra("authToken");
         db = AppDatabase.getDatabase(this);
 
         observeTeam(teamId);
@@ -119,6 +124,11 @@ public class TeamEditActivity extends AppCompatActivity implements View.OnClickL
         team.setName(name);
         team.setDescription(description);
         db.teamDao().update(team);
+
+        ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+        TeamRepository repository = new TeamRepository(this);
+        repository.sendUpdateTeam(api, team);
+
         finish();
     }
 

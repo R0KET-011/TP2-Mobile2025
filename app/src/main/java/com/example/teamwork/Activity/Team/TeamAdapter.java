@@ -69,6 +69,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
      * Conserve le nombre d'étudiants par équipe (cache le résultat pour éviter les requêtes répétées.
      */
     private final Map<Integer, Integer> studentCounts = new HashMap<>();
+    private final String authToken;
 
     /**
      * Constructeur pour l'initialisation.
@@ -78,11 +79,12 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
      * @param project le projet qui est en lien avec les équipes
      * @param db l'instance de la base de données
      */
-    public TeamAdapter(Context context, List<Team> teams, Project project, AppDatabase db) {
+    public TeamAdapter(Context context, List<Team> teams, Project project, AppDatabase db, String authToken) {
         this.context = context;
         this.teams = teams;
         this.project = project;
         this.db = db;
+        this.authToken = authToken;
     }
 
     /**
@@ -193,6 +195,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
             itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(context, TeamShowActivity.class);
                 intent.putExtra("teamId", team.getId());
+                intent.putExtra("authToken", authToken);
                 context.startActivity(intent);
             });
         }

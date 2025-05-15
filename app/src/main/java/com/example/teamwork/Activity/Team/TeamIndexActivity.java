@@ -143,7 +143,7 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
      */
     private void setupRecyclerView(int projectId){
         db.teamDao().getTeamsByProjectId(projectId).observe(this, teams -> {
-            TeamAdapter adapter = new TeamAdapter(this, teams, project, db);
+            TeamAdapter adapter = new TeamAdapter(this, teams, project, db, authToken);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(adapter);
         });
@@ -196,6 +196,7 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
     private void startTeamCreateActivity(){
         Intent intent = new Intent(this, TeamCreateActivity.class);
         intent.putExtra("projectId", project.getId());
+        intent.putExtra("authToken", authToken);
         startActivity(intent);
     }
 }

@@ -6,6 +6,9 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.teamwork.API.ApiClient;
+import com.example.teamwork.API.ApiInterface;
+import com.example.teamwork.API.Repository.TeamRepository;
 import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Team;
@@ -49,6 +52,7 @@ public class TeamCreateActivity extends AppCompatActivity implements View.OnClic
      * L'instance de la base de données.
      */
     private AppDatabase db;
+    private String authToken;
 
     /**
      * Le constructeur qui initialise les variables de base.
@@ -63,6 +67,7 @@ public class TeamCreateActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_team_create);
 
         projectId = getIntent().getIntExtra("projectId",-1);
+        authToken = getIntent().getStringExtra("authToken");
         db = AppDatabase.getDatabase(this);
 
         setViews();
@@ -107,6 +112,10 @@ public class TeamCreateActivity extends AppCompatActivity implements View.OnClic
         // TODO : Validation par API et Pour l'Id
         Team team = new Team(4, name, "Non conforme", description , projectId);
         db.teamDao().insert(team);
+
+        ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+        TeamRepository repository = new TeamRepository(this);
+        repository.sendCreateTeam(api, team);
 
         if (Authentication.isStudent())
             addStudentToTeam(team);

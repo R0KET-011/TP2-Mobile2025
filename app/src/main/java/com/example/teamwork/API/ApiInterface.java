@@ -69,4 +69,13 @@ public interface ApiInterface {
     @PUT("projects/update")
     Call<Void> updateProject(@Body Project project);
 
+    @DELETE("team/{team_id}/delete")
+    Call<Void> deleteTeam (@Path("team_id") int id);
+
+    @PUT("teams/update")
+    Call<Void> updateTeam(@Body Team team);
+
+    @POST("teams/store")
+    Call<Void> createTeam(@Body Team team);
+
 }

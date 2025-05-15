@@ -91,7 +91,69 @@ public class TeamRepository {
         });
     }
 
-    public LiveData<List<Team>> getAllTeams() {
-        return teamDao.getAllTeams();
+    public void sendDeleteTeam(ApiInterface api, int id) {
+        Call<Void> call = api.deleteTeam(id);
+        Log.v("TEAM API DELETE", "Call done");
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.v("TEAM API DELETE", "SUCESS");
+                }
+                else {
+                    Log.v("TEAM API DELETE", "FAIL");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.v("TEAM API CALL", "Failure", t);
+            }
+        });
+    }
+
+    public void sendUpdateTeam(ApiInterface api, Team team) {
+        Call<Void> call = api.updateTeam(team);
+        Log.v("TEAM API PUT CALL", "Call done");
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()){
+                    Log.v("TEAM API PUT", "SUCCESS");
+                }
+                else {
+                    Log.v("TEAM API PUT", "FAIL");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.v("TEAM API PUT CALL", "Call done");
+            }
+        });
+    }
+
+    public void sendCreateTeam(ApiInterface api, Team team){
+        Call<Void> call = api.createTeam(team);
+        Log.v("TEAM API CREATE CALL", "Call done");
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.v("TEAM API CREATE", "SUCCESS");
+                }
+                else {
+                    Log.v("TEAM API CREATE", "FAIL");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.v("TEAM API CREATE CALL", "Failure", t);
+            }
+        });
     }
 }
