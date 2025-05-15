@@ -56,15 +56,38 @@ import com.example.teamwork.API.ApiClient;
 import com.example.teamwork.Database.Tables.Project;
 import com.google.gson.Gson;
 
+/**
+ * Project Activity qui liste les projets.
+ */
 public class ProjectActivity extends AppCompatActivity implements View.OnClickListener{
-
+    /**
+     * Instance de la base de donné.
+     */
     private AppDatabase db;
-    private RecyclerView recyclerView;
+    /**
+     * Token d'autentification pour faire un call à l'API web.
+     */
     String authToken = "1|8O00lRImUMuFqpeCguRmjVSBrThyLJK9XcE6aSeg0abad55f";
+    /**
+     * L'id de l'utilisateur authentifié.
+     */
     int userId;
+    /**
+     * Texte view pour le titre de la view.
+     */
     TextView titleView;
+    /**
+     * bouton + pour afficher la create view des projets.
+     */
     ImageView createView;
 
+    /**
+     * Override onCreate, définit les différentes variables et prepare la vue.
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,6 +173,9 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
+    /**
+     * Check si l'utilisateur est un professeur ou étudiant et afficher quelque chose en conséquence.
+     */
     public void checkRole() {
         if (Authentication.isStudent()) {
             createView.setVisibility(ImageView.GONE);
@@ -158,6 +184,10 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * Défini les onClickListener des boutons.
+     * @param v The view that was clicked.
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.add) {
@@ -183,42 +213,63 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * Update les projets de la base de donnée avec les info de la base de donné web.
+     */
     public void updateProjectDatabase() {
         ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
         ProjectRepository repository = new ProjectRepository(this);
         repository.fetchInsertProjects(api);
     }
 
+    /**
+     * Update les élèves de la base de donné avec les info de la base de donné web.
+     */
     public void updateStudentDatabase() {
         ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
         StudentRepository repository = new StudentRepository(this);
         repository.fetchInsertStudents(api);
     }
 
+    /**
+     * Update les équipes de la base de donné avec les info de la base de donné web.
+     */
     public void updateTeamDatabase() {
         ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
         TeamRepository repository = new TeamRepository(this);
         repository.fetchInsertTeams(api);
     }
 
+    /**
+     * Update les cours de la base de donné avec les info de la base de donné web.
+     */
     public void updateCourseDatabase() {
       ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
         CourseRepository repository = new CourseRepository(this);
         repository.fetchInsertCourses(api);
     }
 
+    /**
+     * Update la table pivot TeamStudent avec les info de la base de donné web.
+     */
     public void updateTeamStudentDatabase() {
         ApiInterface api = ApiClient.getClient(authToken).create((ApiInterface.class));
         TeamStudentRepository repository = new TeamStudentRepository(this);
         repository.fetchInsertTeamStudent(api);
     }
 
+    /**
+     * Update les groups avec les info de la base de donné web.
+     */
     public void updateGroupDatabase() {
         ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
         GroupRepository repository = new GroupRepository(this);
         repository.fetchInsertGroups(api);
     }
 
+    /**
+     * Update la table pivot GroupProject avec les info de la base de donné web.
+     */
     public void updateGroupProjectDatabase() {
         ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
         GroupProjectRepository repository = new GroupProjectRepository(this);

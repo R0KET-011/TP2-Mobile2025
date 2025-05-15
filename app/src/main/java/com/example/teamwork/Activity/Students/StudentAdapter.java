@@ -44,7 +44,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
      */
     private List<Student> students;
     /**
-     * Le Context ou le recyclerview est.
+     * Le Context de l'Adapter.
      */
     private Context context;
     /**
