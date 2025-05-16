@@ -21,14 +21,58 @@ import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Project;
 import com.example.teamwork.R;
 
+/**
+ * Activity pour modifier un projet.
+ */
 public class ProjectEditActivity extends AppCompatActivity implements View.OnClickListener {
-
+    /**
+     * Instance de la base de donnée.
+     */
     private AppDatabase db;
+    /**
+     * L'id du projet qui sera modifier.
+     */
     int projectId;
+    /**
+     * Token d'autentification pour faire un call à l'API web.
+     */
     String authToken;
-    EditText nameEdit, descriptionEdit, minEdit, maxEdit;
-    CheckBox joinableBox, creatableBox, commonClassesBox;
+    /**
+     * Input fieds pour le nom.
+     */
+    EditText nameEdit;
+    /**
+     * Input fieds pour la description.
+     */
+    EditText descriptionEdit;
+    /**
+     * Input fieds pour la taille minimum d'une équipe.
+     */
+    EditText minEdit;
+    /**
+     * Input fieds pour la taille maximum d'une équipe.
+     */
+    EditText maxEdit;
+    /**
+     * Checkbox pour permettre au élèves de joindre une équipe par eux-même.
+     */
+    CheckBox joinableBox;
+    /**
+     * Checkbox pour permettre au élèves de créer des équipes eux même.
+     */
+    CheckBox creatableBox;
+    /**
+//     * Checkbox pour mettre les classes communes en critère.
+     */
+    CheckBox commonClassesBox;
 
+    /**
+     * Override onCreate, crée la vue et set les variables.
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +87,9 @@ public class ProjectEditActivity extends AppCompatActivity implements View.OnCli
         setTextFields(projectId);
     }
 
+    /**
+     * Assignes les différentes vue a chaque variables avbec FindViewById.
+     */
     private void findView(){
         nameEdit = findViewById(R.id.name);
         descriptionEdit = findViewById(R.id.description);
@@ -53,11 +100,21 @@ public class ProjectEditActivity extends AppCompatActivity implements View.OnCli
         commonClassesBox = findViewById(R.id.common_classes_checkbox);
     }
 
+    /**
+     * set les onClickListener des boutons.
+     */
     private void setupButtons(){
         findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.edit).setOnClickListener(this);
     }
 
+    /**
+     * Méthode qui valide le formulaire.
+     * @param name nom du projet
+     * @param min minimum d'élèves dans une équipe.
+     * @param max maximum d'élèves dans une équipe.
+     * @return
+     */
     public boolean validateForm(String name, String min, String max) {
         if (name.isEmpty()){
             nameEdit.setError(getString(R.string.error_name));
@@ -92,6 +149,10 @@ public class ProjectEditActivity extends AppCompatActivity implements View.OnCli
         return true;
     }
 
+    /**
+     * Défini le onClick pour les boutons du formulaire.
+     * @param v The view that was clicked.
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.back) {
@@ -116,6 +177,10 @@ public class ProjectEditActivity extends AppCompatActivity implements View.OnCli
 
     }
 
+    /**
+     * Set les input feilds avec les informations de la base de donnée.
+     * @param projectId l'id du projet dont les info seront pris.
+     */
     public void setTextFields(int projectId) {
         db.projectDao().getProjectById(projectId).observe(this, new Observer<Project>() {
             @Override

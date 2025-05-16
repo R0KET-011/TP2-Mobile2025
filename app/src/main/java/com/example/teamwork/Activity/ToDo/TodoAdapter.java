@@ -40,7 +40,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
      */
     private final List<Todo> todos;
     /**
-     * Contexte ou le recycler view est.
+     * Contexte de l'Adapter.
      */
     private final Context context;
 

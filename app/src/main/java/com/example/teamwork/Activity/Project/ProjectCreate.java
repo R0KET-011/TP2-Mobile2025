@@ -49,15 +49,62 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ProjectCreate extends AppCompatActivity implements View.OnClickListener{
-
+    /**
+     * Instance de la base de donnée.
+     */
     private AppDatabase db;
-    EditText nameEdit, descriptionEdit, minEdit, maxEdit;
-    CheckBox joinableBox, creatableBox, commonClassesBox;
+    /**
+     * Input field pour le nom du projet.
+     */
+    EditText nameEdit;
+    /**
+     * Input field pour la description du projet.
+     */
+    EditText descriptionEdit;
+    /**
+     * Input field pour le mminimum d'élève dans une équipe.
+     */
+    EditText minEdit;
+    /**
+     * Input field pour le maximum d'élève dans une équipe.
+     */
+    EditText  maxEdit;
+    /**
+     * Checkbox pour permettre au élèves de joindre une équipe par eux-même.
+     */
+    CheckBox joinableBox;
+    /**
+     * Checkbox pour permettre au élèves de créer des équipes eux même.
+     */
+    CheckBox creatableBox;
+    /**
+     * Checkbox pour mettre les classes communes en critère.
+     */
+    CheckBox commonClassesBox;
+    /**
+     *  Liste des groupes tiré de la base de donnée web.
+     */
     List<Group> groups;
+    /**
+     * Liste des cours tiré de la base de donnée web.
+     */
     List<Course> courses;
+    /**
+     * spinner du dropdown des groupes.
+     */
     Spinner groupSelection;
+    /**
+     * Token d'autentification pour faire un call à l'API web.
+     */
     String authToken;
 
+    /**
+     * Override onCreate pour set le menu dropdown et les variables.
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +116,10 @@ public class ProjectCreate extends AppCompatActivity implements View.OnClickList
 
     }
 
+    /**
+     * défini le onClickListener des boutons et autre.
+     * @param v The view that was clicked.
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.back) {
@@ -109,6 +160,9 @@ public class ProjectCreate extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /**
+     * Set les différentes variable pour l'activité.
+     */
     public void setVariables(){
         db = AppDatabase.getDatabase(this);
         findViewById(R.id.back).setOnClickListener(this);
@@ -123,6 +177,9 @@ public class ProjectCreate extends AppCompatActivity implements View.OnClickList
         authToken = getIntent().getStringExtra("authToken");
     }
 
+    /**
+     * Set les menu dropdown pour la selection des groupes.
+     */
     public void setDropdownMenus() {
         setLists();
         groupSelection = findViewById(R.id.groupSelector);
@@ -132,6 +189,9 @@ public class ProjectCreate extends AppCompatActivity implements View.OnClickList
 
     }
 
+    /**
+     * Set les listes des groupes et cours.
+     */
     public void setLists() {
         String jsonGroups = getIntent().getStringExtra("groups");
         String jsonCourses = getIntent().getStringExtra("courses");
@@ -144,6 +204,13 @@ public class ProjectCreate extends AppCompatActivity implements View.OnClickList
         courses = gson.fromJson(jsonCourses, typeCourse);
     }
 
+    /**
+     * Valide les informations du form.
+     * @param name nom du projet.
+     * @param min minimum d'élève par équipe.
+     * @param max maximum d'élève par équipe.
+     * @return boolean, return si le projet a été créé ou non.
+     */
     public boolean validateForm(String name, String min, String max) {
         if (name.isEmpty()){
             nameEdit.setError(getString(R.string.error_name));
