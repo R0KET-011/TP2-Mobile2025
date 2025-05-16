@@ -60,7 +60,7 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
 
     private AppDatabase db;
     private RecyclerView recyclerView;
-    String authToken = "1|8O00lRImUMuFqpeCguRmjVSBrThyLJK9XcE6aSeg0abad55f";
+    String authToken = "1|G80mYnLHuB6b00i9SN9gjpRmWmhzbXiCu6zK5KxNfdffb5bc";
     int userId;
     TextView titleView;
     ImageView createView;

@@ -27,6 +27,7 @@ import com.example.teamwork.Database.Tables.Project;
 import com.example.teamwork.Database.Tables.Student;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.TeamStudent;
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -77,5 +78,11 @@ public interface ApiInterface {
 
     @POST("teams/store")
     Call<Void> createTeam(@Body Team team);
+
+    @POST("team/{team_id}/add")
+    Call<Void> createTeamStudent(@Path("team_id") int team_id, @Body JsonObject json);
+
+    @DELETE("project/{project_id}/student/{user_id}")
+    Call<Void> deleteTeamStudent(@Path("project_id") int project_id, @Path("user_id") int user_id);
 
 }

@@ -47,4 +47,7 @@ public interface TeamDao {
 
     @Query("SELECT COUNT(*) FROM teams WHERE LOWER(name) = LOWER(:name) AND project_id = :projectId AND id != :teamId")
     int isNameTakenEdit(String name, int projectId, int teamId);
+
+    @Query("SELECT COUNT(*) FROM teams")
+    int getTeamTableSize();
 }

@@ -26,6 +26,7 @@ import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Dao.TeamStudentDao;
 import com.example.teamwork.Database.Tables.TeamStudent;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -67,6 +68,52 @@ public class TeamStudentRepository {
             public void onFailure(Call<List<TeamStudent>> call, Throwable t) {
                 t.printStackTrace();
                 Log.v("TeamStudent API Call Fail", "Failure", t);
+            }
+        });
+    }
+
+    public void sendCreateRelation(ApiInterface api, int team_id, JsonObject json) {
+        Call<Void> call = api.createTeamStudent(team_id, json);
+        Log.v("TEAMSTUDENT API CREATE CALL", "Call done");
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.v("TEAMSTUDENT", response.toString());
+                if (response.isSuccessful()){
+                    Log.v("TEAMSTUDENT API CREATE", "SUCCESS");
+                }
+                else {
+                    Log.v("TEAMSTUDENT API CREATE", "FAIL");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.v("TEAMSTUDENT API CREATE CALL", "Failure", t);
+            }
+        });
+    }
+
+    public void sendDeleteRelation(ApiInterface api, int project_id, int user_id) {
+        Call<Void> call = api.deleteTeamStudent(project_id, user_id);
+        Log.v("TEAMSTUDENT API DELETE CALL", "Call done");
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.v("TEAMSTUDENT", response.toString());
+                if(response.isSuccessful()) {
+                    Log.v("TEAMSTUDENT API DELETE", "SUCCESS");
+                }
+                else {
+                    Log.v("TEAMSTUDENT API DELETE", "FAIL");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.v("TEAMSTUDENT API DELETE CALL", "Failure", t);
             }
         });
     }

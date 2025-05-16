@@ -1,6 +1,7 @@
 package com.example.teamwork.Activity.Team;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -9,11 +10,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.teamwork.API.ApiClient;
 import com.example.teamwork.API.ApiInterface;
 import com.example.teamwork.API.Repository.TeamRepository;
+import com.example.teamwork.API.Repository.TeamStudentRepository;
 import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.TeamStudent;
 import com.example.teamwork.R;
+import com.google.gson.JsonObject;
 
 /****************************************
  Fichier : TeamCreateActivity
@@ -110,15 +113,20 @@ public class TeamCreateActivity extends AppCompatActivity implements View.OnClic
         if (!validateInputs(name, description)) return;
 
         // TODO : Validation par API et Pour l'Id
-        Team team = new Team(4, name, "Non conforme", description , projectId);
+        int id = AppDatabase.getDatabase(this).teamDao().getTeamTableSize()+1;
+
+        Team team = new Team(id, name, "Non conforme", description , projectId);
         db.teamDao().insert(team);
 
         ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
         TeamRepository repository = new TeamRepository(this);
         repository.sendCreateTeam(api, team);
 
-        if (Authentication.isStudent())
+        if (Authentication.isStudent()){
             addStudentToTeam(team);
+            deleteStudentTeamAPI(api);
+            addStudentTeamAPI(api, team);
+        }
 
         finish();
     }
@@ -133,6 +141,18 @@ public class TeamCreateActivity extends AppCompatActivity implements View.OnClic
         TeamStudent teamStudent = new TeamStudent(team.getId(), Authentication.getId(), "");
         db.teamStudentDao().deleteStudentFromProject(Authentication.getId(), projectId);
         db.teamStudentDao().insert(teamStudent);
+    }
+
+    private void deleteStudentTeamAPI(ApiInterface api) {
+        TeamStudentRepository teamStudentRepository = new TeamStudentRepository(this);
+        teamStudentRepository.sendDeleteRelation(api, projectId, Authentication.getId());
+    }
+
+    private void addStudentTeamAPI(ApiInterface api, Team team) {
+        JsonObject json = new JsonObject();
+        json.addProperty("user_id", String.valueOf(Authentication.getId()));
+        TeamStudentRepository teamStudentRepository = new TeamStudentRepository(this);
+        teamStudentRepository.sendCreateRelation(api, team.getId(), json);
     }
 
     /**
