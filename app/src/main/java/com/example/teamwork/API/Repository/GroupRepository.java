@@ -35,11 +35,15 @@ public class GroupRepository {
 
     private GroupDao groupDao;
 
+    /** Constructeur pour le répositoire de groupe
+     * @param context est Context de l'activité*/
     public GroupRepository(Context context) {
         AppDatabase db = AppDatabase.getDatabase(context);
         groupDao = db.groupDao();
     }
 
+    /** Fait appel api pour importer la base de donnée de groupes
+     * @param api est ApiInterface*/
     public void fetchInsertGroups(ApiInterface api) {
         Call<List<Group>> call = api.getGroups();
         Log.v("Group API Call", "Call done.");

@@ -64,13 +64,8 @@ public class ProjectActivity extends AppCompatActivity implements View.OnClickLi
      * Instance de la base de donné.
      */
     private AppDatabase db;
-    /**
-     * Token d'autentification pour faire un call à l'API web.
-     */
-    String authToken = "1|8O00lRImUMuFqpeCguRmjVSBrThyLJK9XcE6aSeg0abad55f";
-    /**
-     * L'id de l'utilisateur authentifié.
-     */
+    private RecyclerView recyclerView;
+    String authToken = "1|G80mYnLHuB6b00i9SN9gjpRmWmhzbXiCu6zK5KxNfdffb5bc";
     int userId;
     /**
      * Texte view pour le titre de la view.

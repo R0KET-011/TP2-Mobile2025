@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.teamwork.API.ApiClient;
 import com.example.teamwork.API.ApiInterface;
 import com.example.teamwork.API.Repository.TeamRepository;
+import com.example.teamwork.API.Repository.TeamStudentRepository;
 import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Activity.Students.StudentListActivity;
 import com.example.teamwork.Database.AppDatabase;
@@ -18,6 +19,7 @@ import com.example.teamwork.Database.Tables.Project;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.TeamStudent;
 import com.example.teamwork.R;
+import com.google.gson.JsonObject;
 
 /****************************************
  Fichier : TeamShowActivity
@@ -212,7 +214,23 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
             TeamStudent teamStudent = new TeamStudent(team.getId(), Authentication.getId(), "");
             db.teamStudentDao().deleteStudentFromProject(Authentication.getId(), project.getId());
             db.teamStudentDao().insert(teamStudent);
+
+            ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+            deleteStudentTeamAPI(api);
+            addStudentTeamAPI(api, team);
         });
+    }
+
+    private void deleteStudentTeamAPI(ApiInterface api) {
+        TeamStudentRepository teamStudentRepository = new TeamStudentRepository(this);
+        teamStudentRepository.sendDeleteRelation(api, team.getProjectId(), Authentication.getId());
+    }
+
+    private void addStudentTeamAPI(ApiInterface api, Team team) {
+        JsonObject json = new JsonObject();
+        json.addProperty("user_id", String.valueOf(Authentication.getId()));
+        TeamStudentRepository teamStudentRepository = new TeamStudentRepository(this);
+        teamStudentRepository.sendCreateRelation(api, team.getId(), json);
     }
 
     /**
@@ -227,6 +245,10 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
         quitButton.setOnClickListener(v -> {
             db.teamStudentDao().delete(membership);
             deleteTeamOnLastStudent();
+
+            ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+            TeamStudentRepository repository = new TeamStudentRepository(this);
+            deleteStudentTeamAPI(api);
         });
     }
 

@@ -27,10 +27,14 @@ public class AuthInterceptor implements Interceptor{
 
     private String token;
 
+    /** Constructeur AuthInterceptor
+     * @param token est String, token d'authentification*/
     public AuthInterceptor(String token) {
         this.token = token;
     }
 
+    /** modifier l'inception d'une requête HTTP pour y insérer le token d'identification
+     * @param chain est requête HTTP */
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();
