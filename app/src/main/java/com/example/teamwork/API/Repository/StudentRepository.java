@@ -36,11 +36,15 @@ public class StudentRepository {
 
     private StudentDao studentDao;
 
+    /** Constructeur du répositoire étudiant
+     * @param context est Context de l'activité */
     public StudentRepository(Context context) {
         AppDatabase db = AppDatabase.getDatabase(context);
         studentDao = db.studentDao();
     }
 
+    /** Fait appel api pour importer les étudiants de la base de donnée utilisateur
+     * @param api est ApiInterface*/
     public void fetchInsertStudents(ApiInterface api) {
         Call<List<Student>> call = api.getStudents();
         Log.v("Group API Call", "Call done.");

@@ -36,11 +36,15 @@ public class CourseRepository {
 
     private CourseDao courseDao;
 
+    /** Constructeur pour le répositoire Course
+     * @param context est Context de l'activité*/
     public CourseRepository(Context context) {
         AppDatabase db = AppDatabase.getDatabase(context);
         courseDao = db.courseDao();
     }
 
+    /** Fait un appel API pour importer la base de donnée de cours.
+     * @param api est ApiInterface*/
     public void fetchInsertCourses(ApiInterface api) {
         Call<List<Course>> call = api.getCourses();
         Log.v("Course API Call", "Call done.");

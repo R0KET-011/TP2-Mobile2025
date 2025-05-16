@@ -37,11 +37,15 @@ public class ProjectRepository {
 
     private ProjectDao projectDao;
 
+    /** Constructeur du répositoire de projet
+     * @param context est Context de l'activité*/
     public ProjectRepository(Context context) {
         AppDatabase db = AppDatabase.getDatabase(context);
         projectDao = db.projectDao();
     }
 
+    /** Fait appel api pour importer la base de donnée de projets
+     * @param api est ApiInterface */
     public void fetchInsertProjects(ApiInterface api) {
         Call<List<Project>> call = api.getProjects();
         Log.v("Project API Call", "Call done.");
@@ -74,6 +78,10 @@ public class ProjectRepository {
         });
     }
 
+    /** Fait appel api pour exporter un nouveau projet
+     * @param api est ApiInterface
+     * @param project est l'objet du projet
+     * @param groupID est le id du group auquel le projet appartient. */
     public void sendCreateProject(ApiInterface api, Project project, int groupID) {
         Call<Void> call = api.createProject(groupID, project);
         Log.v("Project Create API", "Call done");
@@ -98,6 +106,9 @@ public class ProjectRepository {
 
     }
 
+    /** Fait appel api pour supprimer un projet spécifique
+     * @param api est ApiInterface
+     * @param id est int */
     public void sendDeleteProject(ApiInterface api, int id) {
         Call<Void> call = api.deleteProject(id);
         Log.v("Project Delete API", "Call done.");
@@ -120,6 +131,9 @@ public class ProjectRepository {
         });
     }
 
+    /** Fait appel api pour la modification d'un projet.
+     * @param api est ApiInterface
+     * @param project est l'objet du projet*/
     public void sendUpdateProject(ApiInterface api, Project project){
         Call<Void> call = api.updateProject(project);
         Log.v("Project PUT Api", "Call done");

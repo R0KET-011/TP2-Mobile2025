@@ -38,11 +38,15 @@ public class TeamStudentRepository {
 
     private TeamStudentDao teamStudentDao;
 
+    /** Constructeur du répositoire TeamStudent
+     * @param context est Context de l'activité*/
     public TeamStudentRepository(Context context) {
         AppDatabase db = AppDatabase.getDatabase(context);
         teamStudentDao = db.teamStudentDao();
     }
 
+    /** Fait appel api pour importer les pairs étudiant-équipe de la base de donnée
+     * @param api est ApiInterface*/
     public void fetchInsertTeamStudent(ApiInterface api) {
         Call<List<TeamStudent>> call = api.getTeamStudent();
         Log.v("TeamStudent API Call", "Call done.");
@@ -72,6 +76,10 @@ public class TeamStudentRepository {
         });
     }
 
+    /** Fsit appel api pour la création d'une pair étudiant-équipe
+     * @param api ApiInterface
+     * @param team_id est int
+     * @param json est un objet JSON qui contient le id de l'étudiant */
     public void sendCreateRelation(ApiInterface api, int team_id, JsonObject json) {
         Call<Void> call = api.createTeamStudent(team_id, json);
         Log.v("TEAMSTUDENT API CREATE CALL", "Call done");
@@ -95,6 +103,10 @@ public class TeamStudentRepository {
         });
     }
 
+    /** Fait appel api pour la suppression d'une relation étudiant-équipe
+     * @param api est ApiInterface
+     * @param project_id est int
+     * @param user_id est int */
     public void sendDeleteRelation(ApiInterface api, int project_id, int user_id) {
         Call<Void> call = api.deleteTeamStudent(project_id, user_id);
         Log.v("TEAMSTUDENT API DELETE CALL", "Call done");

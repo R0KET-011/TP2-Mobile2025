@@ -25,6 +25,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     private static Retrofit retrofit = null;
 
+    /** Constructeur de retrofit // Singleton
+     * @param token est token authentification */
     public static Retrofit getClient(String token) {
         if (retrofit == null) {
             OkHttpClient client =

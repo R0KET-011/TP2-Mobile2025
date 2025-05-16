@@ -41,11 +41,15 @@ public class TeamRepository {
 
     private TeamDao teamDao;
 
+    /** Constructeur du répositoire équipe
+     * @param context est Context de l'activité */
     public TeamRepository(Context context) {
         AppDatabase db = AppDatabase.getDatabase(context);
         teamDao = db.teamDao();
     }
 
+    /** Fait appel api pour importer les équipes de la base de données Teams
+     * @param api est ApiInterface */
     public void fetchInsertTeams(ApiInterface api) {
         Call<List<Team>> call = api.getTeams();
         Log.v("Team API Call", "Call done.");
@@ -91,6 +95,9 @@ public class TeamRepository {
         });
     }
 
+    /** Fait appel api pour la suppression d'une équipe
+     * @param api est ApiInterface
+     * @param id est int */
     public void sendDeleteTeam(ApiInterface api, int id) {
         Call<Void> call = api.deleteTeam(id);
         Log.v("TEAM API DELETE", "Call done");
@@ -113,6 +120,9 @@ public class TeamRepository {
         });
     }
 
+    /** Fait appel api pour la modification des détails d'une équipe
+     * @param api est ApiInterface
+     * @param team est objet de l'équipe */
     public void sendUpdateTeam(ApiInterface api, Team team) {
         Call<Void> call = api.updateTeam(team);
         Log.v("TEAM API PUT CALL", "Call done");
@@ -135,6 +145,9 @@ public class TeamRepository {
         });
     }
 
+    /** Fait appel api pour la création d'une équipe
+     * @param api est ApiInterface
+     * @param team est objet de l'équipe */
     public void sendCreateTeam(ApiInterface api, Team team){
         Call<Void> call = api.createTeam(team);
         Log.v("TEAM API CREATE CALL", "Call done");
