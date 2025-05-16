@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_create"
+        android:title="@string/create"
+        android:icon="@drawable/plus"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
+    <item
+        android:id="@+id/menu_todo"
+        android:title="@string/todo"
+        android:icon="@drawable/clipboard_check"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
+
+    <item
+        android:id="@+id/menu_projects"
+        android:title="@string/project_title"/>
+    <item
+        android:id="@+id/menu_profile"
+        android:title="@string/profil"/>
+</menu>

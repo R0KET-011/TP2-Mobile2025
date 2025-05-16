@@ -3,10 +3,14 @@ package com.example.teamwork.Activity.Team;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +22,7 @@ import com.example.teamwork.Activity.Project.ProjectEditActivity;
 import com.example.teamwork.Activity.ToDo.TodoIndexActivity;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Project;
+import com.example.teamwork.MenuHelper.BaseActivity;
 import com.example.teamwork.R;
 
 /****************************************
@@ -41,7 +46,7 @@ import com.example.teamwork.R;
  * @version 1.0
  * @since 2025-05-05
  */
-public class TeamIndexActivity extends AppCompatActivity implements View.OnClickListener {
+public class TeamIndexActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * Le projet en lien avec les équipes.
@@ -82,6 +87,13 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
 
         db = AppDatabase.getDatabase(this);
 
+        //set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         setupView();
         setupButtons();
         observeProject(projectId);
@@ -100,9 +112,7 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
      * Ajoute également les listeners.
      */
     private void setupButtons() {
-        findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.create).setOnClickListener(this);
-        findViewById(R.id.todo).setOnClickListener(this);
 
         if (Authentication.isStudent()){
             findViewById(R.id.project_delete).setVisibility(View.GONE);
@@ -155,19 +165,10 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
      * @param v la vue cliquée
      */
     public void onClick(View v) {
-        if (v.getId() == R.id.back) {
-            finish();
-        } else if (v.getId() == R.id.create) {
-            startTeamCreateActivity();
-        } else if (v.getId() == R.id.project_delete){
+        if (v.getId() == R.id.project_delete){
             deleteProject();
         } else if (v.getId() == R.id.project_edit){
             startProjectEditActivity();
-        }
-        else if (v.getId() == R.id.todo) {
-            Intent intent = new Intent(TeamIndexActivity.this, TodoIndexActivity.class);
-            intent.putExtra("projectId", project.getId());
-            startActivity(intent);
         }
     }
 
@@ -200,5 +201,40 @@ public class TeamIndexActivity extends AppCompatActivity implements View.OnClick
         intent.putExtra("projectId", project.getId());
         intent.putExtra("authToken", authToken);
         startActivity(intent);
+    }
+
+    /**
+     * Override onCreateOptionMenu pour set le menu
+     * @param menu The options menu in which you place your items.
+     *
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.header_menu, menu);
+        menu.findItem(R.id.menu_todo).setVisible(true);
+        if (!Authentication.isStudent()) {
+            menu.findItem(R.id.menu_create).setVisible(true);
+        }
+        return true;
+    }
+
+    /**
+     * Add des options au menu existant.
+     * @param item The menu item that was selected.
+     *
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_todo) {
+            Intent intent = new Intent(this, TodoIndexActivity.class);
+            intent.putExtra("projectId", project.getId());
+            startActivity(intent);
+        }
+        else if (item.getItemId() == R.id.menu_create) {
+            startTeamCreateActivity();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

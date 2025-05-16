@@ -28,6 +28,7 @@ import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,6 +41,7 @@ import com.example.teamwork.Database.Tables.Course;
 import com.example.teamwork.Database.Tables.Group;
 import com.example.teamwork.Database.Tables.GroupProject;
 import com.example.teamwork.Database.Tables.Project;
+import com.example.teamwork.MenuHelper.BaseActivity;
 import com.example.teamwork.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -48,7 +50,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class ProjectCreate extends AppCompatActivity implements View.OnClickListener{
+public class ProjectCreate extends BaseActivity implements View.OnClickListener{
     /**
      * Instance de la base de donnée.
      */
@@ -110,6 +112,14 @@ public class ProjectCreate extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_create);
 
+        //set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+
         setVariables();
         setDropdownMenus();
 
@@ -122,10 +132,7 @@ public class ProjectCreate extends AppCompatActivity implements View.OnClickList
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.back) {
-            finish();
-        }
-        else if(v.getId() == R.id.create){
+        if(v.getId() == R.id.create){
 
             int id = AppDatabase.getDatabase(this).projectDao().getProjectTableSize() + 1;
             String name = nameEdit.getText().toString();
@@ -165,7 +172,6 @@ public class ProjectCreate extends AppCompatActivity implements View.OnClickList
      */
     public void setVariables(){
         db = AppDatabase.getDatabase(this);
-        findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.create).setOnClickListener(this);
         nameEdit = findViewById(R.id.name);
         descriptionEdit = findViewById(R.id.description);
