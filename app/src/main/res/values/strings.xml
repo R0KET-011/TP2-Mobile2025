@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TP2-Mobile2025</string>
+    <string name="app_name">TeamWork</string>
     <string name="back">Retour</string>
     <string name="info">Informations</string>
     <string name="description">Description</string>
@@ -47,4 +47,7 @@
 
     <string name="audio">Audio (facultatif)</string>
     <string name="todo">TODO liste</string>
+    <string name="create">Create</string>
+
+    <string name="profil">Profil</string>
 </resources>

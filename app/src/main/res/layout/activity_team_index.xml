@@ -8,38 +8,15 @@
     android:fitsSystemWindows="true"
     android:background="@color/color_tertiary">
 
-    <RelativeLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
-
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:contentDescription="@string/back"
-            android:src="@drawable/chevron_left"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/team_index"
-            android:textColor="@color/text_primary"
-            android:textSize="20sp"
-            android:layout_centerInParent="true"/>
-
-        <ImageView
-            android:id="@+id/todo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:contentDescription="@string/todo"
-            app:srcCompat="@drawable/clipboard_check" />
-
-    </RelativeLayout>
+        android:background="@color/color_tertiary"
+        app:title="@string/team_index"
+        android:titleTextColor="@color/text_secondary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <View
         android:layout_width="match_parent"

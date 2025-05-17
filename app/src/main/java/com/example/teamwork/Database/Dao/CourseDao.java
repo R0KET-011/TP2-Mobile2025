@@ -30,12 +30,16 @@ import java.util.List;
 @Dao
 public interface CourseDao {
 
+    /** Insert un cours dans la base de donnée locale
+     * @param courses est collection de json de cours*/
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertCourses(List<Course> courses);
 
+    /** return une liste de cours */
     @Query("SELECT * FROM courses")
     List<Course> getAllCourses();
 
+    /** return le nom du cours d'un groupe */
     @Query("SELECT name FROM courses WHERE id = (SELECT id_group FROM groups WHERE code = :groupCode)")
     String getCourseName(int groupCode);
 }

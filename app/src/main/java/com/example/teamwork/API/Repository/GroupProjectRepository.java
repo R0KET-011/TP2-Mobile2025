@@ -37,11 +37,15 @@ public class GroupProjectRepository {
 
     private GroupProjectDao groupProjectDao;
 
+    /** Constructeur du répositoire de GroupProject.
+     * @param context est Context de l'activité. */
     public GroupProjectRepository(Context context) {
         AppDatabase db = AppDatabase.getDatabase(context);
         groupProjectDao = db.groupProjectDao();
     }
 
+    /** Fait un appel API pour importer la base de donnée GroupProject
+     * @param api est ApiInterface */
     public void fetchInsertGroupProject(ApiInterface api) {
         Call<List<GroupProject>> call = api.getGroupProject();
         Log.v("GroupProject API Call", "Call done.");

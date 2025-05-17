@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.teamwork.API.ApiClient;
 import com.example.teamwork.API.ApiInterface;
@@ -15,6 +16,7 @@ import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.TeamStudent;
+import com.example.teamwork.MenuHelper.BaseActivity;
 import com.example.teamwork.R;
 import com.google.gson.JsonObject;
 
@@ -39,7 +41,7 @@ import com.google.gson.JsonObject;
  * @version 1.0
  * @since 2025-05-05
  */
-public class TeamCreateActivity extends AppCompatActivity implements View.OnClickListener {
+public class TeamCreateActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * L'id du projet depuis lequel on crée l'équipe.
@@ -69,6 +71,13 @@ public class TeamCreateActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_create);
 
+        //set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         projectId = getIntent().getIntExtra("projectId",-1);
         authToken = getIntent().getStringExtra("authToken");
         db = AppDatabase.getDatabase(this);
@@ -84,7 +93,6 @@ public class TeamCreateActivity extends AppCompatActivity implements View.OnClic
         nameEditText = findViewById(R.id.name);
         descriptionEditText = findViewById(R.id.description);
 
-        findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.create).setOnClickListener(this);
     }
 
@@ -95,9 +103,7 @@ public class TeamCreateActivity extends AppCompatActivity implements View.OnClic
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.back) {
-            finish();
-        } else if (v.getId() == R.id.create) {
+        if (v.getId() == R.id.create) {
             submitCreate();
         }
     }

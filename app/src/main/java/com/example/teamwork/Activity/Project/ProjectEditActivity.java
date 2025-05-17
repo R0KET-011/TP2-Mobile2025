@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -19,12 +20,13 @@ import com.example.teamwork.API.ApiInterface;
 import com.example.teamwork.API.Repository.ProjectRepository;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Project;
+import com.example.teamwork.MenuHelper.BaseActivity;
 import com.example.teamwork.R;
 
 /**
  * Activity pour modifier un projet.
  */
-public class ProjectEditActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProjectEditActivity extends BaseActivity implements View.OnClickListener {
     /**
      * Instance de la base de donnée.
      */
@@ -79,6 +81,13 @@ public class ProjectEditActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_project_edit);
         db = AppDatabase.getDatabase(this);
 
+        //set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         projectId = getIntent().getIntExtra("projectId",-1);
         authToken = getIntent().getStringExtra("authToken");
 
@@ -104,7 +113,6 @@ public class ProjectEditActivity extends AppCompatActivity implements View.OnCli
      * set les onClickListener des boutons.
      */
     private void setupButtons(){
-        findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.edit).setOnClickListener(this);
     }
 
@@ -155,9 +163,7 @@ public class ProjectEditActivity extends AppCompatActivity implements View.OnCli
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.back) {
-            finish();
-        } else if (v.getId() == R.id.edit) {
+        if (v.getId() == R.id.edit) {
             if (!validateForm(nameEdit.getText().toString(),
                     String.valueOf(minEdit.getText().toString()),
                     String.valueOf(maxEdit.getText().toString()))) {return ;}

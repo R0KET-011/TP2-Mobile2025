@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.teamwork.API.ApiClient;
 import com.example.teamwork.API.ApiInterface;
@@ -18,6 +19,7 @@ import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Project;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.TeamStudent;
+import com.example.teamwork.MenuHelper.BaseActivity;
 import com.example.teamwork.R;
 import com.google.gson.JsonObject;
 
@@ -43,7 +45,7 @@ import com.google.gson.JsonObject;
  * @version 1.0
  * @since 2025-05-05
  */
-public class TeamShowActivity extends AppCompatActivity implements View.OnClickListener {
+public class TeamShowActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * L'équipe actuellement inspectée.
@@ -82,6 +84,14 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
         authToken = getIntent().getStringExtra("authToken");
 
         db = AppDatabase.getDatabase(this);
+
+        //set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         setupButtons();
         observeTeam(teamId);
     }
@@ -91,7 +101,6 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
      * et ajoute les listeners pour ceux qui n'ont pas de logique complexe.
      */
     private void setupButtons() {
-        findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.students).setOnClickListener(this);
 
         deleteButton = findViewById(R.id.delete);
@@ -289,9 +298,7 @@ public class TeamShowActivity extends AppCompatActivity implements View.OnClickL
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.back) {
-            finish();
-        } else if (v.getId() == R.id.edit) {
+        if (v.getId() == R.id.edit) {
             startEditActivity();
         } else if (v.getId() == R.id.students) {
             startStudentListActivity();
