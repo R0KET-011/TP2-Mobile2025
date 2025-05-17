@@ -85,4 +85,9 @@ public interface ApiInterface {
     @DELETE("project/{project_id}/student/{user_id}")
     Call<Void> deleteTeamStudent(@Path("project_id") int project_id, @Path("user_id") int user_id);
 
+    @POST("register")
+    Call<Void> registerUser(@Body JsonObject json);
+
+    @GET("login")
+    Call<Void> loginUser(@Body JsonObject json);
 }

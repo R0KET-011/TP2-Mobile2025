@@ -44,7 +44,7 @@
         android:layout_margin="16sp"
         android:autofillHints="username"
         android:hint="Numéro de dossier"
-        android:inputType="numberSigned"
+        android:inputType="textEmailAddress"
         android:textColor="@color/text_primary"
         android:textColorHint="@color/text_secondary" />
 

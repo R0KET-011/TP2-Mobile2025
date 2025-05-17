@@ -21,7 +21,11 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.teamwork.API.ApiClient;
+import com.example.teamwork.API.ApiInterface;
+import com.example.teamwork.API.Repository.UserRepository;
 import com.example.teamwork.R;
+import com.google.gson.JsonObject;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,7 +33,7 @@ import java.util.regex.Pattern;
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     EditText input;
     LinearLayout layout;
-    Pattern p = Pattern.compile("^[0-9]{9}$");
+    Pattern p = Pattern.compile("^[0-9]{9}@cegepsherbrooke\\.qc\\.ca$");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +65,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 input.setError("Le numéro de dossier doit contenir 9 chiffres");
                 input.requestFocus();
             } else {
-                //Todo : call api to send email
+                ApiInterface api = ApiClient.getClient("").create(ApiInterface.class);
+                UserRepository repository = new UserRepository(this);
+                JsonObject json = new JsonObject();
+                json.addProperty("email", inputText);
+                repository.sendMail(api, json);
                 finish();
             }
         }
