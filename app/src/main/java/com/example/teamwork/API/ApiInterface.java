@@ -27,6 +27,7 @@ import com.example.teamwork.Database.Tables.Project;
 import com.example.teamwork.Database.Tables.Student;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.TeamStudent;
+import com.example.teamwork.Database.Tables.User;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -114,6 +115,6 @@ public interface ApiInterface {
     @POST("register")
     Call<Void> registerUser(@Body JsonObject json);
 
-    @GET("login")
-    Call<Void> loginUser(@Body JsonObject json);
+    @POST("login")
+    Call<User> login(@Body JsonObject json);
 }

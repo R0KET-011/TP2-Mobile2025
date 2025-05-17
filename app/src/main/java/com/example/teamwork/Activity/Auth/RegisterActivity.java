@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     EditText input;
     LinearLayout layout;
-    Pattern p = Pattern.compile("^[0-9]{9}@cegepsherbrooke\\.qc\\.ca$");
+    Pattern mailPattern = Pattern.compile("^[0-9]{9}@cegepsherbrooke\\.qc\\.ca$");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,14 +55,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             input = findViewById(R.id.editTextNDA);
             String inputText = input.getText().toString();
 
-            Matcher m = p.matcher(inputText);
+            Matcher m = mailPattern.matcher(inputText);
             boolean bFormatCorrect = m.matches();
 
             if (inputText.isEmpty()) {
-                input.setError("Veuillez entrer votre numéro de dossier.");
+                input.setError("Veuillez entrer votre courriel");
                 input.requestFocus();
             } else if (!bFormatCorrect) {
-                input.setError("Le numéro de dossier doit contenir 9 chiffres");
+                input.setError("Le courriel doit être dans le format suivant : 000000000@cegepsherbrooke.qc.ca");
                 input.requestFocus();
             } else {
                 ApiInterface api = ApiClient.getClient("").create(ApiInterface.class);

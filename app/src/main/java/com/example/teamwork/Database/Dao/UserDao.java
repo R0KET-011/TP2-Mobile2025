@@ -46,8 +46,11 @@ public interface UserDao {
     LiveData<List<User>> getAllUsers();
 
     /**
-     * @return users in the db matching the given id
+     * @return user in the db
      */
-    @Query("SELECT * FROM users WHERE id = :id")
-    LiveData<User> getUserById(int id);
+    @Query("SELECT * FROM users LIMIT 1")
+    User getUser();
+
+    @Query("DELETE FROM users")
+    void deleteAll();
 }

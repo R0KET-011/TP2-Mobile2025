@@ -37,12 +37,12 @@
         android:background="@color/color_primary" />
 
     <EditText
-        android:id="@+id/editTextNDA"
+        android:id="@+id/editTextCourriel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16sp"
-        android:autofillHints="username"
-        android:hint="Numéro de dossier"
+        android:autofillHints="emailAddress"
+        android:hint="Courriel"
         android:inputType="text"
         android:textColor="@color/text_primary"
         android:textColorHint="@color/text_secondary" />

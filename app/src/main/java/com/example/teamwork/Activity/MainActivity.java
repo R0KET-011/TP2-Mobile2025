@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         Authentication.setId(2);
         Authentication.setIsStudent(false);
 
-        Intent intent = new Intent(this, RegisterActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 }
