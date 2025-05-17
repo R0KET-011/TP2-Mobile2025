@@ -5,12 +5,14 @@ import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.teamwork.API.ApiClient;
 import com.example.teamwork.API.ApiInterface;
 import com.example.teamwork.API.Repository.TeamRepository;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Team;
+import com.example.teamwork.MenuHelper.BaseActivity;
 import com.example.teamwork.R;
 
 /****************************************
@@ -34,7 +36,7 @@ import com.example.teamwork.R;
  * @version 1.0
  * @since 2025-05-05
  */
-public class TeamEditActivity extends AppCompatActivity implements View.OnClickListener{
+public class TeamEditActivity extends BaseActivity implements View.OnClickListener{
 
     /**
      * L'équipe qui se fait modifier
@@ -62,6 +64,13 @@ public class TeamEditActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team_edit);
+
+        //set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         int teamId = getIntent().getIntExtra("teamId", -1);
         authToken = getIntent().getStringExtra("authToken");
@@ -93,7 +102,6 @@ public class TeamEditActivity extends AppCompatActivity implements View.OnClickL
         nameEditText.setText(team.getName());
         descriptionEditText.setText(team.getDescription());
 
-        findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.confirm).setOnClickListener(this);
     }
 
@@ -104,9 +112,7 @@ public class TeamEditActivity extends AppCompatActivity implements View.OnClickL
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.back) {
-            finish();
-        } else if (v.getId() == R.id.confirm) {
+        if (v.getId() == R.id.confirm) {
             submitEdit();
         }
     }
