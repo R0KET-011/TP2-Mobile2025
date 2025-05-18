@@ -140,7 +140,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 launchCameraIntent();
             } else {
-                Toast.makeText(this, "Camera permission is required to take pictures", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "L'autorisation de la caméra est requise", Toast.LENGTH_SHORT).show();
             }
         }
     }
