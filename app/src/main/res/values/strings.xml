@@ -47,7 +47,11 @@
 
     <string name="audio">Audio (facultatif)</string>
     <string name="todo">TODO liste</string>
-    <string name="create">Create</string>
 
+    <string name="profile">Profil</string>
     <string name="profil">Profil</string>
+    <string name="password_reset">Réinitialisation du mot de passe</string>
+    <string name="disconnect">Déconnecter</string>
+    <string name="take_picture">Prendre une photo</string>
+    <string name="create">Create</string>
 </resources>

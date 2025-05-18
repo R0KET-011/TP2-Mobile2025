@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Activity.Auth.LoginActivity;
-import com.example.teamwork.Activity.Auth.RegisterActivity;
+import com.example.teamwork.Activity.Auth.ProfileActivity;
 import com.example.teamwork.Activity.Project.ProjectActivity;
 import com.example.teamwork.Activity.ToDo.TodoIndexActivity;
 import com.example.teamwork.Database.Tables.Project;
@@ -21,9 +21,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Authentication.setId(2);
-        Authentication.setIsStudent(false);
+        Authentication.setIsStudent(true);
+        Authentication.setCode(206242440);
+        Authentication.setEmail("206242440@cegepsherbrooke.qc.ca");
+        Authentication.setName("Antoine Blouin");
 
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
 }
