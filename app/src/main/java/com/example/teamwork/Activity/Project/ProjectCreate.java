@@ -26,29 +26,23 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.teamwork.API.ApiClient;
 import com.example.teamwork.API.ApiInterface;
 import com.example.teamwork.API.Repository.ProjectRepository;
-import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Course;
 import com.example.teamwork.Database.Tables.Group;
 import com.example.teamwork.Database.Tables.GroupProject;
 import com.example.teamwork.Database.Tables.Project;
-import com.example.teamwork.MenuHelper.BaseActivity;
+import com.example.teamwork.Activity.MenuHelper.BaseActivity;
 import com.example.teamwork.R;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class ProjectCreate extends BaseActivity implements View.OnClickListener{
     /**

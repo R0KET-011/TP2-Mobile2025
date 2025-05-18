@@ -1,4 +1,4 @@
-package com.example.teamwork.MenuHelper;
+package com.example.teamwork.Activity.MenuHelper;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -21,12 +21,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Authentication.setId(2);
-        Authentication.setIsStudent(true);
+        Authentication.setIsStudent(false);
         Authentication.setCode(206242440);
         Authentication.setEmail("206242440@cegepsherbrooke.qc.ca");
         Authentication.setName("Antoine Blouin");
 
-        Intent intent = new Intent(this, ProfileActivity.class);
+        Intent intent = new Intent(this, ProjectActivity.class);
         startActivity(intent);
     }
 }

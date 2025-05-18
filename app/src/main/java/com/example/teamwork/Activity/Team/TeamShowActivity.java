@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.teamwork.API.ApiClient;
@@ -19,7 +18,7 @@ import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Project;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.TeamStudent;
-import com.example.teamwork.MenuHelper.BaseActivity;
+import com.example.teamwork.Activity.MenuHelper.BaseActivity;
 import com.example.teamwork.R;
 import com.google.gson.JsonObject;
 

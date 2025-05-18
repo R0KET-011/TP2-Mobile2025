@@ -30,26 +30,17 @@ import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Course;
 import com.example.teamwork.Database.Tables.Group;
-import com.example.teamwork.Database.Tables.Team;
-import com.example.teamwork.Database.Tables.TeamStudent;
-import com.example.teamwork.MenuHelper.BaseActivity;
+import com.example.teamwork.Activity.MenuHelper.BaseActivity;
 import com.example.teamwork.R;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
@@ -58,7 +49,6 @@ import java.util.concurrent.Executors;
 
 import com.example.teamwork.API.ApiClient;
 
-import com.example.teamwork.Database.Tables.Project;
 import com.google.gson.Gson;
 
 /**

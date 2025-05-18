@@ -1,11 +1,9 @@
 package com.example.teamwork.Activity.Team;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.teamwork.API.ApiClient;
@@ -16,7 +14,7 @@ import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.TeamStudent;
-import com.example.teamwork.MenuHelper.BaseActivity;
+import com.example.teamwork.Activity.MenuHelper.BaseActivity;
 import com.example.teamwork.R;
 import com.google.gson.JsonObject;
 

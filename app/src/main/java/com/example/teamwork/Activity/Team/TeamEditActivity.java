@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.teamwork.API.ApiClient;
@@ -12,7 +11,7 @@ import com.example.teamwork.API.ApiInterface;
 import com.example.teamwork.API.Repository.TeamRepository;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Team;
-import com.example.teamwork.MenuHelper.BaseActivity;
+import com.example.teamwork.Activity.MenuHelper.BaseActivity;
 import com.example.teamwork.R;
 
 /****************************************

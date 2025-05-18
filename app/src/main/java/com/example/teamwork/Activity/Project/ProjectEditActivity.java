@@ -5,14 +5,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.Observer;
 
 import com.example.teamwork.API.ApiClient;
@@ -20,7 +14,7 @@ import com.example.teamwork.API.ApiInterface;
 import com.example.teamwork.API.Repository.ProjectRepository;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Project;
-import com.example.teamwork.MenuHelper.BaseActivity;
+import com.example.teamwork.Activity.MenuHelper.BaseActivity;
 import com.example.teamwork.R;
 
 /**
