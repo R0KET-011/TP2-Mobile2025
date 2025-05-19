@@ -45,9 +45,22 @@ import java.util.regex.Pattern;
 import com.example.teamwork.Activity.Auth.Authentication;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    /**
+     * Les champs pour la connexion
+     */
     EditText editTextCourriel, editTextPassword;
+    /**
+     * Le pattern regex pour l'adresse mail
+     */
     Pattern mailPattern = Pattern.compile("^[0-9]{9}@cegepsherbrooke\\.qc\\.ca$");
 
+    /**
+     * Le constructeur qui initialise les variables de base et charge le UI.
+     *
+     * @param savedInstanceState Si l'activité est recréée après une fermeture,
+     * ce Bundle contient les données précédemment enregistrées.
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +70,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         findViewById(R.id.buttonLogin).setOnClickListener(this);
     }
 
+    /**
+     * Gère les clics sur les différents boutons de l'interface.
+     *
+     * @param v La vue qui a été cliquée
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.buttonRegister) {

@@ -43,11 +43,21 @@ import retrofit2.Response;
 public class UserRepository {
     private UserDao userDao;
 
+    /** Constructeur du répertoire utilisateur
+     * @param context est Context de l'activité */
     public UserRepository(Context context) {
         AppDatabase db = AppDatabase.getDatabase(context);
         userDao = db.userDao();
     }
 
+    /**
+     * Envoit un requete à l'api pour envoyer un mail de mise à jour de mot de passe
+     * à l'utilisateur
+     * @param api interface api a appelé
+     * @param json le contenu de la requete
+     * @param context l'application a fermer à la fin de la requête
+     * @param layout la layout où afficher le message d'erreur
+     */
     public void sendMail(ApiInterface api, JsonObject json,Context context, LinearLayout layout) {
         Call<Void> call = api.registerUser(json);
         Log.v("User POST Api", "Call done");
@@ -71,6 +81,14 @@ public class UserRepository {
         });
     }
 
+    /**
+     * Envoit une requête à l'api pour obtenir les informations de l'utilisateur
+     * auquel on veut se connecter
+     * @param api interface api a appelé
+     * @param json le contenu de la requete
+     * @param context l'application a fermer à la fin de la requête
+     * @param layout la layout où afficher le message d'erreur
+     */
     public void login(ApiInterface api, JsonObject json, Context context, LinearLayout layout) {
         Call<User> call = api.login(json);
         Log.v("User GET Api", "Call done");

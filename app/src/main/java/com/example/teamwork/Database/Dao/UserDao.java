@@ -51,6 +51,9 @@ public interface UserDao {
     @Query("SELECT * FROM users LIMIT 1")
     User getUser();
 
+    /**
+     * Supprime tous les utilisateurs dans la bd
+     */
     @Query("DELETE FROM users")
     void deleteAll();
 }

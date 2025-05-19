@@ -30,9 +30,13 @@ public class User {
     private boolean isStudent;
 
     /**
-     * @param id         the db id of the user
-     * @param email      the email of the user
-     * @param token      the api token of the user
+     *
+     * @param id db id of the user
+     * @param first_name first nam of the user
+     * @param last_name last name of the user
+     * @param email email of the user
+     * @param token api token of the user
+     * @param isStudent if the user is a student
      */
     public User(int id, String first_name, String last_name, String email, String token, boolean isStudent) {
         this.id = id;
@@ -57,18 +61,30 @@ public class User {
         this.id = id;
     }
 
+    /**
+     * @return the first name of the user
+     */
     public String getFirst_name() {
         return first_name;
     }
 
+    /**
+     * @param first_name the first name of the user
+     */
     public void setFirst_name(String first_name) {
         this.first_name = first_name;
     }
 
+    /**
+     * @return the last name of the user
+     */
     public String getLast_name() {
         return last_name;
     }
 
+    /**
+     * @param last_name the first name of the user
+     */
     public void setLast_name(String last_name) {
         this.last_name = last_name;
     }
@@ -115,10 +131,16 @@ public class User {
         this.lien_image = lien_image;
     }
 
+    /**
+     * @return  if the user is a student
+     */
     public boolean isStudent() {
         return isStudent;
     }
 
+    /**
+     * @param student set if the user is a student
+     */
     public void setStudent(boolean student) {
         isStudent = student;
     }
