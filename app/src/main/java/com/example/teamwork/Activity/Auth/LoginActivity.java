@@ -19,8 +19,10 @@ package com.example.teamwork.Activity.Auth;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -87,10 +89,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 JsonObject json = new JsonObject();
                 json.addProperty("email", courriel);
                 json.addProperty("password", password);
-                repository.login(api, json);
-
-                Intent intent = new Intent(this, ProjectActivity.class);
-                startActivity(intent);
+                LinearLayout layout = findViewById(R.id.layout);
+                repository.login(api, json, this, layout);
             }
         }
     }

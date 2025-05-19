@@ -13,15 +13,21 @@
  ****************************************/
 package com.example.teamwork.API.Repository;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
+import android.widget.LinearLayout;
 
 import com.example.teamwork.API.ApiInterface;
 import com.example.teamwork.Activity.Auth.Authentication;
+import com.example.teamwork.Activity.Project.ProjectActivity;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Dao.UserDao;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.User;
+import com.google.android.material.snackbar.Snackbar;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -42,7 +48,7 @@ public class UserRepository {
         userDao = db.userDao();
     }
 
-    public void sendMail(ApiInterface api, JsonObject json){
+    public void sendMail(ApiInterface api, JsonObject json) {
         Call<Void> call = api.registerUser(json);
         Log.v("User POST Api", "Call done");
 
@@ -63,7 +69,7 @@ public class UserRepository {
         });
     }
 
-    public void login(ApiInterface api, JsonObject json){
+    public void login(ApiInterface api, JsonObject json, Context context, LinearLayout layout) {
         Call<User> call = api.login(json);
         Log.v("User GET Api", "Call done");
 
@@ -86,11 +92,14 @@ public class UserRepository {
                             userDao.deleteAll();
                             userDao.insert(user);
                             Log.v("User GET API", "Login request sent.");
+                            Intent intent = new Intent(context, ProjectActivity.class);
+                            context.startActivity(intent);
                         }).start();
                     } catch (Exception e) {
                         Log.e("ERROR FROM FETCH", "" + e);
                     }
                 } else {
+                    Snackbar.make(layout, "Identifiants erronés", Snackbar.LENGTH_SHORT).show();
                     Log.v("User GET API", "Login request error.");
                 }
 
