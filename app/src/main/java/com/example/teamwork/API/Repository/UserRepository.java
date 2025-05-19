@@ -17,6 +17,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.teamwork.API.ApiInterface;
+import com.example.teamwork.Activity.Auth.Authentication;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Dao.UserDao;
 import com.example.teamwork.Database.Tables.Team;
@@ -73,8 +74,17 @@ public class UserRepository {
                 if (response.isSuccessful()) {
                     try {
                         new Thread(() -> {
+                            User user = response.body();
+                            String email = (user.getEmail());
+                            int code = Integer.parseInt(email.substring(0, 9));
+                            Authentication.setCode(code);
+                            Authentication.setId(user.getId());
+                            Authentication.setToken(user.getToken());
+                            Authentication.setEmail(user.getEmail());
+                            Authentication.setName(user.getFirst_name() + " " + user.getLast_name());
+                            Authentication.setIsStudent(user.isStudent());
                             userDao.deleteAll();
-                            userDao.insert(response.body());
+                            userDao.insert(user);
                             Log.v("User GET API", "Login request sent.");
                         }).start();
                     } catch (Exception e) {

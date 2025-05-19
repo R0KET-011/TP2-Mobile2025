@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             int code = Integer.parseInt(email.substring(0, 9));
             Authentication.setCode(code);
             Authentication.setId(user.getId());
+            Authentication.setToken(user.getToken());
             Authentication.setEmail(user.getEmail());
             Authentication.setName(user.getFirst_name() + " " + user.getLast_name());
             Authentication.setIsStudent(user.isStudent());

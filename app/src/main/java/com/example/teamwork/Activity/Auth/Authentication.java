@@ -4,10 +4,19 @@ public class Authentication {
 
     private static int id, code;
     private static boolean isStudent;
-    private static String email, name;
+    private static String email, name, token;
+
 
     public static int getId() {
         return id;
+    }
+
+    public static String getToken() {
+        return token;
+    }
+
+    public static void setToken(String token) {
+        Authentication.token = token;
     }
 
     public static void setId(int id) {
