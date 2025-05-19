@@ -48,7 +48,7 @@ public class UserRepository {
         userDao = db.userDao();
     }
 
-    public void sendMail(ApiInterface api, JsonObject json) {
+    public void sendMail(ApiInterface api, JsonObject json, LinearLayout layout) {
         Call<Void> call = api.registerUser(json);
         Log.v("User POST Api", "Call done");
 
@@ -58,7 +58,8 @@ public class UserRepository {
                 if (response.isSuccessful()) {
                     Log.v("User POST API", "Email sent.");
                 } else {
-                    Log.v("User POST API", "Email Sent.");
+                    Snackbar.make(layout, "Courriel erronés", Snackbar.LENGTH_SHORT).show();
+                    Log.v("User POST API", "Email Error.");
                 }
             }
 

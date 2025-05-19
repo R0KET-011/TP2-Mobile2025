@@ -69,7 +69,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 UserRepository repository = new UserRepository(this);
                 JsonObject json = new JsonObject();
                 json.addProperty("email", inputText);
-                repository.sendMail(api, json);
+                LinearLayout layout = findViewById(R.id.layout);
+                repository.sendMail(api, json, layout);
                 finish();
             }
         }
