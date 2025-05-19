@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Ajouter"
+            android:text="@string/todo_add"
             android:textColor="@color/text_primary"
             android:textSize="20sp" />
 
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginVertical="10dp"
-            android:hint="NOM"
+            android:hint="@string/todo_name"
             android:inputType="text"
             android:textColor="@color/text_primary"
             android:textColorHint="@color/text_secondary" />
@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginVertical="10dp"
-            android:hint="DESCRIPTION"
+            android:hint="@string/todo_description"
             android:inputType="text"
             android:textColor="@color/text_primary"
             android:textColorHint="@color/text_secondary" />
@@ -122,7 +122,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:backgroundTint="@color/color_secondary"
-            android:text="Ajouter"
+            android:text="@string/todo_add"
             android:textColor="@color/text_secondary"
             android:textSize="16sp"
             app:cornerRadius="5dp" />

@@ -32,6 +32,7 @@ import com.example.teamwork.Activity.ToDo.Audio.AudioRecorder;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Todo;
 import com.example.teamwork.R;
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * L'activité a afficher pour créer un élément d'une to do liste.
@@ -115,7 +116,7 @@ public class TodoCreateActivity extends AppCompatActivity implements View.OnClic
         }
         if (v.getId() == R.id.buttonAdd) {
             if (nameEditText.getText().toString().isEmpty()) {
-                nameEditText.setError("Veuillez entrer un nom de tâche");
+                nameEditText.setError(getString(R.string.todo_error_name));
                 nameEditText.requestFocus();
             } else {
                 Todo todo = new Todo(this.projectId, nameEditText.getText().toString(), descriptionEditText.getText().toString(), audioPath, false);
@@ -138,7 +139,7 @@ public class TodoCreateActivity extends AppCompatActivity implements View.OnClic
             audioPath = null;
             audio_trash.setVisibility(View.GONE);
             audio_play.setVisibility(View.GONE);
-            Toast.makeText(this, "Audio deleted.", Toast.LENGTH_SHORT).show();
+            Snackbar.make(layout, R.string.audio_deleted, Snackbar.LENGTH_SHORT).show();
         }
     }
 
@@ -227,7 +228,7 @@ public class TodoCreateActivity extends AppCompatActivity implements View.OnClic
             mic_btn();
         }
         else {
-            Toast.makeText(this, "Permission wasn't granted", Toast.LENGTH_SHORT).show();
+            Snackbar.make(layout, R.string.permission_denied, Snackbar.LENGTH_SHORT).show();
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults, deviceId);
     }

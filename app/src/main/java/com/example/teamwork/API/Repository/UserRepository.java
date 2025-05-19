@@ -29,6 +29,7 @@ import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Dao.UserDao;
 import com.example.teamwork.Database.Tables.Team;
 import com.example.teamwork.Database.Tables.User;
+import com.example.teamwork.R;
 import com.google.android.material.snackbar.Snackbar;
 
 import com.google.gson.Gson;
@@ -74,7 +75,7 @@ public class UserRepository {
                     ((Activity)context).finish();
                     Log.v("User POST API", "Email sent.");
                 } else {
-                    Snackbar.make(layout, "Courriel erronés", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(layout, R.string.register_error_mail, Snackbar.LENGTH_SHORT).show();
                     Log.v("User POST API", "Email Error.");
                 }
             }
@@ -124,7 +125,7 @@ public class UserRepository {
                         Log.e("ERROR FROM FETCH", "" + e);
                     }
                 } else {
-                    Snackbar.make(layout, "Identifiants erronés", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(layout, R.string.login_error, Snackbar.LENGTH_SHORT).show();
                     Log.v("User GET API", "Login request error.");
                 }
 

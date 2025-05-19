@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Inscription / Mot de passe oublié"
+            android:text="@string/login_update_password"
             android:textColor="@color/text_primary"
             android:textSize="20sp" />
 
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16sp"
         android:autofillHints="username"
-        android:hint="Courriel"
+        android:hint="@string/login_mail"
         android:inputType="textEmailAddress"
         android:textColor="@color/text_primary"
         android:textColorHint="@color/text_secondary" />
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16sp"
         android:layout_marginTop="70dp"
-        android:text="Un courriel vous sera envoyé sur votre courriel afin de mettre à jour votre mot de passe"
+        android:text="@string/register_mail_notice"
         android:textAlignment="center"
         android:textColor="@color/text_primary"
         android:textSize="16sp" />
@@ -65,7 +65,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="16dp"
         android:backgroundTint="@color/color_secondary"
-        android:text="Envoyer le courriel d'inscription"
+        android:text="@string/register_send_mail"
         android:textColor="@color/text_secondary"
         android:textSize="16sp"
         app:cornerRadius="5dp" />
