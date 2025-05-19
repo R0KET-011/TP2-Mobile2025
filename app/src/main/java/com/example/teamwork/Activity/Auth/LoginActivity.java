@@ -10,6 +10,8 @@
  Date           Nom                 Description
  05/05/2025     Samy Larochelle     Création
  05/07/2025     Samy Larochelle     Recréation de la vue
+ 05/16/2025     Samy Larochelle     Apporte vers ProjetActivity si déja login
+ 05/18/2025     Samy Larochelle     Déplace la logique au dessus dans MainActivity
  =========================================================
  ****************************************/
 
@@ -49,30 +51,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.buttonRegister).setOnClickListener(this);
         findViewById(R.id.buttonLogin).setOnClickListener(this);
-
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(this::loadDbUser);
     }
 
-    private void loadDbUser(){
-        AppDatabase db = AppDatabase.getDatabase(this);
-        User user = db.userDao().getUser();
-
-        if(user != null){
-            Authentication.setId(user.getId());
-            Authentication.setIsStudent(user.isStudent());
-            Intent intent = new Intent(this, ProjectActivity.class);
-            startActivity(intent);
-        }
-    }
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.back) {
-            finish();
-        }
         if (v.getId() == R.id.buttonRegister) {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);

@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="S'inscrire"
+            android:text="Inscription / Mot de passe oublié"
             android:textColor="@color/text_primary"
             android:textSize="20sp" />
 
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16sp"
         android:layout_marginTop="70dp"
-        android:text="Un courriel vous sera envoyé sur votre courriel du cégep afin de finaliser votre inscription."
+        android:text="Un courriel vous sera envoyé sur votre courriel afin de mettre à jour votre mot de passe"
         android:textAlignment="center"
         android:textColor="@color/text_primary"
         android:textSize="16sp" />
