@@ -60,7 +60,7 @@ public class ProjectActivity extends BaseActivity{
      */
     private AppDatabase db;
     private RecyclerView recyclerView;
-    String authToken = "1|G80mYnLHuB6b00i9SN9gjpRmWmhzbXiCu6zK5KxNfdffb5bc";
+    String authToken = Authentication.getToken();
     int userId;
     /**
      * Toolbar qui fait le titre de la vue.
