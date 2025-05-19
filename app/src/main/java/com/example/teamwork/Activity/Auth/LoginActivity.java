@@ -24,6 +24,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.teamwork.API.ApiClient;
@@ -35,6 +37,7 @@ import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Dao.UserDao;
 import com.example.teamwork.Database.Tables.User;
 import com.example.teamwork.R;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonObject;
 
 import java.util.concurrent.ExecutorService;
@@ -49,6 +52,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      * Les champs pour la connexion
      */
     EditText editTextCourriel, editTextPassword;
+    /**
+     * Le layout de l'activité
+     */
+    LinearLayout layout;
     /**
      * Le pattern regex pour l'adresse mail
      */
@@ -68,6 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         findViewById(R.id.buttonRegister).setOnClickListener(this);
         findViewById(R.id.buttonLogin).setOnClickListener(this);
+        layout = findViewById(R.id.layout);
     }
 
     /**
@@ -78,8 +86,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.buttonRegister) {
-            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-            startActivity(intent);
+            Intent intent = new Intent(this, RegisterActivity.class);
+            registerLauncher.launch(intent);
         }
         if (v.getId() == R.id.buttonLogin) {
             editTextCourriel = findViewById(R.id.editTextCourriel);
@@ -107,9 +115,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 JsonObject json = new JsonObject();
                 json.addProperty("email", courriel);
                 json.addProperty("password", password);
-                LinearLayout layout = findViewById(R.id.layout);
                 repository.login(api, json, this, layout);
             }
         }
     }
+    /**
+     * Lanceur d'activité pour l'inscription
+     * Affiche un message comme quoi l'email a bien été envoyé
+     */
+    private final ActivityResultLauncher<Intent> registerLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    Snackbar.make(layout, "Courriel envoyé!", Snackbar.LENGTH_SHORT).show();
+                }
+            });
 }

@@ -13,6 +13,8 @@
  ****************************************/
 package com.example.teamwork.API.Repository;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +23,7 @@ import android.widget.LinearLayout;
 
 import com.example.teamwork.API.ApiInterface;
 import com.example.teamwork.Activity.Auth.Authentication;
+import com.example.teamwork.Activity.Auth.LoginActivity;
 import com.example.teamwork.Activity.Project.ProjectActivity;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Dao.UserDao;
@@ -66,6 +69,8 @@ public class UserRepository {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
+                    Intent intent = new Intent(context, LoginActivity.class);
+                    ((Activity)context).setResult(RESULT_OK,intent);
                     ((Activity)context).finish();
                     Log.v("User POST API", "Email sent.");
                 } else {
