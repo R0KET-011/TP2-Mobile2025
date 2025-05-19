@@ -48,7 +48,7 @@ public class UserRepository {
         userDao = db.userDao();
     }
 
-    public void sendMail(ApiInterface api, JsonObject json, LinearLayout layout) {
+    public void sendMail(ApiInterface api, JsonObject json,Context context, LinearLayout layout) {
         Call<Void> call = api.registerUser(json);
         Log.v("User POST Api", "Call done");
 
@@ -56,6 +56,7 @@ public class UserRepository {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
+                    ((Activity)context).finish();
                     Log.v("User POST API", "Email sent.");
                 } else {
                     Snackbar.make(layout, "Courriel erronés", Snackbar.LENGTH_SHORT).show();
