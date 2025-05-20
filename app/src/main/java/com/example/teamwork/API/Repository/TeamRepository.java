@@ -75,6 +75,8 @@ public class TeamRepository {
                                 teamInsert.setDescription(team.getDescription());
                                 teamInsert.setProjectId(team.getProjectId());
                                 teamInsert.setState(team.getState());
+
+                                Log.v("api", jsonTeam);
                                 teamDao.insert(teamInsert);
                             }
                             Log.v("Team API Insertion", "Team insertions successful");
