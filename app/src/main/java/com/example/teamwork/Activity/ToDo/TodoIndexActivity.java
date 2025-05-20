@@ -18,13 +18,19 @@ package com.example.teamwork.Activity.ToDo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.teamwork.Activity.Auth.Authentication;
+import com.example.teamwork.Activity.MenuHelper.BaseActivity;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Todo;
 import com.example.teamwork.R;
@@ -34,7 +40,7 @@ import java.util.List;
 /**
  * Activité qui affiche une to do liste pour un projet. Affiche tout les élément présent pour la to do liste du projet en question.
  */
-public class TodoIndexActivity extends AppCompatActivity implements View.OnClickListener {
+public class TodoIndexActivity extends BaseActivity {
     /**
      * L'id du projet pour le quel la to do list sera afficher.
       */
@@ -50,8 +56,12 @@ public class TodoIndexActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_index);
 
-        findViewById(R.id.back).setOnClickListener(this);
-        findViewById(R.id.add).setOnClickListener(this);
+        //set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         Intent intent = getIntent();
         projectId = intent.getIntExtra("projectId", -1);
@@ -73,19 +83,35 @@ public class TodoIndexActivity extends AppCompatActivity implements View.OnClick
                     }
                 });
     }
+
     /**
-     * Set ce que font les différent buttons lorsque l'on clique dessus.
-     * @param v La vue qui a été cliquer.
+     * Add des options au menu existant.
+     * @param item The menu item that was selected.
+     *
+     * @return
      */
     @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.back) {
-            finish();
-        }
-        if (v.getId() == R.id.add) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_create) {
             Intent intent = new Intent(this, TodoCreateActivity.class);
             intent.putExtra("projectId", this.projectId);
             startActivity(intent);
         }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Override onCreateOptionMenu pour set le menu
+     * @param menu The options menu in which you place your items.
+     *
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.header_menu, menu);
+        if (!Authentication.isStudent()) {
+            menu.findItem(R.id.menu_create).setVisible(true);
+        }
+        return true;
     }
 }
