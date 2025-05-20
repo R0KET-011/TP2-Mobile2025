@@ -11,6 +11,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +29,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.teamwork.Activity.MenuHelper.BaseActivity;
 import com.example.teamwork.Activity.Team.TeamAdapter;
 import com.example.teamwork.Database.AppDatabase;
+import com.example.teamwork.Database.Dao.UserDao;
 import com.example.teamwork.Database.Tables.Student;
 import com.example.teamwork.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 
@@ -45,6 +48,11 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     private ImageView imageView;
 
     /**
+     * Le layout de l'activité
+     */
+    LinearLayout layout;
+
+    /**
      * L'ID unique de la photo
      */
     private Uri photoURI;
@@ -53,7 +61,10 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
      * Le chemin vers la photo
      */
     private File imageFile;
-
+    /**
+     * Lien vers la bd
+     */
+    private UserDao userDao;
     /**
      * Le constructeur qui initialise les variables de base et charge le UI.
      *
@@ -73,6 +84,9 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        AppDatabase db = AppDatabase.getDatabase(this);
+        userDao = db.userDao();
+
         findViews();
         setInfos();
         loadImage();
@@ -87,6 +101,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         code = findViewById(R.id.code);
         email = findViewById(R.id.email);
         imageView = findViewById(R.id.profile);
+        layout = findViewById(R.id.layout);
 
         findViewById(R.id.take_picture).setOnClickListener(this);
         findViewById(R.id.password_reset).setOnClickListener(this);
@@ -179,9 +194,12 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         if (v.getId() == R.id.take_picture) {
             takePicture();
         } else if (v.getId() == R.id.password_reset) {
-            // ToDo Implementer le reste de password
+            Intent intent = new Intent(this, RegisterActivity.class);
+            registerLauncher.launch(intent);
         } else if (v.getId() == R.id.disconnect){
-            // ToDo Implementer la deconnection
+            userDao.deleteAll();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -193,6 +211,17 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK) {
                     loadImage();
+                }
+            });
+
+    /**
+     * Lanceur d'activité pour l'inscription
+     * Affiche un message comme quoi l'email a bien été envoyé
+     */
+    private final ActivityResultLauncher<Intent> registerLauncher =
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    Snackbar.make(layout, "Courriel envoyé!", Snackbar.LENGTH_SHORT).show();
                 }
             });
 
