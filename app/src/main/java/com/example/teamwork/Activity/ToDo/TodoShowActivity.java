@@ -15,6 +15,7 @@ package com.example.teamwork.Activity.ToDo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +25,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.example.teamwork.Activity.MenuHelper.BaseActivity;
 import com.example.teamwork.Activity.ToDo.Audio.AudioPermissionManager;
 import com.example.teamwork.Activity.ToDo.Audio.AudioPlayer;
 import com.example.teamwork.Activity.ToDo.Audio.AudioRecorder;
@@ -35,7 +38,7 @@ import com.example.teamwork.R;
 /**
  * L'activité qui permet de read/update (montrer et modifier) un élément d'une to do list.
  */
-public class TodoShowActivity extends AppCompatActivity implements View.OnClickListener {
+public class TodoShowActivity extends BaseActivity implements View.OnClickListener {
     /**
      * Fields inputs pour le nom et la description de l'élément de la to do list.
      */
@@ -85,6 +88,13 @@ public class TodoShowActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_show);
 
+        //set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         Intent intent = getIntent();
         int todoId = intent.getIntExtra("todoId", -1);
 
@@ -113,7 +123,6 @@ public class TodoShowActivity extends AppCompatActivity implements View.OnClickL
             buttonComplete.setText("Marquer comme\ncomplété");
 
         buttonComplete.setOnClickListener(this);
-        findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.buttonDelete).setOnClickListener(this);
     }
 
@@ -123,20 +132,6 @@ public class TodoShowActivity extends AppCompatActivity implements View.OnClickL
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.back) {
-            if (nameEditText.getText().toString().isEmpty()) {
-                nameEditText.setError("Veuillez entrer un nom de tâche");
-                nameEditText.requestFocus();
-            } else {
-                todo.setNom(nameEditText.getText().toString());
-                todo.setDescription(descriptionEditText.getText().toString());
-                db.todoDao().update(todo);
-                //check audio before leaving
-                if (record_status) audioRecorder.stop();
-                if (audioPlayer.isPlaying()) audioPlayer.stop();
-                finish();
-            }
-        }
         if (v.getId() == R.id.buttonDelete) {
             db.todoDao().delete(todo);
             finish();
@@ -260,4 +255,32 @@ public class TodoShowActivity extends AppCompatActivity implements View.OnClickL
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults, deviceId);
     }
+
+    /**
+     * Add des options au menu existant.
+     * @param item The menu item that was selected.
+     *
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            if (nameEditText.getText().toString().isEmpty()) {
+                nameEditText.setError("Veuillez entrer un nom de tâche");
+                nameEditText.requestFocus();
+            } else {
+                todo.setNom(nameEditText.getText().toString());
+                todo.setDescription(descriptionEditText.getText().toString());
+                db.todoDao().update(todo);
+                //check audio before leaving
+                if (record_status) audioRecorder.stop();
+                if (audioPlayer.isPlaying()) audioPlayer.stop();
+                finish();
+            }
+            return true;
+        }
+        else return super.onOptionsItemSelected(item);
+    }
+
+
 }

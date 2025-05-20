@@ -24,8 +24,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import com.example.teamwork.Activity.MenuHelper.BaseActivity;
 import com.example.teamwork.Activity.ToDo.Audio.AudioPermissionManager;
 import com.example.teamwork.Activity.ToDo.Audio.AudioPlayer;
 import com.example.teamwork.Activity.ToDo.Audio.AudioRecorder;
@@ -36,7 +37,7 @@ import com.example.teamwork.R;
 /**
  * L'activité a afficher pour créer un élément d'une to do liste.
  */
-public class TodoCreateActivity extends AppCompatActivity implements View.OnClickListener {
+public class TodoCreateActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * Field pour le nom et description de l'élément de la to do list.
@@ -88,6 +89,13 @@ public class TodoCreateActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_create);
 
+        //set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         Intent intent = getIntent();
         projectId = getIntent().getIntExtra("projectId", -1);
         db = AppDatabase.getDatabase(this);
@@ -100,7 +108,6 @@ public class TodoCreateActivity extends AppCompatActivity implements View.OnClic
         setAudio();
 
         buttonAdd.setOnClickListener(this);
-        findViewById(R.id.back).setOnClickListener(this);
     }
 
 
@@ -110,9 +117,6 @@ public class TodoCreateActivity extends AppCompatActivity implements View.OnClic
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.back) {
-            finish();
-        }
         if (v.getId() == R.id.buttonAdd) {
             if (nameEditText.getText().toString().isEmpty()) {
                 nameEditText.setError("Veuillez entrer un nom de tâche");

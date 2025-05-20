@@ -47,6 +47,9 @@
 
     <string name="audio">Audio (facultatif)</string>
     <string name="todo">TODO liste</string>
+    <string name="task">Tâches</string>
+    <string name="add">Ajouter</string>
+    <string name="details">Détails</string>
 
     <string name="profile">Profil</string>
     <string name="profil">Profil</string>
