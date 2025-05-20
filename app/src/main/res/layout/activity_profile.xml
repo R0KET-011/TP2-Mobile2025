@@ -15,7 +15,8 @@
         android:background="@color/color_tertiary"
         app:title="@string/profil"
         android:titleTextColor="@color/text_secondary"
-        android:minHeight="?attr/actionBarSize"/>
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <View
         android:layout_width="match_parent"
