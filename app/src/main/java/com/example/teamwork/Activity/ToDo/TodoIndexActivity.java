@@ -109,9 +109,7 @@ public class TodoIndexActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.header_menu, menu);
-        if (!Authentication.isStudent()) {
-            menu.findItem(R.id.menu_create).setVisible(true);
-        }
+        menu.findItem(R.id.menu_create).setVisible(true);
         return true;
     }
 }
