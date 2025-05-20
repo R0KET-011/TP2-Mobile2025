@@ -74,4 +74,5 @@
     <string name="todo_mark_uncompleted">Marquer comme\nincomplété</string>
     <string name="register_error_mail">Courriel erronés</string>
     <string name="login_error">Identifiants erronés</string>
+    <string name="teamwork">Teamwork</string>
 </resources>
