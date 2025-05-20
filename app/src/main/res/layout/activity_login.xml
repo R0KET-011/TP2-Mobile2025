@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_tertiary"
@@ -12,20 +13,12 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:contentDescription="@string/back"
-            android:src="@drawable/chevron_left" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Se connecter"
+            android:text="@string/login_login"
             android:textColor="@color/text_primary"
             android:textSize="20sp" />
 
@@ -42,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16sp"
         android:autofillHints="emailAddress"
-        android:hint="Courriel"
+        android:hint="@string/login_mail"
         android:inputType="text"
         android:textColor="@color/text_primary"
         android:textColorHint="@color/text_secondary" />
@@ -53,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16sp"
         android:autofillHints="password"
-        android:hint="Mot de passe"
+        android:hint="@string/login_password"
         android:inputType="textPassword"
         android:textColor="@color/text_primary"
         android:textColorHint="@color/text_secondary" />
@@ -64,7 +57,7 @@
         android:layout_height="45dp"
         android:layout_marginHorizontal="16dp"
         android:backgroundTint="@color/color_secondary"
-        android:text="Je n'ai pas encore de compte"
+        android:text="@string/login_update_password"
         android:textColor="@color/text_secondary"
         app:cornerRadius="5dp" />
 
@@ -75,7 +68,7 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="45dp"
         android:backgroundTint="@color/color_secondary"
-        android:text="Se connecter"
+        android:text="@string/login_login"
         android:textColor="@color/text_secondary"
         android:textSize="16sp"
         app:cornerRadius="5dp" />

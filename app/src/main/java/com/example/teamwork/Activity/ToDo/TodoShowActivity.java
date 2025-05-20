@@ -34,6 +34,7 @@ import com.example.teamwork.Activity.ToDo.Audio.AudioRecorder;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Todo;
 import com.example.teamwork.R;
+import com.google.android.material.snackbar.Snackbar;
 
 /**
  * L'activité qui permet de read/update (montrer et modifier) un élément d'une to do list.
@@ -118,9 +119,9 @@ public class TodoShowActivity extends BaseActivity implements View.OnClickListen
         nameEditText.setText(this.todo.getNom());
         descriptionEditText.setText(this.todo.getDescription());
         if (this.todo.isCompleted())
-            buttonComplete.setText("Marquer comme\nincomplété");
+            buttonComplete.setText(R.string.todo_mark_uncompleted);
         else
-            buttonComplete.setText("Marquer comme\ncomplété");
+            buttonComplete.setText(R.string.todo_mark_completed);
 
         buttonComplete.setOnClickListener(this);
         findViewById(R.id.buttonDelete).setOnClickListener(this);
@@ -139,9 +140,9 @@ public class TodoShowActivity extends BaseActivity implements View.OnClickListen
         if (v.getId() == R.id.buttonComplete) {
             todo.setCompleted(!todo.isCompleted());
             if (todo.isCompleted())
-                buttonComplete.setText("Marquer comme\nincomplété");
+                buttonComplete.setText(R.string.todo_mark_uncompleted);
             else
-                buttonComplete.setText("Marquer comme\ncomplété");
+                buttonComplete.setText(R.string.todo_mark_completed);
         }
         //audio
         else if (v.getId() == R.id.iv_audio_mic) {
@@ -156,7 +157,7 @@ public class TodoShowActivity extends BaseActivity implements View.OnClickListen
             todo.setLien_audio(null);
             audio_trash.setVisibility(View.GONE);
             audio_play.setVisibility(View.GONE);
-            Toast.makeText(this, "Audio deleted.", Toast.LENGTH_SHORT).show();
+            Snackbar.make(layout, R.string.audio_deleted, Snackbar.LENGTH_SHORT).show();
         }
 
     }
@@ -242,7 +243,7 @@ public class TodoShowActivity extends BaseActivity implements View.OnClickListen
      *                     {@link android.content.pm.PackageManager#PERMISSION_GRANTED},
      *                     soit {@link android.content.pm.PackageManager#PERMISSION_DENIED}. Jamais null.
      * @param deviceId L'identifiant de l'appareil pour lequel les permissions ont été demandées.
-     *                 L'appareil principal/physique est associé à {@link Context#DEVICE_ID_DEFAULT},
+     *                 L'appareil principal/physique est associé à {Context#DEVICE_ID_DEFAULT},
      *                 et les appareils virtuels reçoivent des identifiants uniques.
      */
     @Override
@@ -251,7 +252,7 @@ public class TodoShowActivity extends BaseActivity implements View.OnClickListen
             mic_btn();
         }
         else {
-            Toast.makeText(this, "Permission wasn't granted", Toast.LENGTH_SHORT).show();
+            Snackbar.make(layout, R.string.permission_denied, Snackbar.LENGTH_SHORT).show();
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults, deviceId);
     }
@@ -266,7 +267,7 @@ public class TodoShowActivity extends BaseActivity implements View.OnClickListen
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             if (nameEditText.getText().toString().isEmpty()) {
-                nameEditText.setError("Veuillez entrer un nom de tâche");
+                nameEditText.setError(getString(R.string.todo_error_name));
                 nameEditText.requestFocus();
             } else {
                 todo.setNom(nameEditText.getText().toString());

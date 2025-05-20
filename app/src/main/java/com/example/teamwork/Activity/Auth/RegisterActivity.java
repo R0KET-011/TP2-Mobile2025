@@ -31,10 +31,26 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
-    EditText input;
-    LinearLayout layout;
+    /**
+     * Le champs pour l'envoi de mail
+     */
+    EditText editTextCourriel;
+    /**
+     * Le pattern regex pour l'adresse mail
+     */
     Pattern mailPattern = Pattern.compile("^[0-9]{9}@cegepsherbrooke\\.qc\\.ca$");
+    /**
+     * Le layout de l'activité
+     */
+    LinearLayout layout;
 
+    /**
+     * Le constructeur qui initialise les variables de base et charge le UI.
+     *
+     * @param savedInstanceState Si l'activité est recréée après une fermeture,
+     * ce Bundle contient les données précédemment enregistrées.
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,34 +59,37 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.buttonSendMail).setOnClickListener(this);
         layout = findViewById(R.id.layout);
-
     }
 
+    /**
+     * Gère les clics sur les différents boutons de l'interface.
+     *
+     * @param v La vue qui a été cliquée
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.back) {
             finish();
         }
         if (v.getId() == R.id.buttonSendMail) {
-            input = findViewById(R.id.editTextNDA);
-            String inputText = input.getText().toString();
+            editTextCourriel = findViewById(R.id.editTextNDA);
+            String courriel = editTextCourriel.getText().toString();
 
-            Matcher m = mailPattern.matcher(inputText);
+            Matcher m = mailPattern.matcher(courriel);
             boolean bFormatCorrect = m.matches();
 
-            if (inputText.isEmpty()) {
-                input.setError("Veuillez entrer votre courriel");
-                input.requestFocus();
+            if (courriel.isEmpty()) {
+                editTextCourriel.setError("Veuillez entrer votre courriel");
+                editTextCourriel.requestFocus();
             } else if (!bFormatCorrect) {
-                input.setError("Le courriel doit être dans le format suivant : 000000000@cegepsherbrooke.qc.ca");
-                input.requestFocus();
+                editTextCourriel.setError("Le courriel doit être dans le format suivant : 000000000@cegepsherbrooke.qc.ca");
+                editTextCourriel.requestFocus();
             } else {
                 ApiInterface api = ApiClient.getClient("").create(ApiInterface.class);
                 UserRepository repository = new UserRepository(this);
                 JsonObject json = new JsonObject();
-                json.addProperty("email", inputText);
-                repository.sendMail(api, json);
-                finish();
+                json.addProperty("email", courriel);
+                repository.sendMail(api, json,this, layout);
             }
         }
     }

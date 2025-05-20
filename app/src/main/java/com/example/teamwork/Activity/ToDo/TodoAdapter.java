@@ -56,9 +56,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
 
     /**
      * Override onCreateViewHolder pour créer la ViewHolder de l'adapter.
-     * @param parent The ViewGroup into which the new View will be added after it is bound to
-     *               an adapter position.
-     * @param viewType The view type of the new View.
+     * @param parent Le groupe de la  View dans lequel la nouvelle vue sera ajoutée après qu'elle soit lié à
+     *               une position d'adaptateur.
+     * @param viewType le type de la nouvelle view
      *
      * @return return le ViewHolder qui a été créé.
      */
@@ -72,8 +72,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
 
     /**
      * Override onBindViewHolder pour set les vues dans le recycler view.
-     * @param holder The ViewHolder which should be updated to represent the contents of the
-     *        item at the given position in the data set.
+     * @param holder Le titulaire de la vue qui doit être mis à jour pour représenter le contenu de
+     *                l'élément à la position donnée dans l'ensemble de données.
      * @param position The position of the item within the adapter's data set.
      */
     @Override

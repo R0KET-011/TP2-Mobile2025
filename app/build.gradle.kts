@@ -50,4 +50,6 @@ dependencies {
     implementation (libs.gson)
     implementation (libs.converter.gson)
 
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
 }

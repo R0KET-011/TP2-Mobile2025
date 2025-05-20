@@ -57,4 +57,24 @@
     <string name="disconnect">Déconnecter</string>
     <string name="take_picture">Prendre une photo</string>
     <string name="create">Create</string>
+    <string name="login_login">Se connecter</string>
+    <string name="login_mail">Courriel</string>
+    <string name="login_password">Mot de passe</string>
+    <string name="login_update_password">S\'inscrire / Mot de passe oublié</string>
+    <string name="register_mail_notice">Un courriel vous sera envoyé sur votre courriel afin de mettre à jour votre mot de passe</string>
+    <string name="register_send_mail">Envoyer le courriel d\'inscription</string>
+    <string name="todo_add">Ajouter</string>
+    <string name="todo_name">NOM</string>
+    <string name="todo_description">DESCRIPTION</string>
+    <string name="todos">Tâches</string>
+    <string name="todo_details">Détails</string>
+    <string name="todo_mark_completed">Marquer comme\ncomplété</string>
+    <string name="todo_todo">Tâche</string>
+    <string name="todo_options">Options</string>
+    <string name="todo_error_name">Veuillez entrer un nom de tâche</string>
+    <string name="audio_deleted">Audio supprimée</string>
+    <string name="permission_denied">Permission à la refusé</string>
+    <string name="todo_mark_uncompleted">Marquer comme\nincomplété</string>
+    <string name="register_error_mail">Courriel erronés</string>
+    <string name="login_error">Identifiants erronés</string>
 </resources>

@@ -164,7 +164,9 @@ public class TeamIndexActivity extends BaseActivity implements View.OnClickListe
      * @param v la vue cliquée
      */
     public void onClick(View v) {
-        if (v.getId() == R.id.project_delete){
+        if (v.getId() == R.id.create){
+            startTeamCreateActivity();
+        }else if (v.getId() == R.id.project_delete){
             deleteProject();
         } else if (v.getId() == R.id.project_edit){
             startProjectEditActivity();

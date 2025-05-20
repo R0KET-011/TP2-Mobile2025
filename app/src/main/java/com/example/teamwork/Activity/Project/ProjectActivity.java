@@ -60,8 +60,8 @@ public class ProjectActivity extends BaseActivity{
      */
     private AppDatabase db;
     private RecyclerView recyclerView;
-    String authToken = "1|G80mYnLHuB6b00i9SN9gjpRmWmhzbXiCu6zK5KxNfdffb5bc";
     int userId;
+
     /**
      * Toolbar qui fait le titre de la vue.
      */
@@ -88,6 +88,7 @@ public class ProjectActivity extends BaseActivity{
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        ApiClient.retrofitReset();
         userId = Authentication.getId();
 
         // Prepare for database manipulation
@@ -128,7 +129,7 @@ public class ProjectActivity extends BaseActivity{
                                 toolbar.setTitle(R.string.project_title);
                             }
                             RecyclerView recyclerView = findViewById(R.id.recyclerView);
-                            ProjectAdapter projectAdapter = new ProjectAdapter(this, projects, authToken);
+                            ProjectAdapter projectAdapter = new ProjectAdapter(this, projects, Authentication.getToken());
                             recyclerView.setAdapter(projectAdapter);
                             recyclerView.setLayoutManager(new LinearLayoutManager(this));
                         }
@@ -149,7 +150,7 @@ public class ProjectActivity extends BaseActivity{
                                 toolbar.setTitle(R.string.project_title);
                             }
                             RecyclerView recyclerView = findViewById(R.id.recyclerView);
-                            ProjectAdapter projectAdapter = new ProjectAdapter(this, projects, authToken);
+                            ProjectAdapter projectAdapter = new ProjectAdapter(this, projects, Authentication.getToken());
                             recyclerView.setAdapter(projectAdapter);
                             recyclerView.setLayoutManager(new LinearLayoutManager(this));
                         }
@@ -164,7 +165,7 @@ public class ProjectActivity extends BaseActivity{
      * Update les projets de la base de donnée avec les info de la base de donné web.
      */
     public void updateProjectDatabase() {
-        ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+        ApiInterface api = ApiClient.getClient(Authentication.getToken()).create(ApiInterface.class);
         ProjectRepository repository = new ProjectRepository(this);
         repository.fetchInsertProjects(api);
     }
@@ -173,7 +174,7 @@ public class ProjectActivity extends BaseActivity{
      * Update les élèves de la base de donné avec les info de la base de donné web.
      */
     public void updateStudentDatabase() {
-        ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+        ApiInterface api = ApiClient.getClient(Authentication.getToken()).create(ApiInterface.class);
         StudentRepository repository = new StudentRepository(this);
         repository.fetchInsertStudents(api);
     }
@@ -182,7 +183,7 @@ public class ProjectActivity extends BaseActivity{
      * Update les équipes de la base de donné avec les info de la base de donné web.
      */
     public void updateTeamDatabase() {
-        ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+        ApiInterface api = ApiClient.getClient(Authentication.getToken()).create(ApiInterface.class);
         TeamRepository repository = new TeamRepository(this);
         repository.fetchInsertTeams(api);
     }
@@ -191,7 +192,7 @@ public class ProjectActivity extends BaseActivity{
      * Update les cours de la base de donné avec les info de la base de donné web.
      */
     public void updateCourseDatabase() {
-      ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+      ApiInterface api = ApiClient.getClient(Authentication.getToken()).create(ApiInterface.class);
         CourseRepository repository = new CourseRepository(this);
         repository.fetchInsertCourses(api);
     }
@@ -200,7 +201,7 @@ public class ProjectActivity extends BaseActivity{
      * Update la table pivot TeamStudent avec les info de la base de donné web.
      */
     public void updateTeamStudentDatabase() {
-        ApiInterface api = ApiClient.getClient(authToken).create((ApiInterface.class));
+        ApiInterface api = ApiClient.getClient(Authentication.getToken()).create((ApiInterface.class));
         TeamStudentRepository repository = new TeamStudentRepository(this);
         repository.fetchInsertTeamStudent(api);
     }
@@ -209,7 +210,7 @@ public class ProjectActivity extends BaseActivity{
      * Update les groups avec les info de la base de donné web.
      */
     public void updateGroupDatabase() {
-        ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+        ApiInterface api = ApiClient.getClient(Authentication.getToken()).create(ApiInterface.class);
         GroupRepository repository = new GroupRepository(this);
         repository.fetchInsertGroups(api);
     }
@@ -218,7 +219,7 @@ public class ProjectActivity extends BaseActivity{
      * Update la table pivot GroupProject avec les info de la base de donné web.
      */
     public void updateGroupProjectDatabase() {
-        ApiInterface api = ApiClient.getClient(authToken).create(ApiInterface.class);
+        ApiInterface api = ApiClient.getClient(Authentication.getToken()).create(ApiInterface.class);
         GroupProjectRepository repository = new GroupProjectRepository(this);
         repository.fetchInsertGroupProject(api);
     }
@@ -248,7 +249,7 @@ public class ProjectActivity extends BaseActivity{
             intent.putExtra("courses", toJson);
 
             // auith token
-            intent.putExtra("authToken", authToken);
+            intent.putExtra("authToken", Authentication.getToken());
 
             startActivity(intent);
         }
