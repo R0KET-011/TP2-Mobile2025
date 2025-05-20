@@ -223,7 +223,6 @@ public class TodoCreateActivity extends BaseActivity implements View.OnClickList
      *                     {@link android.content.pm.PackageManager#PERMISSION_GRANTED},
      *                     soit {@link android.content.pm.PackageManager#PERMISSION_DENIED}. Jamais null.
      * @param deviceId L'identifiant de l'appareil pour lequel les permissions ont été demandées.
-     *                 L'appareil principal/physique est associé à {@link Context#DEVICE_ID_DEFAULT},
      *                 et les appareils virtuels reçoivent des identifiants uniques.
      */
     @Override
