@@ -118,6 +118,7 @@ public class TeamIndexActivity extends BaseActivity implements View.OnClickListe
         }else{
             findViewById(R.id.project_delete).setOnClickListener(this);
             findViewById(R.id.project_edit).setOnClickListener(this);
+            findViewById(R.id.create).setOnClickListener(this);
         }
 
     }
@@ -167,6 +168,8 @@ public class TeamIndexActivity extends BaseActivity implements View.OnClickListe
             deleteProject();
         } else if (v.getId() == R.id.project_edit){
             startProjectEditActivity();
+        } else if (v.getId() == R.id.create) {
+            startTeamCreateActivity();
         }
     }
 
@@ -211,9 +214,6 @@ public class TeamIndexActivity extends BaseActivity implements View.OnClickListe
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.header_menu, menu);
         menu.findItem(R.id.menu_todo).setVisible(true);
-        if (!Authentication.isStudent()) {
-            menu.findItem(R.id.menu_create).setVisible(true);
-        }
         return true;
     }
 
@@ -229,9 +229,6 @@ public class TeamIndexActivity extends BaseActivity implements View.OnClickListe
             Intent intent = new Intent(this, TodoIndexActivity.class);
             intent.putExtra("projectId", project.getId());
             startActivity(intent);
-        }
-        else if (item.getItemId() == R.id.menu_create) {
-            startTeamCreateActivity();
         }
         return super.onOptionsItemSelected(item);
     }

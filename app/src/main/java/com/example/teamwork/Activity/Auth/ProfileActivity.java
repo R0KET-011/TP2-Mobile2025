@@ -18,12 +18,14 @@ import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.teamwork.Activity.MenuHelper.BaseActivity;
 import com.example.teamwork.Activity.Team.TeamAdapter;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Student;
@@ -31,7 +33,7 @@ import com.example.teamwork.R;
 
 import java.io.File;
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
+public class ProfileActivity extends BaseActivity implements View.OnClickListener{
     /**
      * Les View pour le UI
      */
@@ -64,6 +66,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        //set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         findViews();
         setInfos();
         loadImage();
@@ -82,7 +91,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.take_picture).setOnClickListener(this);
         findViewById(R.id.password_reset).setOnClickListener(this);
         findViewById(R.id.disconnect).setOnClickListener(this);
-        findViewById(R.id.back).setOnClickListener(this);
     }
 
     /**
@@ -170,8 +178,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if (v.getId() == R.id.take_picture) {
             takePicture();
-        } else if (v.getId() == R.id.back){
-            finish();
         } else if (v.getId() == R.id.password_reset) {
             // ToDo Implementer le reste de password
         } else if (v.getId() == R.id.disconnect){

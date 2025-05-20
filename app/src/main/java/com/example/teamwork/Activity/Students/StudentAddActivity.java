@@ -6,12 +6,14 @@ import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.LiveData;
 
 import com.example.teamwork.Activity.Auth.Authentication;
+import com.example.teamwork.Activity.MenuHelper.BaseActivity;
 import com.example.teamwork.Database.AppDatabase;
 import com.example.teamwork.Database.Tables.Student;
 import com.example.teamwork.Database.Tables.Team;
@@ -34,7 +36,7 @@ import com.example.teamwork.R;
 /**
  * Activité pour ajouter un Étudiant a une équipe.
  */
-public class StudentAddActivity extends AppCompatActivity implements View.OnClickListener {
+public class StudentAddActivity extends BaseActivity implements View.OnClickListener {
     /**
      * Field texte pour le code de l'étudiant.
      */
@@ -60,21 +62,20 @@ public class StudentAddActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_add);
 
+        //set toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         db = AppDatabase.getDatabase(this);
 
         int teamId = getIntent().getIntExtra("teamId", -1);
         team = db.teamDao().getTeamByIdClass(teamId);
 
-        setupButtons();
-        codeEditText = findViewById(R.id.code);
-    }
-
-    /**
-     * set les boutons back et confirmer.
-     */
-    private void setupButtons(){
-        findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.confirm).setOnClickListener(this);
+        codeEditText = findViewById(R.id.code);
     }
 
     /**
@@ -83,9 +84,7 @@ public class StudentAddActivity extends AppCompatActivity implements View.OnClic
      */
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.back){
-            finish();
-        } else if (v.getId() == R.id.confirm){
+        if (v.getId() == R.id.confirm){
             addStudent();
         }
     }
